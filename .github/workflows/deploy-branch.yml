@@ -1,0 +1,96 @@
+# Builds the website on GitHub (shared hosting doesn't have the memory to
+# build Next.js) and publishes the ready-to-run files to the `deploy` branch.
+# cPanel → Git Version Control clones that branch; its "Deploy HEAD Commit"
+# button runs web/deploy/cpanel/deploy.sh (via .cpanel.yml), which copies the
+# files into the Node.js app and restarts it. See web/README.md → Deploying.
+#
+# Repository variables (Settings → Secrets and variables → Actions → Variables):
+#   SITE_URL         public origin, e.g. https://www.example.com  (required to publish)
+#   APP_DIR          Node.js app root on the server   (default /home/deipmali/dch-web)
+#   BOOKING_ENABLED  "true" turns on online booking  (default off)
+
+name: Build deploy branch
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-branch
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      # The build prerenders pages from a database. GitHub can't see the live
+      # one, so it builds from a throwaway copy seeded with src/content; the
+      # deploy script then expires those snapshots so the live site renders
+      # from the real database.
+      DATABASE_URL: file:./data/dch.db
+      PAYLOAD_SECRET: ci-build-only-not-used-in-production
+      SEED_ADMIN_EMAIL: ci@build.invalid
+      SEED_ADMIN_PASSWORD: ci-build-only-not-used-in-production
+      NEXT_PUBLIC_SERVER_URL: ${{ vars.SITE_URL || 'http://localhost:3000' }}
+      NEXT_PUBLIC_BOOKING_ENABLED: ${{ vars.BOOKING_ENABLED || 'false' }}
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build database for prerendering
+        run: |
+          mkdir -p data
+          npm run payload migrate
+          npm run seed
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Assemble deploy files
+        run: |
+          out="$RUNNER_TEMP/deploy"
+          rm -rf "$out" && mkdir -p "$out"
+          # Same file set as scripts/package-namecheap.sh, minus build caches.
+          cp -R .next public src server.js next.config.ts package.json package-lock.json tsconfig.json "$out/"
+          rm -rf "$out/.next/cache" "$out/.next/dev"
+          cp deploy/cpanel/.cpanel.yml deploy/cpanel/deploy.sh "$out/"
+          {
+            echo "SITE_URL=${{ vars.SITE_URL }}"
+            echo "APP_DIR=${{ vars.APP_DIR || '/home/deipmali/dch-web' }}"
+            echo "SOURCE_COMMIT=${GITHUB_SHA}"
+          } > "$out/.deploy-env"
+
+      - name: Publish deploy branch
+        if: ${{ vars.SITE_URL != '' }}
+        run: |
+          cd "$RUNNER_TEMP/deploy"
+          git init -q -b deploy
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Build of ${GITHUB_SHA::7}: ${{ github.event.head_commit.message && 'see main' || 'manual run' }}"
+          # One commit per build, force-pushed: the branch only ever holds the latest build.
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" deploy:deploy
+
+      - name: Not published
+        if: ${{ vars.SITE_URL == '' }}
+        run: echo "::warning::Build OK, but the deploy branch was not published — set the SITE_URL repository variable first."

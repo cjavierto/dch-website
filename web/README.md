@@ -59,26 +59,35 @@ The project currently lives in `~/Documents`, which is synced to iCloud Drive. i
 It is controlled by `NEXT_PUBLIC_BOOKING_ENABLED` (see `src/lib/features.ts`):
 
 - **Off (default):** `/book` is a 404, every "Book Appointment" button goes to `/contact?subject=appointment`, and Booking entries are hidden in the admin.
-- **On:** set `NEXT_PUBLIC_BOOKING_ENABLED=true` **in the shell where you build** — it is baked in at build time, so setting it only in cPanel does nothing. For example: `NEXT_PUBLIC_BOOKING_ENABLED=true npm run package:namecheap`, then deploy as usual. Locally, the `web-booking` entry in `.claude/launch.json` runs the dev server with it on.
+- **On:** set the GitHub repository variable `BOOKING_ENABLED` to `true` and deploy — it is baked in at build time, so setting it only in cPanel does nothing. (Manual builds: `NEXT_PUBLIC_BOOKING_ENABLED=true npm run package:namecheap`.) Locally, the `web-booking` entry in `.claude/launch.json` runs the dev server with it on.
 
-## Deploying to Namecheap shared hosting
+## Deploying to Namecheap shared hosting (via Git)
 
-The site runs as a Node.js app under cPanel → **Setup Node.js App** (Phusion Passenger), using `server.js` as the startup file. There is no database server: content lives in `data/dch.db` and uploads in `media/` and `uploads/`, all inside the app folder (outside `public_html`, so they can't be downloaded).
+The site runs as a Node.js app under cPanel → **Setup Node.js App** (Phusion Passenger) with `server.js` as the startup file, in `~/dch-web` (outside `public_html`). There is no database server: content lives in `data/dch.db`, uploads in `media/` and `uploads/`, all inside the app folder and **never in Git** — a deploy can't overwrite what staff edit.
 
-Check first (ask Namecheap support if the selector doesn't show it): **Node.js 20.9 or newer** must be offered — Next.js 16 requires it.
+**How a deploy works**
 
-1. Locally: `npm run package:namecheap -- --data` (first deploy: includes the database and images). This builds and writes `dch-web-<date>.zip`.
-2. cPanel → File Manager: upload the zip to a folder in your home directory, e.g. `~/dch-web`, and extract it.
-3. cPanel → Setup Node.js App → Create application: Node.js version 20+ · mode **Production** · application root `dch-web` · application URL your domain · startup file `server.js`.
-4. Add environment variables: `NODE_ENV=production`, `DATABASE_URL=file:./data/dch.db`, `PAYLOAD_SECRET` (new long random value), `NEXT_PUBLIC_SERVER_URL=https://your-domain`.
-5. Stop the app → **Run NPM Install** (installs Linux builds of `sharp` and `libsql`) → Start. Pending migrations run on startup.
-6. Sign in at `/admin` with the seeded admin, then change its email and password (or create real users and delete it).
+1. Push to `main` on GitHub (`cjavierto/dch-website`).
+2. GitHub Actions (`.github/workflows/deploy-branch.yml`) installs, lints and **builds** the site — shared hosting doesn't have the memory to build Next.js — then publishes the ready-to-run files to the **`deploy`** branch (one commit, replaced on each build).
+3. In cPanel → **Git Version Control** → Manage → *Pull or Deploy*: **Update from Remote**, then **Deploy HEAD Commit**. That runs `deploy.sh` (from `deploy/cpanel/`, via `.cpanel.yml`), which copies the files into `~/dch-web`, runs `npm install` if dependencies changed, restarts the app, and calls `/deploy-hook` so pages render from the live database instead of the build's starter data. Log: `~/dch-deploy.log`.
 
-**Later deploys:** `npm run package:namecheap` (no `--data`) and extract over the app folder — this leaves `data/`, `media/` and `uploads/` untouched. Run NPM Install again if dependencies changed, then Restart.
+Pending database migrations run when the app starts.
+
+**Repository variables** (GitHub → Settings → Secrets and variables → Actions → Variables): `SITE_URL` (required to publish, e.g. `https://www.example.com`), `APP_DIR` (default `/home/deipmali/dch-web`), `BOOKING_ENABLED` (`true` turns on online booking).
+
+**One-time setup**
+
+1. cPanel → **Setup Node.js App** → Create application: Node.js **20.9 or newer** · mode Production · application root `dch-web` · your domain · startup file `server.js`. Environment variables: `NODE_ENV=production`, `DATABASE_URL=file:./data/dch.db`, `PAYLOAD_SECRET` (new long random value), `NEXT_PUBLIC_SERVER_URL=https://your-domain`.
+2. Upload the starting content once: `data/`, `media/` and `uploads/` from this folder into `~/dch-web` (File Manager → upload a zip → Extract).
+3. Give cPanel read access to the private repo: cPanel → **SSH Access** → Manage SSH Keys → Generate a key **without a passphrase**; add its public key on GitHub → repo Settings → **Deploy keys** (read-only). cPanel's Git docs also need `~/.ssh/config` pointing `github.com` at that key.
+4. cPanel → **Git Version Control** → Create: Clone URL `git@github.com:cjavierto/dch-website.git`, path `repositories/dch-website`. Then Manage → switch the checked-out branch to **`deploy`** → Update from Remote → Deploy HEAD Commit.
+5. In the Node.js app: **Run NPM Install** (first time only — later deploys install automatically when dependencies change), then Restart. Sign in at `/admin` and replace the seeded admin account.
+
+**Manual fallback** (no Git): `npm run package:namecheap` builds a zip locally; extract it over `~/dch-web` and restart.
 
 **Backups:** `data/dch.db`, `media/` and `uploads/` are the whole site's content. Make sure cPanel backups include the app folder, or download them regularly. To look at the raw data, open `dch.db` in [DB Browser for SQLite](https://sqlitebrowser.org) (phpMyAdmin is MySQL-only).
 
-Shared-hosting caveats: memory and process limits are tight, so build locally (never on the server). If the app restarts often or runs out of memory, ask Namecheap to raise the account's limits, or move the same zip to a small VPS.
+Shared-hosting caveats: memory and process limits are tight. If the app restarts often or runs out of memory, ask Namecheap to raise the account's limits, or move to a small VPS.
 
 ## Not connected yet
 
