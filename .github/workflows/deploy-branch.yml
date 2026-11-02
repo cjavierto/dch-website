@@ -86,10 +86,20 @@ jobs:
           git init -q -b deploy
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          # Build on top of the previous deploy commit (never rewrite history),
+          # so cPanel's "Update from Remote" is always a plain fast-forward.
+          # The new commit's files are exactly this build.
+          if git fetch -q --depth=1 origin deploy; then
+            git reset -q --soft FETCH_HEAD
+          fi
           git add -A
-          git commit -q -m "Build of ${GITHUB_SHA::7}: ${{ github.event.head_commit.message && 'see main' || 'manual run' }}"
-          # One commit per build, force-pushed: the branch only ever holds the latest build.
-          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" deploy:deploy
+          if git diff --cached --quiet; then
+            echo "Build identical to the current deploy branch — nothing to publish."
+            exit 0
+          fi
+          git commit -q -m "Build of ${GITHUB_SHA::7}"
+          git push -q origin deploy
 
       - name: Not published
         if: ${{ vars.SITE_URL == '' }}

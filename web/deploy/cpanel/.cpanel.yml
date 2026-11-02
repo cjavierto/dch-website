@@ -1,6 +1,5 @@
 ---
-# Used on the `deploy` branch (built by .github/workflows/deploy-branch.yml).
-# cPanel → Git Version Control → Manage → Pull or Deploy → "Deploy HEAD Commit".
 deployment:
   tasks:
-    - /bin/bash ./deploy.sh
+    - export DEPLOYPATH=/home/deipmali/dch-web
+    - /bin/bash deploy.sh
