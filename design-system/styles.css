@@ -1,0 +1,9 @@
+/* Deiparine Community Hospital — design system entry point.
+   Consumers link this one file. Keep it @import lines only. */
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/elevation.css";
+@import "tokens/motion.css";
+@import "tokens/base.css";

@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+<style>
+  body{margin:0;background:#f7f6f2;color:#14181f;font-family:'Source Sans 3',Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  *{box-sizing:border-box}
+  a{color:#14357f;text-decoration:none}
+  a:hover{color:#2f8b3c}
+  input,textarea,select{font-family:'Source Sans 3',Helvetica,sans-serif}
+  .ms{font-family:'Material Symbols Rounded';font-weight:400;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;direction:ltr;-webkit-font-feature-settings:'liga';font-variation-settings:'FILL' 1}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#f7f6f2">
+
+  <aside style="flex:1 1 230px;max-width:262px;min-width:230px;background:#0e2559;color:#cfd9ee;display:flex;flex-direction:column;padding:18px 14px 22px;gap:4px">
+    <div style="display:flex;align-items:center;gap:11px;padding:0 6px 16px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:12px">
+      <img src="assets/dch-logo.jpg" alt="DCH" style="width:38px;height:38px;border-radius:50%;flex:none">
+      <span style="display:flex;flex-direction:column;line-height:1.2;min-width:0">
+        <span style="font-family:'Source Serif 4',Georgia,serif;font-size:14.5px;font-weight:700;color:#fff">DCH Admin</span>
+        <span style="font-size:10.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#7f9ad6">Website manager</span>
+      </span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:3px">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="12">
+        <a href="#" onClick="{{ item.go }}" style="{{ item.style }}">
+          <span class="ms" style="font-size:20px;flex:none">{{ item.icon }}</span>
+          <span style="flex:1;min-width:0">{{ item.label }}</span>
+          <sc-if value="{{ item.count }}" hint-placeholder-val="{{ false }}">
+            <span style="{{ item.countStyle }}">{{ item.count }}</span>
+          </sc-if>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:10px">
+      <div style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none">TG</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13.5px;font-weight:600;color:#fff">Teresita G. Lopez</div>
+        <div style="font-size:11.5px;color:#7f9ad6">Administrator</div>
+      </div>
+      <a href="#" aria-label="Sign out" style="color:#9fb2dc;flex:none"><span class="ms" style="font-size:20px">logout</span></a>
+    </div>
+  </aside>
+
+  <main style="flex:999 1 620px;min-width:0;display:flex;flex-direction:column">
+
+    <header style="background:#fff;border-bottom:1px solid #e6e3da;padding:14px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;position:sticky;top:0;z-index:20">
+      <div style="min-width:0">
+        <div style="font-size:12px;color:#8a8578">{{ crumb }}</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:23px;font-weight:700;margin:2px 0 0;letter-spacing:-0.3px">{{ heading }}</h1>
+      </div>
+      <div style="margin-left:auto;display:flex;flex-wrap:wrap;gap:9px;align-items:center">
+        <a href="#" style="display:flex;align-items:center;gap:7px;border:1px solid #ddd9cf;padding:10px 14px;border-radius:10px;font-size:14px;font-weight:600;color:#14181f" style-hover="border-color:#14357f;color:#14357f"><span class="ms" style="font-size:18px">visibility</span>View site</a>
+        <a href="#" onClick="{{ primaryAction }}" style="display:flex;align-items:center;gap:7px;background:#14357f;color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:18px">{{ primaryIcon }}</span>{{ primaryLabel }}</a>
+      </div>
+    </header>
+
+    <div style="flex:1;padding:22px;display:flex;flex-direction:column;gap:18px">
+
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:18px">
+            <span class="ms" style="font-size:24px;color:#14357f">event_available</span>
+            <div style="font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;margin-top:8px;line-height:1">9</div>
+            <div style="font-size:13.5px;color:#6d6a62;margin-top:3px">Bookings today</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:18px">
+            <span class="ms" style="font-size:24px;color:#14357f">date_range</span>
+            <div style="font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;margin-top:8px;line-height:1">41</div>
+            <div style="font-size:13.5px;color:#6d6a62;margin-top:3px">This week</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:18px">
+            <span class="ms" style="font-size:24px;color:#8f1d1d">mark_email_unread</span>
+            <div style="font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;margin-top:8px;line-height:1">4</div>
+            <div style="font-size:13.5px;color:#6d6a62;margin-top:3px">Unread messages</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:18px">
+            <span class="ms" style="font-size:24px;color:#2f8b3c">pending_actions</span>
+            <div style="font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;margin-top:8px;line-height:1">6</div>
+            <div style="font-size:13.5px;color:#6d6a62;margin-top:3px">New, awaiting confirmation</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;align-items:start">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+              <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0">Today's bookings</h2>
+              <a href="#" onClick="{{ goBookings }}" style="margin-left:auto;font-size:13.5px;font-weight:700">Open workqueue</a>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ todayBookings }}" as="b" hint-placeholder-count="4">
+                <a href="#" onClick="{{ goBookings }}" style="display:flex;gap:12px;align-items:center;padding:11px 12px;border:1px solid #eeece5;border-radius:11px;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+                  <span style="font-size:13px;font-weight:700;color:#14357f;width:58px;flex:none">{{ b.time }}</span>
+                  <span style="flex:1;min-width:0">
+                    <span style="display:block;font-weight:600;font-size:14.5px">{{ b.name }}</span>
+                    <span style="display:block;font-size:12.5px;color:#6d6a62">{{ b.dept }}</span>
+                  </span>
+                  <span style="{{ b.badgeStyle }}">{{ b.status }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+                <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0">Unread messages</h2>
+                <a href="#" onClick="{{ goContacts }}" style="margin-left:auto;font-size:13.5px;font-weight:700">Inbox</a>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <sc-for list="{{ unreadContacts }}" as="c" hint-placeholder-count="3">
+                  <a href="#" onClick="{{ goContacts }}" style="display:flex;gap:11px;padding:11px 12px;border:1px solid #eeece5;border-radius:11px;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+                    <span class="ms" style="font-size:20px;color:#8a8578;flex:none">mail</span>
+                    <span style="flex:1;min-width:0">
+                      <span style="display:block;font-weight:600;font-size:14.5px">{{ c.subject }}</span>
+                      <span style="display:block;font-size:12.5px;color:#6d6a62">{{ c.from }} · {{ c.when }}</span>
+                    </span>
+                  </a>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="background:#14357f;border-radius:16px;padding:20px;color:#fff">
+              <h2 style="font-size:17px;font-weight:700;margin:0 0 14px">Quick actions</h2>
+              <div style="display:flex;flex-wrap:wrap;gap:9px">
+                <a href="#" onClick="{{ newNews }}" style="display:flex;align-items:center;gap:7px;background:#e8b23a;color:#1d1503;padding:11px 15px;border-radius:10px;font-size:14px;font-weight:700" style-hover="background:#f3cd74;color:#1d1503"><span class="ms" style="font-size:18px">campaign</span>Post announcement</a>
+                <a href="#" onClick="{{ newDoctor }}" style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.4);color:#fff;padding:11px 15px;border-radius:10px;font-size:14px;font-weight:700" style-hover="background:rgba(255,255,255,.22);color:#fff"><span class="ms" style="font-size:18px">person_add</span>Add doctor</a>
+                <a href="#" onClick="{{ goMedia }}" style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.4);color:#fff;padding:11px 15px;border-radius:10px;font-size:14px;font-weight:700" style-hover="background:rgba(255,255,255,.22);color:#fff"><span class="ms" style="font-size:18px">upload</span>Upload photo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isPages }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden">
+        <div style="padding:16px 18px;border-bottom:1px solid #eeece5;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <label style="flex:1 1 240px;display:flex;align-items:center;gap:8px;border:1px solid #e6e3da;border-radius:10px;padding:9px 12px">
+            <span class="ms" style="font-size:19px;color:#8a8578">search</span>
+            <input placeholder="Search pages" style="border:0;outline:0;font-size:14.5px;width:100%;background:transparent">
+          </label>
+          <span style="font-size:13.5px;color:#6d6a62">8 pages</span>
+        </div>
+        <div style="overflow-x:auto">
+          <div style="min-width:680px">
+            <div style="display:flex;gap:16px;padding:11px 18px;background:#faf9f6;border-bottom:1px solid #eeece5;font-size:11.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#8a8578">
+              <span style="flex:2.2">Page</span><span style="flex:1.1">Section</span><span style="flex:1.2">Last updated</span><span style="width:96px;text-align:right">Actions</span>
+            </div>
+            <sc-for list="{{ pages }}" as="p" hint-placeholder-count="8">
+              <div style="display:flex;gap:16px;padding:14px 18px;border-bottom:1px solid #f4f2ec;align-items:center">
+                <span style="flex:2.2;min-width:0;display:flex;gap:11px;align-items:center">
+                  <span class="ms" style="font-size:21px;color:#14357f;flex:none">{{ p.icon }}</span>
+                  <span style="min-width:0">
+                    <span style="display:block;font-weight:700;font-size:15px">{{ p.title }}</span>
+                    <span style="display:block;font-size:12.5px;color:#8a8578">{{ p.url }}</span>
+                  </span>
+                </span>
+                <span style="flex:1.1;font-size:14px;color:#4a4741">{{ p.section }}</span>
+                <span style="flex:1.2;font-size:13.5px;color:#6d6a62">{{ p.updated }}</span>
+                <span style="width:96px;display:flex;gap:6px;justify-content:flex-end">
+                  <a href="#" onClick="{{ goPageEditor }}" aria-label="Edit" style="width:34px;height:34px;border-radius:9px;background:#f2f4fa;display:flex;align-items:center;justify-content:center;color:#14357f"><span class="ms" style="font-size:19px">edit</span></a>
+                  <a href="#" aria-label="Preview" style="width:34px;height:34px;border-radius:9px;background:#f2f4fa;display:flex;align-items:center;justify-content:center;color:#14357f"><span class="ms" style="font-size:19px">visibility</span></a>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isPageEditor }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;align-items:start">
+        <div style="flex:2;display:flex;flex-direction:column;gap:18px;grid-column:span 2;min-width:0">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 16px">Page content</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741;grid-column:1 / -1">Page title<input value="Imaging &amp; Radiology" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">URL slug<input value="/services/imaging-radiology" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;color:#6d6a62"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Category<select style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;background:#fff"><option>Diagnostics</option><option>Emergency</option><option>Inpatient</option><option>Maternal &amp; child</option></select></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741;grid-column:1 / -1">Short description (shown on cards)<textarea rows="2" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;resize:vertical">Digital X-ray, ultrasound, ECG, and 16-slice CT — read the same day, beside the emergency room.</textarea></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741;grid-column:1 / -1">Body copy<textarea rows="7" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;line-height:1.6;outline:0;resize:vertical">The imaging section sits on the ground floor next to the emergency room, so trauma, stroke, and acute abdominal cases can be scanned within minutes of triage.
+
+All studies are interpreted by a licensed radiologist. Reports for studies done before 2 PM are released the same day.</textarea></label>
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+              <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0">List items</h2>
+              <span style="font-size:13px;color:#8a8578">Procedures offered</span>
+              <a href="#" style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700"><span class="ms" style="font-size:18px">add</span>Add item</a>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ pageItems }}" as="it" hint-placeholder-count="4">
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;border:1px solid #eeece5;border-radius:11px;padding:11px 12px">
+                  <span class="ms" style="font-size:19px;color:#b3aea1;cursor:grab;flex:none">drag_indicator</span>
+                  <input value="{{ it.icon }}" style="width:130px;border:1px solid #ddd9cf;border-radius:8px;padding:8px 10px;font-size:13.5px;outline:0;color:#6d6a62">
+                  <input value="{{ it.title }}" style="flex:1 1 160px;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:8px 10px;font-size:14.5px;font-weight:600;outline:0">
+                  <input value="{{ it.detail }}" style="flex:2 1 220px;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:8px 10px;font-size:14px;outline:0;color:#4a4741">
+                  <a href="#" aria-label="Remove" style="width:32px;height:32px;border-radius:8px;background:#fdeeee;color:#8f1d1d;display:flex;align-items:center;justify-content:center;flex:none"><span class="ms" style="font-size:18px">delete</span></a>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <h3 style="font-size:16px;font-weight:700;margin:0 0 12px">Header image</h3>
+            <img src="assets/imaging.png" alt="" style="width:100%;height:120px;object-fit:cover;border-radius:11px;display:block">
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <a href="#" onClick="{{ goMedia }}" style="flex:1;text-align:center;border:1px solid #ddd9cf;padding:9px;border-radius:9px;font-size:13.5px;font-weight:600;color:#14181f" style-hover="border-color:#14357f;color:#14357f">Replace</a>
+              <a href="#" style="flex:none;width:40px;display:flex;align-items:center;justify-content:center;border:1px solid #ddd9cf;border-radius:9px;color:#8f1d1d"><span class="ms" style="font-size:18px">delete</span></a>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <h3 style="font-size:16px;font-weight:700;margin:0 0 12px">Sidebar details</h3>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Schedule<input value="Daily 8 AM – 5 PM" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Location<input value="Ground floor, beside the ER" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Direct line<input value="(032) 484 1200 local 112" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Assigned doctors<select style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0;background:#fff"><option>Dr. Edgar P. Pacaña — Radiologist</option><option>Jomar L. Tabada, RRT</option></select></label>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-size:13px;color:#8a8578">Last saved 2 hours ago by Teresita G. Lopez. Saving publishes immediately.</div>
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#14357f;color:#fff;padding:13px;border-radius:10px;font-size:15px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:19px">save</span>Save &amp; publish</a>
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #ddd9cf;padding:13px;border-radius:10px;font-size:15px;font-weight:700;color:#14181f" style-hover="border-color:#14357f;color:#14357f"><span class="ms" style="font-size:19px">visibility</span>Preview</a>
+            <a href="#" onClick="{{ goPages }}" style="text-align:center;font-size:13.5px;font-weight:600;color:#6d6a62;padding-top:4px" style-hover="color:#14357f">Cancel</a>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isNews }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden">
+        <div style="padding:16px 18px;border-bottom:1px solid #eeece5;display:flex;flex-wrap:wrap;gap:9px;align-items:center">
+          <label style="flex:1 1 220px;display:flex;align-items:center;gap:8px;border:1px solid #e6e3da;border-radius:10px;padding:9px 12px">
+            <span class="ms" style="font-size:19px;color:#8a8578">search</span>
+            <input placeholder="Search announcements" style="border:0;outline:0;font-size:14.5px;width:100%;background:transparent">
+          </label>
+          <span style="background:#14357f;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">All</span>
+          <span style="border:1px solid #e6e3da;color:#4a4741;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">Advisory</span>
+          <span style="border:1px solid #e6e3da;color:#4a4741;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">Service update</span>
+          <span style="border:1px solid #e6e3da;color:#4a4741;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">Community</span>
+        </div>
+        <div style="overflow-x:auto">
+          <div style="min-width:700px">
+            <div style="display:flex;gap:16px;padding:11px 18px;background:#faf9f6;border-bottom:1px solid #eeece5;font-size:11.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#8a8578">
+              <span style="flex:2.6">Headline</span><span style="flex:1">Category</span><span style="flex:1">Published</span><span style="width:120px">Featured</span><span style="width:96px;text-align:right">Actions</span>
+            </div>
+            <sc-for list="{{ news }}" as="n" hint-placeholder-count="6">
+              <div style="display:flex;gap:16px;padding:12px 18px;border-bottom:1px solid #f4f2ec;align-items:center">
+                <span style="flex:2.6;min-width:0;display:flex;gap:12px;align-items:center">
+                  {{ n.thumb }}
+                  <span style="min-width:0">
+                    <span style="display:block;font-weight:700;font-size:15px;line-height:1.3">{{ n.title }}</span>
+                    <span style="display:block;font-size:12.5px;color:#8a8578">{{ n.excerpt }}</span>
+                  </span>
+                </span>
+                <span style="flex:1"><span style="{{ n.badgeStyle }}">{{ n.category }}</span></span>
+                <span style="flex:1;font-size:13.5px;color:#6d6a62">{{ n.date }}</span>
+                <span style="width:120px">{{ n.featuredMark }}</span>
+                <span style="width:96px;display:flex;gap:6px;justify-content:flex-end">
+                  <a href="#" onClick="{{ goNewsEditor }}" aria-label="Edit" style="width:34px;height:34px;border-radius:9px;background:#f2f4fa;display:flex;align-items:center;justify-content:center;color:#14357f"><span class="ms" style="font-size:19px">edit</span></a>
+                  <a href="#" aria-label="Delete" style="width:34px;height:34px;border-radius:9px;background:#fdeeee;display:flex;align-items:center;justify-content:center;color:#8f1d1d"><span class="ms" style="font-size:19px">delete</span></a>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isNewsEditor }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;align-items:start">
+        <div style="grid-column:span 2;min-width:0;background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+          <div style="display:grid;gap:14px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Headline<input value="New 16-slice CT scanner now serving southern Cebu" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:16px;font-weight:600;outline:0"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Summary (shown on cards and the home page)<textarea rows="2" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;resize:vertical">Head, chest, and abdominal studies are now read the same day — no more referral trips to Cebu City for a basic scan.</textarea></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Body<textarea rows="10" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;line-height:1.65;outline:0;resize:vertical">Deiparine Community Hospital has begun operating a 16-slice computed tomography scanner, ending a long-standing need for patients in Sibonga and nearby towns to travel to Cebu City for even routine scans.
+
+The unit is installed in the renovated imaging suite beside the emergency room, which means trauma and stroke cases arriving by ambulance can be scanned within minutes of triage.</textarea></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Pull quote (optional)<input value="Now the scan happens here. — Dr. James Deiparine" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <h3 style="font-size:16px;font-weight:700;margin:0 0 12px">Publishing</h3>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Category<select style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0;background:#fff"><option>Service update</option><option>Advisory</option><option>Community</option><option>Careers</option></select></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Date<input value="2026-09-08" type="date" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Author line<input value="Hospital Information Office" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0"></label>
+              <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#14181f;padding-top:2px"><input type="checkbox" checked style="width:18px;height:18px;margin:1px 0 0;accent-color:#14357f">Feature this on the home page</label>
+              <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#14181f"><input type="checkbox" style="width:18px;height:18px;margin:1px 0 0;accent-color:#14357f">Show in the mobile app banner</label>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <h3 style="font-size:16px;font-weight:700;margin:0 0 12px">Cover photo</h3>
+            <img src="assets/imaging.png" alt="" style="width:100%;height:110px;object-fit:cover;border-radius:11px;display:block">
+            <a href="#" onClick="{{ goMedia }}" style="display:block;text-align:center;margin-top:10px;border:1px solid #ddd9cf;padding:9px;border-radius:9px;font-size:13.5px;font-weight:600;color:#14181f" style-hover="border-color:#14357f;color:#14357f">Choose from library</a>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px">
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#14357f;color:#fff;padding:13px;border-radius:10px;font-size:15px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:19px">save</span>Save &amp; publish</a>
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #ddd9cf;padding:13px;border-radius:10px;font-size:15px;font-weight:700;color:#14181f" style-hover="border-color:#14357f;color:#14357f"><span class="ms" style="font-size:19px">visibility</span>Preview</a>
+            <a href="#" onClick="{{ goNews }}" style="text-align:center;font-size:13.5px;font-weight:600;color:#6d6a62;padding-top:4px" style-hover="color:#14357f">Cancel</a>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isHealth }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:#eef7f0;border:1px solid #cfe6d6;border-radius:14px;padding:16px;display:flex;gap:11px;align-items:flex-start">
+          <span class="ms" style="font-size:22px;color:#2f8b3c;flex:none">info</span>
+          <p style="font-size:14.5px;line-height:1.6;color:#22432c;margin:0">Health articles carry a medical disclaimer automatically. Every post needs a named clinician author before it can be saved.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px">
+          <sc-for list="{{ healthPosts }}" as="h" hint-placeholder-count="6">
+            <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;display:flex;flex-direction:column">
+              {{ h.thumb }}
+              <div style="padding:16px;display:flex;flex-direction:column;gap:7px;flex:1">
+                <span style="font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#2f8b3c">{{ h.topic }}</span>
+                <span style="font-weight:700;font-size:16px;line-height:1.3">{{ h.title }}</span>
+                <span style="font-size:13px;color:#6d6a62">{{ h.author }}</span>
+                <div style="margin-top:auto;padding-top:12px;display:flex;gap:8px;align-items:center">
+                  <span style="font-size:12.5px;color:#8a8578">{{ h.date }}</span>
+                  <a href="#" onClick="{{ goNewsEditor }}" style="margin-left:auto;font-size:13.5px;font-weight:700">Edit</a>
+                  <a href="#" aria-label="Delete" style="color:#8f1d1d"><span class="ms" style="font-size:18px">delete</span></a>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isDoctors }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden">
+        <div style="padding:16px 18px;border-bottom:1px solid #eeece5;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <label style="flex:1 1 220px;display:flex;align-items:center;gap:8px;border:1px solid #e6e3da;border-radius:10px;padding:9px 12px">
+            <span class="ms" style="font-size:19px;color:#8a8578">search</span>
+            <input placeholder="Search by name or specialty" style="border:0;outline:0;font-size:14.5px;width:100%;background:transparent">
+          </label>
+          <select style="border:1px solid #e6e3da;border-radius:10px;padding:10px 12px;font-size:14px;background:#fff;outline:0"><option>All specialties</option><option>Internal Medicine</option><option>OB-Gynecology</option><option>Pediatrics</option></select>
+          <span style="font-size:13.5px;color:#6d6a62">34 in directory</span>
+        </div>
+        <div style="overflow-x:auto">
+          <div style="min-width:760px">
+            <div style="display:flex;gap:16px;padding:11px 18px;background:#faf9f6;border-bottom:1px solid #eeece5;font-size:11.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#8a8578">
+              <span style="flex:1.8">Doctor</span><span style="flex:1.2">Specialty</span><span style="flex:1.4">Clinic schedule</span><span style="flex:1">Room</span><span style="width:110px">Status</span><span style="width:96px;text-align:right">Actions</span>
+            </div>
+            <sc-for list="{{ doctors }}" as="d" hint-placeholder-count="6">
+              <div style="display:flex;gap:16px;padding:12px 18px;border-bottom:1px solid #f4f2ec;align-items:center">
+                <span style="flex:1.8;min-width:0;display:flex;gap:11px;align-items:center">
+                  <span style="width:38px;height:38px;border-radius:50%;background:#eef1f8;color:#14357f;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:700;flex:none">{{ d.initials }}</span>
+                  <span style="min-width:0">
+                    <span style="display:block;font-weight:700;font-size:14.5px">{{ d.name }}</span>
+                    <span style="display:block;font-size:12.5px;color:#8a8578">{{ d.prc }}</span>
+                  </span>
+                </span>
+                <span style="flex:1.2;font-size:14px;color:#2f8b3c;font-weight:600">{{ d.specialty }}</span>
+                <span style="flex:1.4;font-size:13.5px;color:#4a4741">{{ d.hours }}</span>
+                <span style="flex:1;font-size:13.5px;color:#4a4741">{{ d.room }}</span>
+                <span style="width:110px"><span style="{{ d.badgeStyle }}">{{ d.status }}</span></span>
+                <span style="width:96px;display:flex;gap:6px;justify-content:flex-end">
+                  <a href="#" onClick="{{ goDoctorEditor }}" aria-label="Edit" style="width:34px;height:34px;border-radius:9px;background:#f2f4fa;display:flex;align-items:center;justify-content:center;color:#14357f"><span class="ms" style="font-size:19px">edit</span></a>
+                  <a href="#" aria-label="Delete" style="width:34px;height:34px;border-radius:9px;background:#fdeeee;display:flex;align-items:center;justify-content:center;color:#8f1d1d"><span class="ms" style="font-size:19px">delete</span></a>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isDoctorEditor }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;align-items:start">
+        <div style="grid-column:span 2;min-width:0;display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 16px">Doctor details</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Full name<input value="Dr. Maria A. Alcantara" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">PRC licence no.<input value="0123456" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Specialty<select style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;background:#fff"><option>OB-Gynecology</option><option>Internal Medicine</option><option>Pediatrics</option><option>General Surgery</option><option>Radiology</option></select></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Department page<select style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;background:#fff"><option>OB-Gynecology</option><option>Imaging &amp; Radiology</option></select></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741;grid-column:1 / -1">Short bio<textarea rows="3" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;line-height:1.6;outline:0;resize:vertical">Handles prenatal packages, ultrasound, and deliveries. In clinic three days a week.</textarea></label>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+              <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0">Clinic schedule</h2>
+              <a href="#" style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700"><span class="ms" style="font-size:18px">add</span>Add slot</a>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ schedule }}" as="s" hint-placeholder-count="3">
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;border:1px solid #eeece5;border-radius:11px;padding:11px 12px">
+                  <select style="flex:1 1 130px;border:1px solid #ddd9cf;border-radius:8px;padding:8px 10px;font-size:14px;background:#fff;outline:0"><option>{{ s.day }}</option></select>
+                  <input value="{{ s.from }}" style="flex:1 1 100px;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:8px 10px;font-size:14px;outline:0">
+                  <input value="{{ s.to }}" style="flex:1 1 100px;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:8px 10px;font-size:14px;outline:0">
+                  <input value="{{ s.room }}" style="flex:1 1 130px;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:8px 10px;font-size:14px;outline:0">
+                  <a href="#" aria-label="Remove slot" style="width:32px;height:32px;border-radius:8px;background:#fdeeee;color:#8f1d1d;display:flex;align-items:center;justify-content:center;flex:none"><span class="ms" style="font-size:18px">delete</span></a>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <h3 style="font-size:16px;font-weight:700;margin:0 0 12px">Photo</h3>
+            <div style="display:flex;gap:14px;align-items:center">
+              <div style="width:66px;height:66px;border-radius:50%;background:#eef1f8;color:#14357f;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex:none">MA</div>
+              <div style="font-size:13px;color:#6d6a62;line-height:1.5">No portrait uploaded. Initials are shown on the website.</div>
+            </div>
+            <a href="#" onClick="{{ goMedia }}" style="display:block;text-align:center;margin-top:12px;border:1px solid #ddd9cf;padding:9px;border-radius:9px;font-size:13.5px;font-weight:600;color:#14181f" style-hover="border-color:#14357f;color:#14357f">Upload portrait</a>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <h3 style="font-size:16px;font-weight:700;margin:0 0 12px">Visibility</h3>
+            <div style="display:flex;flex-direction:column;gap:11px;font-size:14px">
+              <label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" checked style="width:18px;height:18px;margin:1px 0 0;accent-color:#14357f">Show in the public directory</label>
+              <label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" checked style="width:18px;height:18px;margin:1px 0 0;accent-color:#14357f">Accepting online bookings</label>
+              <label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" style="width:18px;height:18px;margin:1px 0 0;accent-color:#14357f">Mark as on leave</label>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px">
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#14357f;color:#fff;padding:13px;border-radius:10px;font-size:15px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:19px">save</span>Save &amp; publish</a>
+            <a href="#" onClick="{{ goDoctors }}" style="text-align:center;font-size:13.5px;font-weight:600;color:#6d6a62" style-hover="color:#14357f">Cancel</a>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isBookings }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;align-items:start">
+        <div style="grid-column:span 2;min-width:0;background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden">
+          <div style="padding:16px 18px;border-bottom:1px solid #eeece5;display:flex;flex-wrap:wrap;gap:9px;align-items:center">
+            <span style="background:#14357f;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">New · 6</span>
+            <span style="border:1px solid #e6e3da;color:#4a4741;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">Confirmed · 21</span>
+            <span style="border:1px solid #e6e3da;color:#4a4741;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">Completed</span>
+            <span style="border:1px solid #e6e3da;color:#4a4741;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">No-show</span>
+            <span style="border:1px solid #e6e3da;color:#4a4741;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px">Cancelled</span>
+            <input type="date" value="2026-09-15" style="margin-left:auto;border:1px solid #e6e3da;border-radius:10px;padding:9px 12px;font-size:14px;outline:0">
+          </div>
+          <div style="overflow-x:auto">
+            <div style="min-width:640px">
+              <div style="display:flex;gap:14px;padding:11px 18px;background:#faf9f6;border-bottom:1px solid #eeece5;font-size:11.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#8a8578">
+                <span style="width:74px">Time</span><span style="flex:1.6">Patient</span><span style="flex:1.4">Department</span><span style="flex:1.4">Assigned</span><span style="width:104px">Status</span>
+              </div>
+              <sc-for list="{{ bookings }}" as="b" hint-placeholder-count="7">
+                <div onClick="{{ b.select }}" style="{{ b.rowStyle }}">
+                  <span style="width:74px;font-size:13.5px;font-weight:700;color:#14357f">{{ b.time }}</span>
+                  <span style="flex:1.6;min-width:0">
+                    <span style="display:block;font-weight:600;font-size:14.5px">{{ b.name }}</span>
+                    <span style="display:block;font-size:12.5px;color:#8a8578">{{ b.phone }}</span>
+                  </span>
+                  <span style="flex:1.4;font-size:13.5px;color:#4a4741">{{ b.dept }}</span>
+                  <span style="flex:1.4;font-size:13.5px;color:#4a4741">{{ b.doctor }}</span>
+                  <span style="width:104px"><span style="{{ b.badgeStyle }}">{{ b.status }}</span></span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+              <div style="min-width:0">
+                <h3 style="font-size:18px;font-weight:700;margin:0 0 3px">{{ selectedBooking.name }}</h3>
+                <div style="font-size:13.5px;color:#6d6a62">{{ selectedBooking.phone }} · booked {{ selectedBooking.booked }}</div>
+              </div>
+              <span style="margin-left:auto;flex:none">{{ selectedBadge }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Department<select style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0;background:#fff"><option>{{ selectedBooking.dept }}</option><option>Internal Medicine</option><option>Pediatrics</option></select></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Assign doctor<select style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0;background:#fff"><option>{{ selectedBooking.doctor }}</option><option>Dr. Ramon L. Deiparine</option><option>Dr. Liza C. Canonigo</option></select></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Clinic slot<select style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0;background:#fff"><option>{{ selectedBooking.slot }}</option><option>Sep 15 · 1:30 PM · OPD Clinic 2</option></select></label>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:#4a4741;margin-bottom:6px">Patient's reason</div>
+                <div style="background:#faf9f6;border:1px solid #eeece5;border-radius:9px;padding:11px 12px;font-size:14px;line-height:1.55;color:#4a4741">{{ selectedBooking.reason }}</div>
+              </div>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Internal note (not shown to the patient)<textarea rows="3" placeholder="e.g. Called at 9:10 AM, no answer. Will retry after lunch." style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:14.5px;outline:0;resize:vertical"></textarea></label>
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <h3 style="font-size:16px;font-weight:700;margin:0 0 12px">Mark as</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <a href="#" onClick="{{ markConfirmed }}" style="flex:1 1 130px;text-align:center;background:#14357f;color:#fff;padding:12px;border-radius:10px;font-size:14px;font-weight:700" style-hover="background:#0e2559;color:#fff">Confirmed</a>
+              <a href="#" onClick="{{ markCompleted }}" style="flex:1 1 130px;text-align:center;border:1px solid #ddd9cf;padding:12px;border-radius:10px;font-size:14px;font-weight:700;color:#14181f" style-hover="border-color:#2f8b3c;color:#2f8b3c">Completed</a>
+              <a href="#" onClick="{{ markNoShow }}" style="flex:1 1 130px;text-align:center;border:1px solid #ddd9cf;padding:12px;border-radius:10px;font-size:14px;font-weight:700;color:#14181f" style-hover="border-color:#8a6512;color:#8a6512">No-show</a>
+              <a href="#" onClick="{{ markCancelled }}" style="flex:1 1 130px;text-align:center;border:1px solid #ddd9cf;padding:12px;border-radius:10px;font-size:14px;font-weight:700;color:#8f1d1d" style-hover="border-color:#8f1d1d;color:#8f1d1d">Cancelled</a>
+            </div>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid #eeece5;font-size:13px;color:#8a8578;line-height:1.55">Status changes are logged with your name and the time. The patient is not notified automatically — call or text them from the OPD line.</div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isContacts }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;align-items:start">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid #eeece5;display:flex;gap:9px;align-items:center">
+            <span style="background:#14357f;color:#fff;font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px">Unread · 4</span>
+            <span style="border:1px solid #e6e3da;color:#4a4741;font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px">All</span>
+            <span style="margin-left:auto;font-size:13px;color:#8a8578">128 total</span>
+          </div>
+          <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="6">
+            <div onClick="{{ c.select }}" style="{{ c.rowStyle }}">
+              <span style="{{ c.dotStyle }}"></span>
+              <span style="flex:1;min-width:0">
+                <span style="display:block;font-weight:700;font-size:14.5px">{{ c.subject }}</span>
+                <span style="display:block;font-size:12.5px;color:#8a8578">{{ c.from }} · {{ c.when }}</span>
+                <span style="display:block;font-size:13px;color:#6d6a62;margin-top:4px">{{ c.preview }}</span>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+          <div style="display:flex;gap:12px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid #eeece5">
+            <div style="min-width:0">
+              <h3 style="font-size:19px;font-weight:700;margin:0 0 4px">{{ selectedContact.subject }}</h3>
+              <div style="font-size:13.5px;color:#6d6a62">{{ selectedContact.from }} · {{ selectedContact.email }}</div>
+              <div style="font-size:13px;color:#8a8578;margin-top:2px">{{ selectedContact.when }}</div>
+            </div>
+            <a href="#" aria-label="Delete" style="margin-left:auto;width:36px;height:36px;border-radius:9px;background:#fdeeee;color:#8f1d1d;display:flex;align-items:center;justify-content:center;flex:none"><span class="ms" style="font-size:19px">delete</span></a>
+          </div>
+          <p style="font-size:15px;line-height:1.7;color:#4a4741;margin:16px 0 20px">{{ selectedContact.body }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:9px">
+            <a href="#" style="display:flex;align-items:center;gap:7px;background:#14357f;color:#fff;padding:11px 16px;border-radius:10px;font-size:14px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:18px">reply</span>Reply by email</a>
+            <a href="#" onClick="{{ markHandled }}" style="display:flex;align-items:center;gap:7px;border:1px solid #ddd9cf;padding:11px 16px;border-radius:10px;font-size:14px;font-weight:700;color:#14181f" style-hover="border-color:#2f8b3c;color:#2f8b3c"><span class="ms" style="font-size:18px">check</span>Mark as handled</a>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isCareers }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden">
+          <div style="padding:16px 18px;border-bottom:1px solid #eeece5;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0">Job postings</h2>
+            <span style="font-size:13.5px;color:#6d6a62">7 open · 2 closed</span>
+          </div>
+          <div style="overflow-x:auto">
+            <div style="min-width:680px">
+              <div style="display:flex;gap:16px;padding:11px 18px;background:#faf9f6;border-bottom:1px solid #eeece5;font-size:11.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#8a8578">
+                <span style="flex:2">Position</span><span style="flex:1.3">Department</span><span style="width:110px">Openings</span><span style="width:110px">Applications</span><span style="width:96px;text-align:right">Actions</span>
+              </div>
+              <sc-for list="{{ jobs }}" as="j" hint-placeholder-count="5">
+                <div style="display:flex;gap:16px;padding:13px 18px;border-bottom:1px solid #f4f2ec;align-items:center">
+                  <span style="flex:2;min-width:0;display:flex;gap:11px;align-items:center">
+                    <span class="ms" style="font-size:21px;color:#14357f;flex:none">{{ j.icon }}</span>
+                    <span style="min-width:0">
+                      <span style="display:block;font-weight:700;font-size:14.5px">{{ j.title }}</span>
+                      <span style="display:block;font-size:12.5px;color:#8a8578">{{ j.type }}</span>
+                    </span>
+                  </span>
+                  <span style="flex:1.3;font-size:14px;color:#4a4741">{{ j.dept }}</span>
+                  <span style="width:110px;font-size:14px;color:#4a4741">{{ j.openings }}</span>
+                  <span style="width:110px"><a href="#" style="font-size:14px;font-weight:700">{{ j.applications }}</a></span>
+                  <span style="width:96px;display:flex;gap:6px;justify-content:flex-end">
+                    <a href="#" onClick="{{ goCareerEditor }}" aria-label="Edit" style="width:34px;height:34px;border-radius:9px;background:#f2f4fa;display:flex;align-items:center;justify-content:center;color:#14357f"><span class="ms" style="font-size:19px">edit</span></a>
+                    <a href="#" aria-label="Close posting" style="width:34px;height:34px;border-radius:9px;background:#fdeeee;display:flex;align-items:center;justify-content:center;color:#8f1d1d"><span class="ms" style="font-size:19px">block</span></a>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isCareerEditor }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;align-items:start">
+        <div style="grid-column:span 2;min-width:0;background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px;display:grid;gap:14px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741;grid-column:1 / -1">Position title<input value="Staff Nurse – Emergency Room" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Department<select style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;background:#fff"><option>Nursing Service</option><option>Clinical Laboratory</option><option>Imaging &amp; Radiology</option><option>Finance</option></select></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Employment type<select style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;background:#fff"><option>Full-time · rotating shifts</option><option>Contract</option><option>Part-time</option></select></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Number of openings<input value="2" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Applications go to<input value="hr@dch-sibonga.ph" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">The role<textarea rows="3" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;line-height:1.6;outline:0;resize:vertical">You will work in a six-bay emergency room alongside a resident physician and two nursing aides, handling triage, resuscitation, and stabilisation.</textarea></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">What you will do (one per line)<textarea rows="5" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;line-height:1.6;outline:0;resize:vertical">Perform triage and initial assessment on arrival.
+Administer medications and IV therapy per physician order.
+Assist in minor procedures — suturing, splinting, nebulisation.
+Endorse cases clearly at shift change.</textarea></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Requirements (one per line)<textarea rows="4" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;line-height:1.6;outline:0;resize:vertical">Registered Nurse with an active PRC licence.
+At least one year of ER, ward, or ICU experience.
+Current BLS certification; ACLS an advantage.</textarea></label>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px">
+            <h3 style="font-size:16px;font-weight:700;margin:0 0 12px">Posting</h3>
+            <div style="display:flex;flex-direction:column;gap:11px;font-size:14px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Closing date<input type="date" value="2026-10-15" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14.5px;outline:0"></label>
+              <label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" checked style="width:18px;height:18px;margin:1px 0 0;accent-color:#14357f">Open for applications</label>
+              <label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" style="width:18px;height:18px;margin:1px 0 0;accent-color:#14357f">Also post as a news item</label>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px">
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#14357f;color:#fff;padding:13px;border-radius:10px;font-size:15px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:19px">save</span>Save &amp; publish</a>
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #ddd9cf;padding:13px;border-radius:10px;font-size:15px;font-weight:700;color:#14181f" style-hover="border-color:#14357f;color:#14357f"><span class="ms" style="font-size:19px">visibility</span>Preview</a>
+            <a href="#" onClick="{{ goCareers }}" style="text-align:center;font-size:13.5px;font-weight:600;color:#6d6a62;padding-top:4px" style-hover="color:#14357f">Cancel</a>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isMedia }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="border:1.5px dashed #ddd9cf;border-radius:16px;padding:28px;text-align:center;background:#fff">
+          <span class="ms" style="font-size:30px;color:#8a8578;display:block;margin-bottom:8px">cloud_upload</span>
+          <div style="font-size:15.5px;font-weight:700;margin-bottom:4px">Drop photos here, or browse</div>
+          <div style="font-size:13.5px;color:#8a8578">JPG or PNG, up to 5 MB. Landscape images at least 1200px wide work best.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px">
+          <sc-for list="{{ media }}" as="m" hint-placeholder-count="10">
+            <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;overflow:hidden">
+              {{ m.thumb }}
+              <div style="padding:11px 12px">
+                <div style="font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ m.name }}</div>
+                <div style="font-size:12px;color:#8a8578;margin-top:3px">{{ m.meta }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 16px">Hospital details</h2>
+            <div style="display:grid;gap:14px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Hospital name<input value="Deiparine Community Hospital" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Short name / tagline<input value="Sibonga, Cebu · Since 1974" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Street address<input value="National Highway, Poblacion" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px">
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Municipality<input value="Sibonga" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Province<input value="Cebu" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">ZIP<input value="6020" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              </div>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Map link<input value="https://maps.google.com/?q=Sibonga+Cebu" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0;color:#6d6a62"></label>
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 16px">Contact numbers</h2>
+            <div style="display:grid;gap:14px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#8f1d1d">Emergency hotline — shown on every page
+                <input value="(032) 484 1234" style="border:1.5px solid #8f1d1d;border-radius:9px;padding:11px 12px;font-size:16px;font-weight:700;outline:0">
+              </label>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Trunkline<input value="(032) 484 1200" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Admitting<input value="(032) 484 1200 loc. 101" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">General email<input value="info@dch-sibonga.ph" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">HR email<input value="hr@dch-sibonga.ph" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 6px">Patients &amp; Visitors</h2>
+            <p style="font-size:13.5px;color:#8a8578;margin:0 0 16px">Visiting hours, room rates, and the admission checklist shown on the Patients page.</p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:10px;padding:0 2px;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8a8578"><span style="flex:1.4">Area</span><span style="flex:1">From</span><span style="flex:1">To</span><span style="width:36px"></span></div>
+              <sc-for list="{{ visiting }}" as="v" hint-placeholder-count="3">
+                <div style="display:flex;gap:10px;align-items:center">
+                  <input value="{{ v.area }}" style="flex:1.4;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:9px 11px;font-size:14px;outline:0">
+                  <input value="{{ v.from }}" style="flex:1;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:9px 11px;font-size:14px;outline:0">
+                  <input value="{{ v.to }}" style="flex:1;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:9px 11px;font-size:14px;outline:0">
+                  <a href="#" aria-label="Remove" style="width:36px;height:36px;border-radius:8px;background:#fdeeee;color:#8f1d1d;display:flex;align-items:center;justify-content:center;flex:none"><span class="ms" style="font-size:18px">delete</span></a>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:18px;padding-top:16px;border-top:1px solid #eeece5">
+              <div style="display:flex;gap:10px;padding:0 2px 8px;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8a8578"><span style="flex:1.6">Accommodation</span><span style="flex:1">Rate / day</span><span style="flex:1.3">PhilHealth note</span><span style="width:36px"></span></div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <sc-for list="{{ rates }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex;gap:10px;align-items:center">
+                    <input value="{{ r.room }}" style="flex:1.6;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:9px 11px;font-size:14px;outline:0">
+                    <input value="{{ r.rate }}" style="flex:1;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:9px 11px;font-size:14px;outline:0">
+                    <input value="{{ r.note }}" style="flex:1.3;min-width:0;border:1px solid #ddd9cf;border-radius:8px;padding:9px 11px;font-size:14px;outline:0">
+                    <a href="#" aria-label="Remove" style="width:36px;height:36px;border-radius:8px;background:#fdeeee;color:#8f1d1d;display:flex;align-items:center;justify-content:center;flex:none"><span class="ms" style="font-size:18px">delete</span></a>
+                  </div>
+                </sc-for>
+              </div>
+              <a href="#" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13.5px;font-weight:700"><span class="ms" style="font-size:18px">add</span>Add row</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 6px">Homepage hero</h2>
+            <p style="font-size:13.5px;color:#8a8578;margin:0 0 16px">Controls the first screen visitors see.</p>
+            <img src="assets/staff-hallway.png" alt="" style="width:100%;height:120px;object-fit:cover;border-radius:11px;display:block;margin-bottom:12px">
+            <div style="display:grid;gap:12px">
+              <a href="#" onClick="{{ goMedia }}" style="text-align:center;border:1px solid #ddd9cf;padding:9px;border-radius:9px;font-size:13.5px;font-weight:600;color:#14181f" style-hover="border-color:#14357f;color:#14357f">Change background photo</a>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Headline<input value="Compassionate care, close to home." style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Sub-headline<textarea rows="3" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:14.5px;line-height:1.55;outline:0;resize:vertical">Fifty years of serving Sibonga and southern Cebu — emergency, maternity, surgery, and diagnostics under one roof.</textarea></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Badge text<input value="Level 1 · DOH Licensed" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Primary button label<input value="Book an appointment" style="border:1px solid #ddd9cf;border-radius:9px;padding:11px 12px;font-size:15px;outline:0"></label>
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 6px">Featured on the home page</h2>
+            <p style="font-size:13.5px;color:#8a8578;margin:0 0 14px">Drag to reorder. Three items show.</p>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ featured }}" as="f" hint-placeholder-count="3">
+                <div style="display:flex;gap:11px;align-items:center;border:1px solid #eeece5;border-radius:11px;padding:10px 11px">
+                  <span class="ms" style="font-size:19px;color:#b3aea1;cursor:grab;flex:none">drag_indicator</span>
+                  {{ f.thumb }}
+                  <span style="flex:1;min-width:0">
+                    <span style="display:block;font-weight:600;font-size:14px;line-height:1.3">{{ f.title }}</span>
+                    <span style="display:block;font-size:12px;color:#8a8578">{{ f.type }}</span>
+                  </span>
+                  <a href="#" aria-label="Remove" style="color:#8a8578;flex:none"><span class="ms" style="font-size:18px">close</span></a>
+                </div>
+              </sc-for>
+            </div>
+            <a href="#" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13.5px;font-weight:700"><span class="ms" style="font-size:18px">add</span>Add item</a>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;margin:0 0 16px">Statistics band</h2>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Figure<input value="60" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Label<input value="Licensed bed capacity" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Figure<input value="34" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:15px;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#4a4741">Label<input value="Consultants &amp; residents" style="border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:15px;outline:0"></label>
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px">
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#14357f;color:#fff;padding:13px;border-radius:10px;font-size:15px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:19px">save</span>Save settings</a>
+            <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #ddd9cf;padding:13px;border-radius:10px;font-size:15px;font-weight:700;color:#14181f" style-hover="border-color:#14357f;color:#14357f"><span class="ms" style="font-size:19px">visibility</span>Preview site</a>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+const BADGE = (bg, fg) => `background:${bg};color:${fg};font-size:12px;font-weight:700;padding:5px 10px;border-radius:6px;display:inline-block;white-space:nowrap`;
+const STATUS = {
+  New: BADGE('#f2f4fa', '#14357f'),
+  Confirmed: BADGE('#eef7f0', '#2f8b3c'),
+  Completed: BADGE('#f1efe9', '#6d6a62'),
+  'No-show': BADGE('#fdf5e4', '#8a6512'),
+  Cancelled: BADGE('#fdeeee', '#8f1d1d'),
+  Active: BADGE('#eef7f0', '#2f8b3c'),
+  'On leave': BADGE('#fdf5e4', '#8a6512'),
+};
+const CATEGORY = {
+  'Service update': BADGE('#f2f4fa', '#14357f'),
+  Advisory: BADGE('#fdf5e4', '#8a6512'),
+  Community: BADGE('#eef7f0', '#2f8b3c'),
+  Careers: BADGE('#f1efe9', '#6d6a62'),
+};
+
+const thumb = (src, style) => React.createElement('img', { src, alt: '', style });
+
+const SCREENS = {
+  dashboard: { crumb: 'Overview', heading: 'Dashboard', label: 'New announcement', icon: 'add', target: 'newsEditor' },
+  pages: { crumb: 'Content', heading: 'Pages', label: 'New page', icon: 'add', target: 'pageEditor' },
+  pageEditor: { crumb: 'Content / Pages', heading: 'Edit page', label: 'Save & publish', icon: 'save', target: 'pages' },
+  news: { crumb: 'Content', heading: 'News & Announcements', label: 'New announcement', icon: 'add', target: 'newsEditor' },
+  newsEditor: { crumb: 'Content / News & Announcements', heading: 'Edit announcement', label: 'Save & publish', icon: 'save', target: 'news' },
+  health: { crumb: 'Content', heading: 'Health Information', label: 'New article', icon: 'add', target: 'newsEditor' },
+  doctors: { crumb: 'Content', heading: 'Doctors directory', label: 'Add doctor', icon: 'person_add', target: 'doctorEditor' },
+  doctorEditor: { crumb: 'Content / Doctors directory', heading: 'Edit doctor', label: 'Save & publish', icon: 'save', target: 'doctors' },
+  bookings: { crumb: 'Inbox', heading: 'Booking entries', label: 'Add walk-in', icon: 'add', target: 'bookings' },
+  contacts: { crumb: 'Inbox', heading: 'Contact us entries', label: 'Export CSV', icon: 'download', target: 'contacts' },
+  careers: { crumb: 'Content', heading: 'Careers', label: 'New posting', icon: 'add', target: 'careerEditor' },
+  careerEditor: { crumb: 'Content / Careers', heading: 'Edit job posting', label: 'Save & publish', icon: 'save', target: 'careers' },
+  media: { crumb: 'Library', heading: 'Media library', label: 'Upload photos', icon: 'upload', target: 'media' },
+  settings: { crumb: 'Settings', heading: 'Website settings', label: 'Save settings', icon: 'save', target: 'settings' },
+};
+
+const NAV = [
+  { page: 'dashboard', icon: 'dashboard', label: 'Dashboard' },
+  { page: 'pages', icon: 'description', label: 'Pages' },
+  { page: 'news', icon: 'campaign', label: 'News & Announcements' },
+  { page: 'health', icon: 'menu_book', label: 'Health Information' },
+  { page: 'doctors', icon: 'stethoscope', label: 'Doctors directory' },
+  { page: 'careers', icon: 'work', label: 'Careers' },
+  { page: 'bookings', icon: 'event_available', label: 'Booking entries', count: 6 },
+  { page: 'contacts', icon: 'mail', label: 'Contact entries', count: 4 },
+  { page: 'media', icon: 'photo_library', label: 'Media library' },
+  { page: 'settings', icon: 'settings', label: 'Website settings' },
+];
+
+const PARENT = { pageEditor: 'pages', newsEditor: 'news', doctorEditor: 'doctors', careerEditor: 'careers' };
+
+class Component extends DCLogic {
+  state = {
+    page: 'dashboard',
+    bookingId: 2,
+    contactId: 0,
+    statuses: {},
+    readContacts: {},
+  };
+
+  go(page) {
+    return (e) => { if (e) e.preventDefault(); this.setState({ page }); window.scrollTo(0, 0); };
+  }
+
+  bookings() {
+    const base = [
+      { id: 0, time: '8:00 AM', name: 'Rosalinda Abellana', phone: '0917 224 8890', dept: 'Internal Medicine', doctor: 'Dr. Ramon L. Deiparine', slot: 'Sep 15 · 8:00 AM · OPD Clinic 2', status: 'Confirmed', booked: 'Sep 12', reason: 'Follow-up for blood pressure medication; needs a new prescription.' },
+      { id: 1, time: '8:40 AM', name: 'Junrey Pacana', phone: '0928 114 3320', dept: 'Imaging & Radiology', doctor: 'Dr. Edgar P. Pacaña', slot: 'Sep 15 · 8:40 AM · Imaging Suite', status: 'Completed', booked: 'Sep 11', reason: 'Chest X-ray for pre-employment requirement.' },
+      { id: 2, time: '9:15 AM', name: 'Marilou Cabahug', phone: '0906 778 1145', dept: 'OB-Gynecology', doctor: 'Unassigned', slot: 'Not yet set', status: 'New', booked: 'today, 6:42 AM', reason: 'Second prenatal check-up. Asking if the Saturday ultrasound slot is still open.' },
+      { id: 3, time: '10:00 AM', name: 'Eduardo Sencio', phone: '0995 330 8871', dept: 'General Surgery', doctor: 'Dr. Jose B. Bacaltos', slot: 'Sep 15 · 10:00 AM · Surgical Annex', status: 'Confirmed', booked: 'Sep 10', reason: 'Post-operative wound check, two weeks after appendectomy.' },
+      { id: 4, time: '10:30 AM', name: 'Liza Mae Tundag', phone: '0917 665 2210', dept: 'Pediatrics', doctor: 'Dr. Liza C. Canonigo', slot: 'Sep 15 · 10:30 AM · OPD Clinic 1', status: 'New', booked: 'today, 7:15 AM', reason: 'Three-year-old with a cough for five days, no fever.' },
+      { id: 5, time: '1:30 PM', name: 'Ernesto Villaflor', phone: '0933 908 4412', dept: 'Internal Medicine', doctor: 'Unassigned', slot: 'Not yet set', status: 'No-show', booked: 'Sep 9', reason: 'Diabetes follow-up and refill of maintenance medicines.' },
+      { id: 6, time: '2:15 PM', name: 'Cristina Borromeo', phone: '0921 447 6635', dept: 'Imaging & Radiology', doctor: 'Unassigned', slot: 'Not yet set', status: 'New', booked: 'today, 8:03 AM', reason: 'Whole abdomen ultrasound requested by her physician in Argao.' },
+    ];
+    return base.map((b) => ({ ...b, status: this.state.statuses[b.id] || b.status }));
+  }
+
+  contacts() {
+    return [
+      { id: 0, subject: 'Asking about PhilHealth for maternity package', from: 'Analyn Deguit', email: 'analyn.deguit@gmail.com', when: 'today, 7:22 AM', preview: 'Good morning po. I am 7 months pregnant and want to ask how much…', body: 'Good morning po. I am 7 months pregnant and want to ask how much the normal delivery package costs if I have PhilHealth. Is the payment deducted right away, or do we pay first and claim later? Also, is Dr. Alcantara available on Saturdays? Salamat po.' },
+      { id: 1, subject: 'Request for medical records copy', from: 'Renato Cuizon', email: 'r.cuizon@yahoo.com', when: 'today, 6:10 AM', preview: 'My father was admitted last July and we need a copy of his discharge…', body: 'My father was admitted last July and we need a copy of his discharge summary and lab results for his insurance claim. What documents do I need to bring, and how long does the request take?' },
+      { id: 2, subject: 'Donation of hospital beds', from: 'Sibonga Rotary Club', email: 'rotary.sibonga@gmail.com', when: 'yesterday', preview: 'Our club would like to donate five hospital beds before the end of…', body: 'Our club would like to donate five hospital beds before the end of the year. Who should we coordinate with, and is there a preferred specification?' },
+      { id: 3, subject: 'Complaint about waiting time at OPD', from: 'Jocelyn Rama', email: 'jrama1978@gmail.com', when: 'yesterday', preview: 'We waited almost three hours last Tuesday even with an appointment…', body: 'We waited almost three hours last Tuesday even with an appointment at 9 AM. I understand the doctors are busy, but it would help if someone told us about the delay. My mother is 78 and had to stand for part of the wait.' },
+      { id: 4, subject: 'Inquiry on drug testing for employment', from: 'Kevin Ybañez', email: 'kevin.ybanez@outlook.com', when: 'Sep 13', preview: 'Do you offer drug testing and how much is the fee?', body: 'Do you offer drug testing and how much is the fee? Is a walk-in accepted or do I need to book?' },
+      { id: 5, subject: 'Ambulance request procedure', from: 'Brgy. Bagacay Health Center', email: 'bagacay.bhs@gmail.com', when: 'Sep 12', preview: 'What is the procedure for requesting ambulance transfer from the…', body: 'What is the procedure for requesting ambulance transfer from the barangay health station to your ER, and is there a fee for residents of Sibonga?' },
+    ];
+  }
+
+  renderVals() {
+    const p = this.state.page;
+    const screen = SCREENS[p] || SCREENS.dashboard;
+    const activeNav = PARENT[p] || p;
+
+    const navStyle = (on) => `display:flex;align-items:center;gap:11px;flex:1 1 100%;min-width:150px;padding:10px 11px;border-radius:10px;font-size:14.5px;font-weight:600;color:${on ? '#fff' : '#cfd9ee'};background:${on ? 'rgba(255,255,255,.14)' : 'transparent'}`;
+
+    const bookings = this.bookings();
+    const selectedBooking = bookings.find((b) => b.id === this.state.bookingId) || bookings[0];
+    const contacts = this.contacts();
+    const selectedContact = contacts.find((c) => c.id === this.state.contactId) || contacts[0];
+
+    const setStatus = (s) => (e) => {
+      if (e) e.preventDefault();
+      this.setState({ statuses: { ...this.state.statuses, [this.state.bookingId]: s } });
+    };
+
+    return {
+      crumb: screen.crumb,
+      heading: screen.heading,
+      primaryLabel: screen.label,
+      primaryIcon: screen.icon,
+      primaryAction: this.go(screen.target),
+
+      isDashboard: p === 'dashboard', isPages: p === 'pages', isPageEditor: p === 'pageEditor',
+      isNews: p === 'news', isNewsEditor: p === 'newsEditor', isHealth: p === 'health',
+      isDoctors: p === 'doctors', isDoctorEditor: p === 'doctorEditor',
+      isBookings: p === 'bookings', isContacts: p === 'contacts',
+      isCareers: p === 'careers', isCareerEditor: p === 'careerEditor',
+      isMedia: p === 'media', isSettings: p === 'settings',
+
+      goPages: this.go('pages'), goPageEditor: this.go('pageEditor'),
+      goNews: this.go('news'), goNewsEditor: this.go('newsEditor'),
+      goDoctors: this.go('doctors'), goDoctorEditor: this.go('doctorEditor'),
+      goBookings: this.go('bookings'), goContacts: this.go('contacts'),
+      goCareers: this.go('careers'), goCareerEditor: this.go('careerEditor'),
+      goMedia: this.go('media'),
+      newNews: this.go('newsEditor'), newDoctor: this.go('doctorEditor'),
+
+      nav: NAV.map((n) => ({
+        ...n,
+        go: this.go(n.page),
+        style: navStyle(activeNav === n.page),
+        count: n.count || false,
+        countStyle: 'background:#e8b23a;color:#1d1503;font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:999px;flex:none',
+      })),
+
+      todayBookings: bookings.slice(0, 4).map((b) => ({ ...b, badgeStyle: STATUS[b.status] })),
+      unreadContacts: contacts.slice(0, 3).map((c) => ({ subject: c.subject, from: c.from, when: c.when })),
+
+      bookings: bookings.map((b) => ({
+        ...b,
+        badgeStyle: STATUS[b.status],
+        rowStyle: `display:flex;gap:14px;padding:12px 18px;border-bottom:1px solid #f4f2ec;align-items:center;cursor:pointer;background:${b.id === this.state.bookingId ? '#f5f7fd' : 'transparent'};border-left:3px solid ${b.id === this.state.bookingId ? '#14357f' : 'transparent'}`,
+        select: (e) => { if (e) e.preventDefault(); this.setState({ bookingId: b.id }); },
+      })),
+      selectedBooking,
+      selectedBadge: React.createElement('span', { style: { background: selectedBooking.status === 'New' ? '#f2f4fa' : selectedBooking.status === 'Confirmed' ? '#eef7f0' : selectedBooking.status === 'Cancelled' ? '#fdeeee' : selectedBooking.status === 'No-show' ? '#fdf5e4' : '#f1efe9', color: selectedBooking.status === 'New' ? '#14357f' : selectedBooking.status === 'Confirmed' ? '#2f8b3c' : selectedBooking.status === 'Cancelled' ? '#8f1d1d' : selectedBooking.status === 'No-show' ? '#8a6512' : '#6d6a62', fontSize: 12, fontWeight: 700, padding: '5px 10px', borderRadius: 6, whiteSpace: 'nowrap' } }, selectedBooking.status),
+      markConfirmed: setStatus('Confirmed'),
+      markCompleted: setStatus('Completed'),
+      markNoShow: setStatus('No-show'),
+      markCancelled: setStatus('Cancelled'),
+
+      contacts: contacts.map((c) => {
+        const read = this.state.readContacts[c.id] || c.id > 3;
+        return {
+          ...c,
+          rowStyle: `display:flex;gap:11px;padding:14px 18px;border-bottom:1px solid #f4f2ec;cursor:pointer;background:${c.id === this.state.contactId ? '#f5f7fd' : 'transparent'}`,
+          dotStyle: `width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none;background:${read ? 'transparent' : '#8f1d1d'}`,
+          select: (e) => { if (e) e.preventDefault(); this.setState({ contactId: c.id, readContacts: { ...this.state.readContacts, [c.id]: true } }); },
+        };
+      }),
+      selectedContact,
+      markHandled: (e) => { if (e) e.preventDefault(); this.setState({ readContacts: { ...this.state.readContacts, [this.state.contactId]: true } }); },
+
+      pages: [
+        { icon: 'home', title: 'Home', url: '/', section: 'Main', updated: 'Sep 14, 2026' },
+        { icon: 'apartment', title: 'About DCH', url: '/about', section: 'About', updated: 'Aug 30, 2026' },
+        { icon: 'flag', title: 'Vision, Mission & Values', url: '/about/vision-values', section: 'About', updated: 'Aug 30, 2026' },
+        { icon: 'local_hospital', title: 'Services & Departments', url: '/services', section: 'Services', updated: 'Sep 8, 2026' },
+        { icon: 'radiology', title: 'Imaging & Radiology', url: '/services/imaging-radiology', section: 'Services', updated: 'Sep 8, 2026' },
+        { icon: 'emergency', title: 'Emergency Medicine', url: '/services/emergency', section: 'Services', updated: 'Jul 2, 2026' },
+        { icon: 'assignment', title: 'Patients & Visitors', url: '/patients', section: 'Main', updated: 'Sep 1, 2026' },
+        { icon: 'mail', title: 'Contact', url: '/contact', section: 'Main', updated: 'Jun 15, 2026' },
+      ],
+
+      pageItems: [
+        { icon: 'radiology', title: 'Digital X-ray', detail: 'Chest, skull, spine, extremities' },
+        { icon: 'monitor_heart', title: '16-slice CT scan', detail: 'Head, chest, abdomen, spine' },
+        { icon: 'pregnant_woman', title: 'Ultrasound', detail: 'Prenatal, whole abdomen, KUB, thyroid' },
+        { icon: 'cardiology', title: 'ECG & 2D-echo', detail: 'Resting ECG daily; 2D-echo Tue & Fri' },
+      ],
+
+      news: [
+        { image: 'assets/imaging.png', title: 'New 16-slice CT scanner now serving southern Cebu', excerpt: 'Head, chest, and abdominal studies read the same day.', category: 'Service update', date: 'Sep 8, 2026', featured: true },
+        { image: 'assets/consult.png', title: 'Free flu vaccination for senior citizens', excerpt: 'Walk-in at the OPD annex every Wednesday this month.', category: 'Advisory', date: 'Sep 2, 2026', featured: true },
+        { image: 'assets/conference.png', title: 'Medical mission in Barangay Bagacay', excerpt: 'Free consults, BP screening, and minor dental services.', category: 'Community', date: 'Aug 4, 2026', featured: false },
+        { image: 'assets/ultrasound.png', title: 'Prenatal ultrasound now available on Saturdays', excerpt: 'Extra slots opened for working mothers.', category: 'Service update', date: 'Jul 21, 2026', featured: false },
+        { image: 'assets/emergency.png', title: 'Dengue watch: what to do before coming to the ER', excerpt: 'Warning signs that mean you should not wait.', category: 'Advisory', date: 'Jul 3, 2026', featured: false },
+        { image: 'assets/cath-lab.png', title: 'DCH is hiring nurses and med techs', excerpt: 'Seven positions open across nursing, lab, and imaging.', category: 'Careers', date: 'Jun 2, 2026', featured: false },
+      ].map((n) => ({
+        ...n,
+        thumb: thumb(n.image, { width: 56, height: 44, objectFit: 'cover', borderRadius: 8, flex: 'none' }),
+        badgeStyle: CATEGORY[n.category],
+        featuredMark: n.featured
+          ? React.createElement('span', { style: { display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 13, fontWeight: 700, color: '#8a6512' } },
+              React.createElement('span', { className: 'ms', style: { fontSize: 17, color: '#e8b23a' } }, 'star'), 'On home')
+          : React.createElement('span', { style: { fontSize: 13, color: '#b3aea1' } }, '—'),
+      })),
+
+      healthPosts: [
+        { image: 'assets/consult.png', topic: 'Diabetes & hypertension', title: 'Checking your blood pressure at home, correctly', author: 'Dr. Ramon L. Deiparine · Internal Medicine', date: 'Sep 5, 2026' },
+        { image: 'assets/ultrasound.png', topic: 'Mother & child', title: 'Your first prenatal visit: what happens and what to bring', author: 'Dr. Maria A. Alcantara · OB-Gyne', date: 'Aug 22, 2026' },
+        { image: 'assets/emergency.png', topic: 'Infectious disease', title: 'Dengue: the warning signs that cannot wait until morning', author: 'Dr. Nelia S. Sanchez · Family Medicine', date: 'Jul 30, 2026' },
+        { image: 'assets/patient-room.png', topic: 'First aid', title: 'Burns, cuts, and sprains: the first ten minutes', author: 'ER Nursing Team', date: 'Jul 12, 2026' },
+        { image: 'assets/conference.png', topic: 'Nutrition', title: 'Eating well on a Sibonga budget', author: 'DCH Dietary Section', date: 'Jun 28, 2026' },
+        { image: 'assets/doctor-portrait.png', topic: 'Diabetes & hypertension', title: 'Living with type 2 diabetes: your first three months', author: 'Dr. Ramon L. Deiparine · Internal Medicine', date: 'Jun 9, 2026' },
+      ].map((h) => ({ ...h, thumb: thumb(h.image, { width: '100%', height: 120, objectFit: 'cover', display: 'block' }) })),
+
+      doctors: [
+        { initials: 'JD', name: 'Dr. James Deiparine', prc: 'PRC 0088211', specialty: 'Medical Director', hours: 'By appointment', room: 'Admin Office', status: 'Active' },
+        { initials: 'RD', name: 'Dr. Ramon L. Deiparine', prc: 'PRC 0104552', specialty: 'Internal Medicine', hours: 'Tue & Fri · 1–5 PM', room: 'OPD Clinic 2', status: 'Active' },
+        { initials: 'MA', name: 'Dr. Maria A. Alcantara', prc: 'PRC 0123456', specialty: 'OB-Gynecology', hours: 'Mon, Wed, Sat · 9 AM–12 NN', room: 'OPD Clinic 4', status: 'Active' },
+        { initials: 'JB', name: 'Dr. Jose B. Bacaltos', prc: 'PRC 0097710', specialty: 'General Surgery', hours: 'Thu · 8 AM–12 NN', room: 'Surgical Annex', status: 'Active' },
+        { initials: 'LC', name: 'Dr. Liza C. Canonigo', prc: 'PRC 0141908', specialty: 'Pediatrics', hours: 'Mon–Fri · 2–5 PM', room: 'OPD Clinic 1', status: 'On leave' },
+        { initials: 'EP', name: 'Dr. Edgar P. Pacaña', prc: 'PRC 0116374', specialty: 'Radiology', hours: 'Daily · on call', room: 'Imaging Suite', status: 'Active' },
+      ].map((d) => ({ ...d, badgeStyle: STATUS[d.status] })),
+
+      schedule: [
+        { day: 'Monday', from: '9:00 AM', to: '12:00 NN', room: 'OPD Clinic 4' },
+        { day: 'Wednesday', from: '9:00 AM', to: '12:00 NN', room: 'OPD Clinic 4' },
+        { day: 'Saturday', from: '9:00 AM', to: '12:00 NN', room: 'OPD Clinic 4' },
+      ],
+
+      jobs: [
+        { icon: 'vaccines', title: 'Staff Nurse – Emergency Room', type: 'Full-time · rotating shifts', dept: 'Nursing Service', openings: '2', applications: '14 received' },
+        { icon: 'pregnant_woman', title: 'Staff Nurse – Delivery Room', type: 'Full-time', dept: 'Nursing Service', openings: '1', applications: '8 received' },
+        { icon: 'labs', title: 'Medical Technologist', type: 'Full-time', dept: 'Clinical Laboratory', openings: '1', applications: '6 received' },
+        { icon: 'radiology', title: 'Radiologic Technologist', type: 'Full-time', dept: 'Imaging & Radiology', openings: '1', applications: '3 received' },
+        { icon: 'receipt_long', title: 'Billing & PhilHealth Clerk', type: 'Full-time', dept: 'Finance', openings: '2', applications: '11 received' },
+      ],
+
+      media: [
+        { src: 'assets/staff-hallway.png', name: 'staff-hallway.png', meta: '1240 × 720 · Sep 8' },
+        { src: 'assets/reception.png', name: 'reception.png', meta: '960 × 640 · Sep 8' },
+        { src: 'assets/patient-room.png', name: 'patient-room.png', meta: '960 × 640 · Sep 8' },
+        { src: 'assets/imaging.png', name: 'imaging.png', meta: '1200 × 800 · Sep 8' },
+        { src: 'assets/emergency.png', name: 'emergency.png', meta: '1200 × 800 · Aug 30' },
+        { src: 'assets/ultrasound.png', name: 'ultrasound.png', meta: '1200 × 800 · Aug 30' },
+        { src: 'assets/cath-lab.png', name: 'cath-lab.png', meta: '1200 × 800 · Aug 30' },
+        { src: 'assets/conference.png', name: 'conference.png', meta: '1200 × 800 · Aug 22' },
+        { src: 'assets/consult.png', name: 'consult.png', meta: '1200 × 800 · Aug 22' },
+        { src: 'assets/dr-james-deiparine.png', name: 'dr-james-deiparine.png', meta: '900 × 1200 · Aug 14' },
+      ].map((m) => ({ ...m, thumb: thumb(m.src, { width: '100%', height: 118, objectFit: 'cover', display: 'block' }) })),
+
+      visiting: [
+        { area: 'General wards', from: '10:00 AM', to: '8:00 PM' },
+        { area: 'Maternity', from: '1:00 PM', to: '7:00 PM' },
+        { area: 'ICU', from: '4:00 PM', to: '6:00 PM' },
+      ],
+
+      rates: [
+        { room: 'Private room', rate: '₱2,400', note: 'PhilHealth deductible' },
+        { room: 'Semi-private', rate: '₱1,500', note: 'PhilHealth deductible' },
+        { room: 'Ward bed', rate: '₱750', note: 'No balance billing' },
+      ],
+
+      featured: [
+        { image: 'assets/imaging.png', title: 'New 16-slice CT scanner', type: 'News · Service update' },
+        { image: 'assets/consult.png', title: 'Free flu vaccination for seniors', type: 'News · Advisory' },
+        { image: 'assets/dr-james-deiparine.png', title: 'Dr. James Deiparine', type: 'Doctor spotlight' },
+      ].map((f) => ({ ...f, thumb: thumb(f.image, { width: 46, height: 38, objectFit: 'cover', borderRadius: 7, flex: 'none' }) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# Project-level ignores. Website rules (database, uploads, .env, builds) are in web/.gitignore.
+
+# Original handoff bundle and loose screenshots — the extracted files are committed instead
+/DCH.zip
+/Screenshot*.png
+
+# Local database backups (contain live content)
+/backups/
+
+# macOS and iCloud sync leftovers ("file 2.ext" conflict copies)
+.DS_Store
+* 2.*
+
+# Per-user Claude Code settings
+.claude/settings.local.json

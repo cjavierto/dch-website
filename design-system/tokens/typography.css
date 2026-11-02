@@ -1,0 +1,53 @@
+:root {
+  /* ---- Families ------------------------------------------------------ */
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-text: "Source Sans 3", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+  --font-icon: "Material Symbols Rounded";
+
+  /* ---- Weights ------------------------------------------------------- */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ---- Desktop scale (px, as used in the approved mockups) ---------- */
+  --text-hero: 56px;          /* home hero H1 */
+  --text-page-title: 44px;    /* section page H1 */
+  --text-article-title: 42px;
+  --text-h2: 36px;
+  --text-h2-sm: 32px;
+  --text-h3: 26px;
+  --text-h4: 19px;
+  --text-lead: 19px;          /* hero paragraph, article standfirst */
+  --text-body-lg: 17.5px;
+  --text-body: 16px;
+  --text-body-sm: 15px;
+  --text-ui: 15px;            /* nav links, buttons */
+  --text-ui-sm: 14.5px;
+  --text-caption: 13.5px;
+  --text-meta: 13px;
+  --text-eyebrow-size: 12px;
+  --text-tag: 12.5px;
+
+  /* ---- Mobile scale -------------------------------------------------- */
+  --text-hero-mobile: 31px;
+  --text-page-title-mobile: 27px;
+  --text-h2-mobile: 22px;
+  --text-h3-mobile: 17.5px;
+  --text-body-mobile: 15px;
+
+  /* ---- Line heights -------------------------------------------------- */
+  --leading-hero: 1.06;
+  --leading-title: 1.15;
+  --leading-heading: 1.3;
+  --leading-body: 1.6;
+  --leading-prose: 1.7;
+
+  /* ---- Tracking ------------------------------------------------------ */
+  --tracking-hero: -1px;
+  --tracking-title: -0.8px;
+  --tracking-h2: -0.5px;
+  --tracking-eyebrow: 1.4px;
+  --tracking-label: 1.3px;
+}

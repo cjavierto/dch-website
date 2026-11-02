@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body{margin:0;background:#f7f6f2;color:#14181f;font-family:'Source Sans 3',Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  *{box-sizing:border-box}
+  a{color:#14357f;text-decoration:none}
+  a:hover{color:#2f8b3c}
+  .ms{font-family:'Material Symbols Rounded';font-weight:400;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;direction:ltr;-webkit-font-feature-settings:'liga';font-variation-settings:'FILL' 1}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+
+  <sc-if value="{{ showTopBar }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#0e2559;color:#dfe6f5;font-size:13px">
+      <div style="max-width:1240px;margin:0 auto;padding:8px 24px;display:flex;flex-wrap:wrap;gap:20px;align-items:center">
+        <span style="display:flex;align-items:center;gap:7px;font-weight:600;color:#fff"><span class="ms" style="font-size:17px;color:#e8b23a">emergency</span>Emergency 24/7 · (032) 484 1234</span>
+        <span style="display:flex;align-items:center;gap:7px"><span class="ms" style="font-size:17px;color:#7f9ad6">location_on</span>Poblacion, Sibonga, Cebu</span>
+        <span style="display:flex;align-items:center;gap:7px"><span class="ms" style="font-size:17px;color:#7f9ad6">verified</span>PhilHealth Accredited</span>
+        <span style="margin-left:auto;display:flex;gap:16px;align-items:center">
+          <a href="#" onClick="{{ goCareers }}" style="color:#dfe6f5">Careers</a>
+          <a href="#" onClick="{{ goContact }}" style="color:#dfe6f5">Contact</a>
+          <a href="#" style="color:#dfe6f5">Bisaya</a>
+        </span>
+      </div>
+    </div>
+  </sc-if>
+
+  <header style="background:#fff;border-bottom:1px solid #e6e3da;position:sticky;top:0;z-index:40">
+    <div style="max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px">
+      <a href="#" onClick="{{ goHome }}" style="display:flex;align-items:center;gap:13px;flex:0 1 auto;min-width:0">
+        <img src="assets/dch-logo.jpg" alt="Deiparine Community Hospital" style="width:56px;height:56px;border-radius:50%;display:block">
+        <span style="display:flex;flex-direction:column;line-height:1.15">
+          <span style="font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:700;color:#14357f;letter-spacing:-0.2px;line-height:1.15">Deiparine Community Hospital</span>
+          <span style="font-size:11.5px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:#2f8b3c">Sibonga, Cebu · Since 1974</span>
+        </span>
+      </a>
+
+      <nav style="margin-left:auto;position:relative;display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:6px 4px">
+        <div onMouseEnter="{{ closeMenu }}">
+          <a href="#" onClick="{{ goHome }}" style="display:block;padding:10px 12px;font-size:15px;font-weight:600;white-space:nowrap;color:#14181f;border-radius:8px" style-hover="background:#f2f4fa;color:#14357f">Home</a>
+        </div>
+        <div onMouseEnter="{{ openServices }}">
+          <a href="#" onClick="{{ goServices }}" style="display:flex;align-items:center;gap:3px;padding:10px 12px;font-size:15px;font-weight:600;white-space:nowrap;color:#14181f;border-radius:8px" style-hover="background:#f2f4fa;color:#14357f">Services<span class="ms" style="font-size:18px">expand_more</span></a>
+          <sc-if value="{{ servicesOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:100%;right:0;width:min(640px,calc(100vw - 48px));background:#fff;border:1px solid #e6e3da;border-radius:14px;box-shadow:0 18px 44px rgba(14,37,89,.16);padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:6px 22px">
+              <div style="grid-column:1 / -1;font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#8a8578;padding:0 8px 6px">Clinical departments</div>
+              <a href="#" onClick="{{ goServiceDetail }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">cardiology</span><span><span style="display:block;font-weight:600;font-size:14.5px">Internal Medicine</span><span style="display:block;font-size:12.5px;color:#6d6a62">Adult primary &amp; chronic care</span></span></a>
+              <a href="#" onClick="{{ goServiceDetail }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">pregnant_woman</span><span><span style="display:block;font-weight:600;font-size:14.5px">OB-Gynecology</span><span style="display:block;font-size:12.5px;color:#6d6a62">Prenatal, delivery, women's health</span></span></a>
+              <a href="#" onClick="{{ goServiceDetail }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">child_care</span><span><span style="display:block;font-weight:600;font-size:14.5px">Pediatrics</span><span style="display:block;font-size:12.5px;color:#6d6a62">Newborn to teen care</span></span></a>
+              <a href="#" onClick="{{ goServiceDetail }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">surgical</span><span><span style="display:block;font-weight:600;font-size:14.5px">General Surgery</span><span style="display:block;font-size:12.5px;color:#6d6a62">Minor &amp; major operations</span></span></a>
+              <a href="#" onClick="{{ goServiceDetail }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">radiology</span><span><span style="display:block;font-weight:600;font-size:14.5px">Imaging &amp; Radiology</span><span style="display:block;font-size:12.5px;color:#6d6a62">X-ray, ultrasound, CT scan</span></span></a>
+              <a href="#" onClick="{{ goServiceDetail }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">labs</span><span><span style="display:block;font-weight:600;font-size:14.5px">Laboratory</span><span style="display:block;font-size:12.5px;color:#6d6a62">Blood chem, hematology, swab</span></span></a>
+              <div style="grid-column:1 / -1;margin-top:10px;padding-top:14px;border-top:1px solid #eeece5;display:flex;gap:10px;align-items:center">
+                <span class="ms" style="font-size:20px;color:#2f8b3c">local_hospital</span>
+                <span style="font-size:13.5px;color:#4a4741">Outpatient clinics open Mon–Sat, 8:00 AM – 5:00 PM</span>
+                <a href="#" onClick="{{ goServices }}" style="margin-left:auto;font-size:13.5px;font-weight:700">All services →</a>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        <div onMouseEnter="{{ openAbout }}">
+          <a href="#" onClick="{{ goAbout }}" style="display:flex;align-items:center;gap:3px;padding:10px 12px;font-size:15px;font-weight:600;white-space:nowrap;color:#14181f;border-radius:8px" style-hover="background:#f2f4fa;color:#14357f">About<span class="ms" style="font-size:18px">expand_more</span></a>
+          <sc-if value="{{ aboutOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:100%;right:0;width:min(560px,calc(100vw - 48px));background:#fff;border:1px solid #e6e3da;border-radius:14px;box-shadow:0 18px 44px rgba(14,37,89,.16);padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:6px 22px">
+              <a href="#" onClick="{{ goAbout }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">apartment</span><span><span style="display:block;font-weight:600;font-size:14.5px">About DCH</span><span style="display:block;font-size:12.5px;color:#6d6a62">History, facility, accreditation</span></span></a>
+              <a href="#" onClick="{{ goVision }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">flag</span><span><span style="display:block;font-weight:600;font-size:14.5px">Vision &amp; Values</span><span style="display:block;font-size:12.5px;color:#6d6a62">What we stand for</span></span></a>
+              <a href="#" onClick="{{ goStaff }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">groups</span><span><span style="display:block;font-weight:600;font-size:14.5px">Our Staff &amp; Leadership Team</span><span style="display:block;font-size:12.5px;color:#6d6a62">Medical director, consultants, nurses</span></span></a>
+              <a href="#" onClick="{{ goCareers }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">work</span><span><span style="display:block;font-weight:600;font-size:14.5px">Careers</span><span style="display:block;font-size:12.5px;color:#6d6a62">Current openings at DCH</span></span></a>
+            </div>
+          </sc-if>
+        </div>
+        <div onMouseEnter="{{ closeMenu }}">
+          <a href="#" onClick="{{ goPatients }}" style="display:block;padding:10px 12px;font-size:15px;font-weight:600;white-space:nowrap;color:#14181f;border-radius:8px" style-hover="background:#f2f4fa;color:#14357f">Patients &amp; Visitors</a>
+        </div>
+        <div onMouseEnter="{{ closeMenu }}">
+          <a href="#" onClick="{{ goDoctors }}" style="display:block;padding:10px 12px;font-size:15px;font-weight:600;white-space:nowrap;color:#14181f;border-radius:8px" style-hover="background:#f2f4fa;color:#14357f">Doctors Directory</a>
+        </div>
+        <div onMouseEnter="{{ openNews }}">
+          <a href="#" onClick="{{ goNews }}" style="display:flex;align-items:center;gap:3px;padding:10px 12px;font-size:15px;font-weight:600;white-space:nowrap;color:#14181f;border-radius:8px" style-hover="background:#f2f4fa;color:#14357f">News &amp; Health Info<span class="ms" style="font-size:18px">expand_more</span></a>
+          <sc-if value="{{ newsOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:100%;right:0;width:min(560px,calc(100vw - 48px));background:#fff;border:1px solid #e6e3da;border-radius:14px;box-shadow:0 18px 44px rgba(14,37,89,.16);padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:6px 22px">
+              <a href="#" onClick="{{ goNews }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">campaign</span><span><span style="display:block;font-weight:600;font-size:14.5px">News &amp; Announcements</span><span style="display:block;font-size:12.5px;color:#6d6a62">Advisories, missions, updates</span></span></a>
+              <a href="#" onClick="{{ goHealth }}" style="display:flex;gap:11px;padding:9px 8px;border-radius:9px;color:#14181f" style-hover="background:#f2f4fa"><span class="ms" style="font-size:21px;color:#14357f">menu_book</span><span><span style="display:block;font-weight:600;font-size:14.5px">Health Information</span><span style="display:block;font-size:12.5px;color:#6d6a62">Guides from our doctors</span></span></a>
+            </div>
+          </sc-if>
+        </div>
+        <a href="#" onClick="{{ goContact }}" style="margin-left:8px;white-space:nowrap;display:flex;align-items:center;gap:8px;background:#14357f;color:#fff;padding:12px 18px;border-radius:10px;font-size:14.5px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:19px">event_available</span>Book Appointment</a>
+      </nav>
+    </div>
+  </header>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <main>
+    <section style="position:relative;background:#0e2559;overflow:hidden">
+      <img src="assets/staff-hallway.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42">
+      <div style="position:absolute;inset:0;background:linear-gradient(92deg,#0e2559 8%,rgba(14,37,89,.82) 48%,rgba(14,37,89,.35) 100%)"></div>
+      <div style="position:relative;max-width:1240px;margin:0 auto;padding:84px 24px 72px">
+        <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(232,178,58,.16);border:1px solid rgba(232,178,58,.5);color:#f3cd74;font-size:12.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;padding:7px 13px;border-radius:999px"><span class="ms" style="font-size:16px">shield</span>Level 1 · DOH Licensed</span>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:56px;line-height:1.06;font-weight:700;color:#fff;margin:22px 0 0;max-width:16em;letter-spacing:-1px;text-wrap:pretty">Compassionate care, close to home.</h1>
+        <p style="font-size:19px;line-height:1.55;color:#cfd9ee;max-width:34em;margin:18px 0 0">Fifty years of serving Sibonga and southern Cebu — emergency, maternity, surgery, and diagnostics under one roof.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+          <a href="#" onClick="{{ goContact }}" style="display:flex;align-items:center;gap:9px;background:#e8b23a;color:#1d1503;padding:15px 22px;border-radius:11px;font-size:15.5px;font-weight:700" style-hover="background:#f3cd74;color:#1d1503"><span class="ms" style="font-size:20px">event_available</span>Book an appointment</a>
+          <a href="#" onClick="{{ goDoctors }}" style="display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.45);color:#fff;padding:15px 22px;border-radius:11px;font-size:15.5px;font-weight:700" style-hover="background:rgba(255,255,255,.2);color:#fff"><span class="ms" style="font-size:20px">stethoscope</span>Our doctors</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1240px;margin:-38px auto 0;padding:0 24px;position:relative;z-index:5">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+        <a href="#" onClick="{{ goContact }}" style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 24px rgba(14,37,89,.07);color:#14181f" style-hover="border-color:#14357f;color:#14357f">
+          <span class="ms" style="font-size:30px;color:#14357f">event_available</span>
+          <span style="font-weight:700;font-size:16.5px">Book Appointment</span>
+          <span style="font-size:13.5px;color:#6d6a62;line-height:1.45">Message OPD to request a slot</span>
+        </a>
+        <a href="#" onClick="{{ goDoctors }}" style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 24px rgba(14,37,89,.07);color:#14181f" style-hover="border-color:#14357f;color:#14357f">
+          <span class="ms" style="font-size:30px;color:#14357f">badge</span>
+          <span style="font-weight:700;font-size:16.5px">Doctors Directory</span>
+          <span style="font-size:13.5px;color:#6d6a62;line-height:1.45">Who is in clinic today</span>
+        </a>
+        <a href="#" onClick="{{ goPatients }}" style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 24px rgba(14,37,89,.07);color:#14181f" style-hover="border-color:#14357f;color:#14357f">
+          <span class="ms" style="font-size:30px;color:#14357f">assignment</span>
+          <span style="font-weight:700;font-size:16.5px">Patients &amp; Visitors</span>
+          <span style="font-size:13.5px;color:#6d6a62;line-height:1.45">Admission, billing, visiting hours</span>
+        </a>
+        <a href="#" style="background:#8f1d1d;border:1px solid #8f1d1d;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 24px rgba(143,29,29,.18);color:#fff" style-hover="background:#7a1717;color:#fff">
+          <span class="ms" style="font-size:30px;color:#f0b8b8">emergency</span>
+          <span style="font-weight:700;font-size:16.5px">Emergency Room</span>
+          <span style="font-size:13.5px;color:#f3cccc;line-height:1.45">Open 24 hours · (032) 484 1234</span>
+        </a>
+      </div>
+    </section>
+
+    <section style="max-width:1240px;margin:0 auto;padding:72px 24px 8px">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px;margin-bottom:28px">
+        <div>
+          <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Our services</span>
+          <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:36px;line-height:1.15;font-weight:700;margin:8px 0 0;letter-spacing:-0.5px">Care for every stage of life</h2>
+        </div>
+        <a href="#" onClick="{{ goServices }}" style="margin-left:auto;display:flex;align-items:center;gap:6px;font-weight:700;font-size:15px">View all departments<span class="ms" style="font-size:19px">arrow_forward</span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:24px" style-hover="border-color:#2f8b3c">
+          <span class="ms" style="font-size:32px;color:#2f8b3c">emergency</span>
+          <h3 style="font-size:18px;font-weight:700;margin:14px 0 6px">Emergency &amp; Trauma</h3>
+          <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Round-the-clock ER with resident physicians, ambulance dispatch, and triage bay.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:24px" style-hover="border-color:#2f8b3c">
+          <span class="ms" style="font-size:32px;color:#2f8b3c">pregnant_woman</span>
+          <h3 style="font-size:18px;font-weight:700;margin:14px 0 6px">Maternity &amp; OB-Gyne</h3>
+          <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Prenatal check-ups, normal and caesarean delivery, newborn screening.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:24px" style-hover="border-color:#2f8b3c">
+          <span class="ms" style="font-size:32px;color:#2f8b3c">surgical</span>
+          <h3 style="font-size:18px;font-weight:700;margin:14px 0 6px">Surgery</h3>
+          <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Two operating rooms for general, orthopedic, and minor procedures.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:24px" style-hover="border-color:#2f8b3c">
+          <span class="ms" style="font-size:32px;color:#2f8b3c">radiology</span>
+          <h3 style="font-size:18px;font-weight:700;margin:14px 0 6px">Diagnostics</h3>
+          <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Digital X-ray, ultrasound, ECG, and a full clinical laboratory.</p>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ showStats }}" hint-placeholder-val="{{ true }}">
+    <section style="max-width:1240px;margin:0 auto;padding:56px 24px">
+      <div style="background:#14357f;border-radius:18px;padding:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:28px">
+        <div>
+          <div style="font-family:'Source Serif 4',Georgia,serif;font-size:40px;font-weight:700;color:#e8b23a;line-height:1">50 yrs</div>
+          <div style="font-size:14.5px;color:#cfd9ee;margin-top:6px">Serving southern Cebu</div>
+        </div>
+        <div>
+          <div style="font-family:'Source Serif 4',Georgia,serif;font-size:40px;font-weight:700;color:#e8b23a;line-height:1">60</div>
+          <div style="font-size:14.5px;color:#cfd9ee;margin-top:6px">Licensed bed capacity</div>
+        </div>
+        <div>
+          <div style="font-family:'Source Serif 4',Georgia,serif;font-size:40px;font-weight:700;color:#e8b23a;line-height:1">34</div>
+          <div style="font-size:14.5px;color:#cfd9ee;margin-top:6px">Consultants &amp; residents</div>
+        </div>
+        <div>
+          <div style="font-family:'Source Serif 4',Georgia,serif;font-size:40px;font-weight:700;color:#e8b23a;line-height:1">24/7</div>
+          <div style="font-size:14.5px;color:#cfd9ee;margin-top:6px">Emergency &amp; delivery room</div>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <section style="max-width:1240px;margin:0 auto;padding:8px 24px 24px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:34px;align-items:center">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <img src="assets/reception.png" alt="Hospital reception" style="width:100%;height:210px;object-fit:cover;border-radius:14px;grid-column:1 / -1">
+          <img src="assets/patient-room.png" alt="Private patient room" style="width:100%;height:150px;object-fit:cover;border-radius:14px">
+          <img src="assets/imaging.png" alt="CT scan suite" style="width:100%;height:150px;object-fit:cover;border-radius:14px">
+        </div>
+        <div>
+          <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Our facility</span>
+          <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:34px;line-height:1.15;font-weight:700;margin:8px 0 14px;letter-spacing:-0.5px">Built for the community it serves</h2>
+          <p style="font-size:16px;line-height:1.65;color:#4a4741;margin:0 0 18px">Private and ward accommodations, a modern operating complex, and diagnostic equipment that means fewer trips to Cebu City for tests and follow-ups.</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px">
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#14181f"><span class="ms" style="font-size:20px;color:#2f8b3c">check_circle</span>PhilHealth, HMO, and senior/PWD discounts honored</li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#14181f"><span class="ms" style="font-size:20px;color:#2f8b3c">check_circle</span>Ambulance service for barangay transfers</li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#14181f"><span class="ms" style="font-size:20px;color:#2f8b3c">check_circle</span>On-site pharmacy open until 9:00 PM</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1240px;margin:0 auto;padding:56px 24px 8px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:34px;align-items:start">
+        <div>
+          <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Common questions</span>
+          <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:34px;line-height:1.15;font-weight:700;margin:8px 0 14px;letter-spacing:-0.5px">Before you come in</h2>
+          <p style="font-size:16px;line-height:1.65;color:#4a4741;margin:0 0 20px">The things our admitting desk gets asked most. If yours isn't here, call the trunkline or send us a message.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <a href="#" onClick="{{ goContact }}" style="display:flex;align-items:center;gap:8px;background:#14357f;color:#fff;padding:13px 19px;border-radius:10px;font-size:14.5px;font-weight:700" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:19px">mail</span>Ask a question</a>
+            <a href="#" style="display:flex;align-items:center;gap:8px;border:1px solid #ddd9cf;padding:13px 19px;border-radius:10px;font-size:14.5px;font-weight:700;color:#14181f" style-hover="border-color:#14357f;color:#14357f"><span class="ms" style="font-size:19px">call</span>(032) 484 1200</a>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+            <div style="{{ f.cardStyle }}">
+              <a href="#" onClick="{{ f.toggle }}" style="display:flex;gap:12px;align-items:flex-start;padding:16px 18px;color:#14181f" style-hover="color:#14357f">
+                <span style="flex:1;font-size:15.5px;font-weight:700;line-height:1.4;text-wrap:pretty">{{ f.q }}</span>
+                <span class="ms" style="{{ f.iconStyle }}">{{ f.icon }}</span>
+              </a>
+              <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:14.5px;line-height:1.65;color:#4a4741;margin:0;padding:0 18px 18px">{{ f.a }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1240px;margin:0 auto;padding:56px 24px 72px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;display:flex;flex-direction:column">
+          <img src="assets/dr-james-deiparine.png" alt="Dr. James Deiparine" style="width:100%;height:300px;object-fit:cover;object-position:center 18%">
+          <div style="padding:24px">
+            <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Doctor spotlight</span>
+            <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:26px;font-weight:700;margin:8px 0 4px">Dr. James Deiparine</h3>
+            <p style="font-size:14.5px;color:#6d6a62;margin:0 0 14px">Medical Director, Deiparine Community Hospital</p>
+            <p style="font-size:15px;line-height:1.6;color:#4a4741;margin:0 0 18px">Leads the hospital's medical staff and clinical services, continuing the family's five decades of care in Sibonga.</p>
+            <a href="#" onClick="{{ goStaff }}" style="display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:15px">Meet the leadership team<span class="ms" style="font-size:19px">arrow_forward</span></a>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;align-items:baseline;gap:14px">
+            <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:28px;font-weight:700;margin:0">Announcements</h2>
+            <a href="#" onClick="{{ goNews }}" style="margin-left:auto;font-weight:700;font-size:14.5px">All news</a>
+          </div>
+          <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:20px;display:flex;gap:16px;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+            <span class="ms" style="font-size:26px;color:#14357f">vaccines</span>
+            <span>
+              <span style="display:block;font-size:12.5px;color:#8a8578;font-weight:600">Sep 2, 2026</span>
+              <span style="display:block;font-weight:700;font-size:17px;margin:3px 0 5px">Free flu vaccination for seniors</span>
+              <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">Walk-in at the OPD annex every Wednesday this month.</span>
+            </span>
+          </a>
+          <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:20px;display:flex;gap:16px;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+            <span class="ms" style="font-size:26px;color:#14357f">monitor_heart</span>
+            <span>
+              <span style="display:block;font-size:12.5px;color:#8a8578;font-weight:600">Aug 19, 2026</span>
+              <span style="display:block;font-weight:700;font-size:17px;margin:3px 0 5px">New 16-slice CT scanner now operational</span>
+              <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">Same-day results for head, chest, and abdominal studies.</span>
+            </span>
+          </a>
+          <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:20px;display:flex;gap:16px;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+            <span class="ms" style="font-size:26px;color:#14357f">groups</span>
+            <span>
+              <span style="display:block;font-size:12.5px;color:#8a8578;font-weight:600">Aug 4, 2026</span>
+              <span style="display:block;font-weight:700;font-size:17px;margin:3px 0 5px">Medical mission in Barangay Bagacay</span>
+              <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">Free consults, BP screening, and minor dental services.</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / Services</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Services &amp; Departments</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">Nine clinical departments and a full diagnostic suite, staffed by consultants from Cebu City and resident physicians on duty around the clock.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:32px 24px 72px">
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px">
+        <span style="background:#14357f;color:#fff;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">All</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Emergency</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Inpatient</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Outpatient</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Diagnostics</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Maternal &amp; child</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+        <div onClick="{{ goServiceDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;cursor:pointer">
+          <img src="assets/emergency.png" alt="" style="width:100%;height:176px;object-fit:cover">
+          <div style="padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px"><span class="ms" style="font-size:24px;color:#8f1d1d">emergency</span><h3 style="font-size:19px;font-weight:700;margin:0">Emergency Medicine</h3></div>
+            <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0 0 14px">Triage, resuscitation, and observation beds. Ambulance dispatch within Sibonga and nearby towns.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="background:#fdeeee;color:#8f1d1d;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">Open 24/7</span><span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">Walk-in</span></div>
+          </div>
+        </div>
+        <div onClick="{{ goServiceDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;cursor:pointer">
+          <img src="assets/patient-room.png" alt="" style="width:100%;height:176px;object-fit:cover">
+          <div style="padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px"><span class="ms" style="font-size:24px;color:#14357f">cardiology</span><h3 style="font-size:19px;font-weight:700;margin:0">Internal Medicine</h3></div>
+            <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0 0 14px">Diabetes, hypertension, and respiratory care with in-house 2D-echo and ECG.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">Mon–Sat</span><span style="background:#eef7f0;color:#2f8b3c;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">6 consultants</span></div>
+          </div>
+        </div>
+        <div onClick="{{ goServiceDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;cursor:pointer">
+          <img src="assets/ultrasound.png" alt="" style="width:100%;height:176px;object-fit:cover">
+          <div style="padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px"><span class="ms" style="font-size:24px;color:#14357f">pregnant_woman</span><h3 style="font-size:19px;font-weight:700;margin:0">OB-Gynecology</h3></div>
+            <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0 0 14px">Prenatal packages, ultrasound, delivery room, and family planning counselling.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">By appointment</span><span style="background:#fdf5e4;color:#8a6512;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">PhilHealth package</span></div>
+          </div>
+        </div>
+        <div onClick="{{ goServiceDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;cursor:pointer">
+          <img src="assets/imaging.png" alt="" style="width:100%;height:176px;object-fit:cover">
+          <div style="padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px"><span class="ms" style="font-size:24px;color:#14357f">radiology</span><h3 style="font-size:19px;font-weight:700;margin:0">Imaging &amp; Radiology</h3></div>
+            <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0 0 14px">Digital X-ray, whole-abdomen ultrasound, and 16-slice CT with same-day reading.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">Mon–Sun</span><span style="background:#eef7f0;color:#2f8b3c;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">Results in 24h</span></div>
+          </div>
+        </div>
+        <div onClick="{{ goServiceDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;cursor:pointer">
+          <img src="assets/cath-lab.png" alt="" style="width:100%;height:176px;object-fit:cover">
+          <div style="padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px"><span class="ms" style="font-size:24px;color:#14357f">surgical</span><h3 style="font-size:19px;font-weight:700;margin:0">Surgery &amp; Anesthesia</h3></div>
+            <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0 0 14px">Appendectomy, hernia repair, caesarean section, and minor skin procedures.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">2 operating rooms</span></div>
+          </div>
+        </div>
+        <div onClick="{{ goServiceDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;cursor:pointer">
+          <img src="assets/conference.png" alt="" style="width:100%;height:176px;object-fit:cover">
+          <div style="padding:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px"><span class="ms" style="font-size:24px;color:#14357f">labs</span><h3 style="font-size:19px;font-weight:700;margin:0">Clinical Laboratory</h3></div>
+            <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0 0 14px">Hematology, blood chemistry, urinalysis, drug testing, and pre-employment panels.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:6px">Open 24/7</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isStaff }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / About / Our Staff &amp; Leadership Team</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Our Staff &amp; Leadership Team</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">The people who run the hospital and the 120-strong nursing, allied-health, and support team behind them.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:40px 24px 8px">
+      <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Leadership team</span>
+      <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;margin:8px 0 22px;letter-spacing:-0.5px">Who runs the hospital</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;grid-column:span 1">
+          <img src="assets/dr-james-deiparine.png" alt="Dr. James Deiparine" style="width:100%;height:250px;object-fit:cover;object-position:center 18%">
+          <div style="padding:20px">
+            <h3 style="font-size:19px;font-weight:700;margin:0 0 4px">Dr. James Deiparine</h3>
+            <div style="font-size:14px;color:#2f8b3c;font-weight:600;margin-bottom:10px">Medical Director</div>
+            <p style="font-size:14.5px;line-height:1.55;color:#6d6a62;margin:0">Leads clinical services and medical staff governance.</p>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:52px;height:52px;border-radius:50%;background:#eef1f8;color:#14357f;display:flex;align-items:center;justify-content:center;font:700 18px 'Source Sans 3',sans-serif;flex:none">AV</div><div><h3 style="font-size:17px;font-weight:700;margin:0 0 2px">Ana V. Villarosa, RN, MAN</h3><div style="font-size:13.5px;color:#2f8b3c;font-weight:600">Chief Nurse</div></div></div>
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:52px;height:52px;border-radius:50%;background:#eef1f8;color:#14357f;display:flex;align-items:center;justify-content:center;font:700 18px 'Source Sans 3',sans-serif;flex:none">TG</div><div><h3 style="font-size:17px;font-weight:700;margin:0 0 2px">Teresita G. Lopez, CPA</h3><div style="font-size:13.5px;color:#2f8b3c;font-weight:600">Hospital Administrator</div></div></div>
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:52px;height:52px;border-radius:50%;background:#eef1f8;color:#14357f;display:flex;align-items:center;justify-content:center;font:700 18px 'Source Sans 3',sans-serif;flex:none">RM</div><div><h3 style="font-size:17px;font-weight:700;margin:0 0 2px">Dr. Rico M. Navarro</h3><div style="font-size:13.5px;color:#2f8b3c;font-weight:600">Chair, Medical Staff Committee</div></div></div>
+        </div>
+        <div style="background:#14357f;border-radius:16px;padding:24px;color:#fff;display:flex;flex-direction:column;gap:14px">
+          <span class="ms" style="font-size:30px;color:#e8b23a">groups</span>
+          <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:24px;font-weight:700;margin:0">120 in the care team</h3>
+          <p style="font-size:15px;line-height:1.6;color:#cfd9ee;margin:0">Nurses, midwives, medical technologists, radiologic technologists, pharmacists, and support staff — most of them from Sibonga and neighbouring towns.</p>
+          <a href="#" onClick="{{ goCareers }}" style="margin-top:auto;display:inline-flex;align-items:center;gap:7px;color:#e8b23a;font-weight:700;font-size:15px" style-hover="color:#f3cd74">Join the team<span class="ms" style="font-size:19px">arrow_forward</span></a>
+        </div>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:44px 24px 8px">
+      <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Department heads</span>
+      <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;margin:8px 0 18px;letter-spacing:-0.5px">Who to ask for, by section</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">
+        <sc-for list="{{ heads }}" as="h" hint-placeholder-count="6">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:20px;display:flex;gap:14px;align-items:flex-start">
+            <span class="ms" style="font-size:26px;color:#14357f;flex:none">{{ h.icon }}</span>
+            <div style="min-width:0">
+              <div style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#8a8578;margin-bottom:6px">{{ h.section }}</div>
+              <h3 style="font-size:17px;font-weight:700;margin:0 0 3px">{{ h.name }}</h3>
+              <div style="font-size:13.5px;color:#2f8b3c;font-weight:600;margin-bottom:8px">{{ h.role }}</div>
+              <p style="font-size:14px;line-height:1.55;color:#6d6a62;margin:0">{{ h.detail }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:44px 24px 72px">
+      <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">The wider team</span>
+      <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;margin:8px 0 18px;letter-spacing:-0.5px">120 people, mostly from Sibonga</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;align-items:start">
+        <sc-for list="{{ teamCounts }}" as="t" hint-placeholder-count="6">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:14px;padding:20px">
+            <div style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;color:#14357f;line-height:1">{{ t.count }}</div>
+            <div style="font-size:15px;font-weight:600;margin-top:8px">{{ t.role }}</div>
+            <div style="font-size:13.5px;color:#6d6a62;line-height:1.5;margin-top:4px">{{ t.note }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:24px;background:#14357f;border-radius:16px;padding:26px;display:flex;flex-wrap:wrap;gap:18px;align-items:center">
+        <span class="ms" style="font-size:30px;color:#e8b23a;flex:none">groups</span>
+        <p style="flex:1 1 320px;font-size:16px;line-height:1.6;color:#cfd9ee;margin:0">We hire, train, and promote locally. Most of the care team come from Sibonga and the neighbouring towns of Argao, Dumanjug, and Barili.</p>
+        <a href="#" onClick="{{ goCareers }}" style="background:#e8b23a;color:#1d1503;padding:13px 20px;border-radius:10px;font-weight:700;font-size:15px" style-hover="background:#f3cd74;color:#1d1503">See open positions</a>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isDoctors }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / Doctors Directory</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Doctors Directory</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">Our consultants and their clinic days. Schedules can change on short notice — call the OPD desk to confirm before travelling.</p>
+        <div style="background:#fff;border-radius:14px;padding:12px;margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;max-width:820px;box-shadow:0 12px 30px rgba(0,0,0,.18)">
+          <label style="flex:1 1 240px;display:flex;align-items:center;gap:9px;border:1px solid #e6e3da;border-radius:10px;padding:11px 14px">
+            <span class="ms" style="font-size:21px;color:#8a8578">search</span>
+            <input placeholder="Doctor name" style="border:0;outline:0;font:400 15px 'Source Sans 3',sans-serif;width:100%;background:transparent">
+          </label>
+          <label style="flex:1 1 200px;display:flex;align-items:center;gap:9px;border:1px solid #e6e3da;border-radius:10px;padding:11px 14px;color:#4a4741;font-size:15px">
+            <span class="ms" style="font-size:21px;color:#8a8578">stethoscope</span>All specialties<span class="ms" style="font-size:21px;margin-left:auto;color:#8a8578">expand_more</span>
+          </label>
+          <button style="background:#14357f;color:#fff;border:0;border-radius:10px;padding:12px 22px;font:700 15px 'Source Sans 3',sans-serif;cursor:pointer">Search</button>
+        </div>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:32px 24px 72px">
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:22px">
+        <span style="background:#14357f;color:#fff;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">All</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Internal Medicine</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">OB-Gynecology</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Pediatrics</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Surgery</span>
+        <span style="background:#fff;border:1px solid #e6e3da;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">Diagnostics</span>
+      </div>
+      <div style="font-size:14.5px;color:#6d6a62;margin-bottom:16px">Showing 10 of 34 consultants</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ directory }}" as="doc" hint-placeholder-count="10">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:18px;display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+            {{ doc.avatar }}
+            <div style="flex:1 1 220px;min-width:0">
+              <h3 style="font-size:17.5px;font-weight:700;margin:0 0 3px">{{ doc.name }}</h3>
+              <div style="font-size:14px;color:#2f8b3c;font-weight:600">{{ doc.specialty }}</div>
+            </div>
+            <div style="flex:1 1 300px;display:flex;gap:7px">
+              <sc-for list="{{ doc.week }}" as="d" hint-placeholder-count="6">
+                <span style="{{ d.style }}">{{ d.label }}</span>
+              </sc-for>
+            </div>
+            <div style="flex:1 1 180px;font-size:14px;color:#4a4741;display:flex;gap:8px;align-items:center">
+              <span class="ms" style="font-size:18px;color:#8a8578;flex:none">schedule</span>{{ doc.hours }}
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:22px;background:#f2f4fa;border-radius:14px;padding:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+        <span class="ms" style="font-size:22px;color:#14357f;flex:none">info</span>
+        <p style="flex:1 1 300px;font-size:14.5px;line-height:1.6;color:#4a4741;margin:0">Filled days are regular clinic days. For appointments, send us a message or call the OPD desk at (032) 484 1200.</p>
+        <a href="#" onClick="{{ goContact }}" style="background:#14357f;color:#fff;padding:12px 18px;border-radius:10px;font-weight:700;font-size:14.5px" style-hover="background:#0e2559;color:#fff">Book an appointment</a>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isPatients }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / Patients &amp; Visitors</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Patients &amp; Visitors</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">What to bring, what happens on the day, and how billing works.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:44px 24px 72px;display:flex;flex-direction:column;gap:32px">
+      <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:26px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="ms" style="font-size:26px;color:#14357f">assignment</span><h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:24px;font-weight:700;margin:0">What to bring</h2></div>
+          <p style="font-size:15px;line-height:1.6;color:#4a4741;margin:0 0 22px">Bring the documents for your situation. If something is missing, come anyway — the admitting desk will tell you what can follow later.</p>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px 34px">
+            <div>
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+                <span class="ms" style="font-size:20px;color:#2f8b3c">badge</span>
+                <h3 style="font-size:16.5px;font-weight:700;margin:0">Every visit, outpatient or emergency</h3>
+              </div>
+              <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11px">
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Valid ID of the patient and the companion</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>List of current medicines and doses</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Known allergies, written down if you can</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Previous lab, X-ray, or ultrasound results</li>
+              </ul>
+            </div>
+
+            <div>
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+                <span class="ms" style="font-size:20px;color:#2f8b3c">receipt_long</span>
+                <h3 style="font-size:16.5px;font-weight:700;margin:0">For coverage and discounts</h3>
+              </div>
+              <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11px">
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>PhilHealth MDR or member ID</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>HMO card and letter of authorization</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Senior citizen or PWD booklet</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Barangay indigency certificate, if applying</li>
+              </ul>
+            </div>
+
+            <div>
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+                <span class="ms" style="font-size:20px;color:#2f8b3c">bed</span>
+                <h3 style="font-size:16.5px;font-weight:700;margin:0">If you are being admitted</h3>
+              </div>
+              <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11px">
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Referral or admission order, if you have one</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>One designated watcher, with their ID</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Toiletries, towel, and a change of clothes</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Contact number of a next of kin</li>
+              </ul>
+            </div>
+
+            <div>
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+                <span class="ms" style="font-size:20px;color:#2f8b3c">science</span>
+                <h3 style="font-size:16.5px;font-weight:700;margin:0">For a laboratory or imaging request</h3>
+              </div>
+              <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11px">
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>The physician's written request</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Six hours of fasting for abdominal studies</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>A full bladder for pelvic ultrasound</li>
+                <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c;flex:none">check_circle</span>Tell staff if you are pregnant</li>
+              </ul>
+            </div>
+          </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;align-items:start">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:26px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="ms" style="font-size:26px;color:#14357f">route</span><h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:24px;font-weight:700;margin:0">What happens on the day</h2></div>
+          <p style="font-size:15px;line-height:1.6;color:#4a4741;margin:0 0 20px">A typical outpatient visit, from the gate to going home.</p>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:30px;height:30px;border-radius:50%;background:#14357f;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">1</span>
+              <span style="flex:1"><span style="display:block;font-weight:700;font-size:15.5px">Register at the admitting desk</span><span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62;margin-top:3px">Give your name and booking reference. New patients fill a short record form.</span></span>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:30px;height:30px;border-radius:50%;background:#14357f;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">2</span>
+              <span style="flex:1"><span style="display:block;font-weight:700;font-size:15.5px">Vital signs at the OPD station</span><span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62;margin-top:3px">A nurse takes your blood pressure, temperature, and weight before you see the doctor.</span></span>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:30px;height:30px;border-radius:50%;background:#14357f;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">3</span>
+              <span style="flex:1"><span style="display:block;font-weight:700;font-size:15.5px">Consultation</span><span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62;margin-top:3px">Booked patients are called in schedule order. Bring your questions written down if it helps.</span></span>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:30px;height:30px;border-radius:50%;background:#14357f;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">4</span>
+              <span style="flex:1"><span style="display:block;font-weight:700;font-size:15.5px">Tests, if ordered</span><span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62;margin-top:3px">The laboratory and imaging sections are on the ground floor. Most plain studies finish in under thirty minutes.</span></span>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:30px;height:30px;border-radius:50%;background:#2f8b3c;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">5</span>
+              <span style="flex:1"><span style="display:block;font-weight:700;font-size:15.5px">Billing, pharmacy, and home</span><span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62;margin-top:3px">PhilHealth and discounts are applied at the billing window. The pharmacy is open until 9:00 PM.</span></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:#14357f;border-radius:16px;padding:24px;color:#fff">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span class="ms" style="font-size:24px;color:#e8b23a">schedule</span><h3 style="font-size:19px;font-weight:700;margin:0">Visiting hours</h3></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:15px"><span style="color:#cfd9ee">General wards</span><strong>10 AM – 8 PM</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:15px"><span style="color:#cfd9ee">Maternity</span><strong>1 PM – 7 PM</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;font-size:15px"><span style="color:#cfd9ee">ICU</span><strong>4 PM – 6 PM</strong></div>
+          <p style="font-size:13.5px;color:#cfd9ee;margin:14px 0 0;line-height:1.5">One watcher per patient. Children under 7 are not permitted in patient rooms.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span class="ms" style="font-size:24px;color:#2f8b3c">support_agent</span><h3 style="font-size:19px;font-weight:700;margin:0">Need help?</h3></div>
+          <div style="display:flex;flex-direction:column;gap:12px;font-size:15px">
+            <a href="#" style="display:flex;gap:9px;align-items:center;color:#14181f" style-hover="color:#14357f"><span class="ms" style="font-size:19px;color:#8a8578">call</span>Admitting: (032) 484 1200</a>
+            <a href="#" style="display:flex;gap:9px;align-items:center;color:#14181f" style-hover="color:#14357f"><span class="ms" style="font-size:19px;color:#8a8578">receipt_long</span>Billing &amp; PhilHealth desk</a>
+            <a href="#" style="display:flex;gap:9px;align-items:center;color:#14181f" style-hover="color:#14357f"><span class="ms" style="font-size:19px;color:#8a8578">volunteer_activism</span>Medical social services</a>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span class="ms" style="font-size:24px;color:#14357f">payments</span><h3 style="font-size:19px;font-weight:700;margin:0">How billing works</h3></div>
+          <div style="display:flex;flex-direction:column;gap:13px;font-size:14.5px;line-height:1.6;color:#4a4741">
+            <p style="margin:0">PhilHealth, HMO, and senior or PWD discounts are applied at the billing window before you pay — you do not have to ask for them.</p>
+            <p style="margin:0">Ward admissions under the PhilHealth case-rate packages carry no balance billing. Private and semi-private rooms are billed with the PhilHealth benefit deducted first.</p>
+            <p style="margin:0">Every statement is itemised, and the billing desk will walk through each line with you.</p>
+          </div>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid #eeece5;display:flex;gap:9px;align-items:flex-start">
+            <span class="ms" style="font-size:19px;color:#8a8578;flex:none">info</span>
+            <p style="font-size:13.5px;line-height:1.55;color:#6d6a62;margin:0">The current schedule of room rates and common procedure fees is posted at the admitting desk and the billing section. Call (032) 484 1200 for an estimate before you come in.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- Booking page: kept for post-launch; not linked from the site. All booking CTAs point to Contact. -->
+  <sc-if value="{{ isBooking }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / Book an appointment</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Book an appointment</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">Request a clinic slot and our OPD staff will confirm by text within one working day.</p>
+      </div>
+    </section>
+    <section style="max-width:960px;margin:0 auto;padding:44px 24px 72px">
+      <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:28px">
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+            <span style="{{ s.style }}"><span style="{{ s.numStyle }}">{{ s.num }}</span>{{ s.label }}</span>
+          </sc-for>
+        </div>
+
+        <div style="margin-bottom:24px">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:12px">
+            <h2 style="font-size:17px;font-weight:700;margin:0">1. Choose a department</h2>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px">
+            <sc-for list="{{ departments }}" as="d" hint-placeholder-count="6">
+              <a href="#" onClick="{{ d.pick }}" style="{{ d.style }}">
+                <span class="ms" style="{{ d.iconStyle }}">{{ d.icon }}</span>
+                <span style="min-width:0">
+                  <span style="display:block;font-weight:700;font-size:14.5px;line-height:1.3">{{ d.name }}</span>
+                  <span style="display:block;font-size:12.5px;color:#8a8578;margin-top:2px">{{ d.count }}</span>
+                </span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+
+        <sc-if value="{{ hasDept }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:24px;padding-top:24px;border-top:1px solid #eeece5">
+            <h2 style="font-size:17px;font-weight:700;margin:0 0 12px">2. Choose a doctor</h2>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ deptDoctors }}" as="doc" hint-placeholder-count="2">
+                <a href="#" onClick="{{ doc.pick }}" style="{{ doc.style }}">
+                  {{ doc.avatar }}
+                  <span style="flex:1 1 180px;min-width:0">
+                    <span style="display:block;font-weight:700;font-size:15.5px">{{ doc.name }}</span>
+                    <span style="display:block;font-size:13.5px;color:#2f8b3c;font-weight:600;margin-top:2px">{{ doc.specialty }}</span>
+                  </span>
+                  <span style="flex:1 1 200px;display:flex;gap:6px">
+                    <sc-for list="{{ doc.week }}" as="w" hint-placeholder-count="6">
+                      <span style="{{ w.style }}">{{ w.label }}</span>
+                    </sc-for>
+                  </span>
+                  <span style="flex:none;display:flex;align-items:center;gap:6px;font-size:13.5px;color:#4a4741"><span class="ms" style="font-size:17px;color:#8a8578">schedule</span>{{ doc.hours }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasDoctor }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:24px;padding-top:24px;border-top:1px solid #eeece5">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:6px">
+              <h2 style="font-size:17px;font-weight:700;margin:0">3. Pick a date</h2>
+              <span style="font-size:13.5px;color:#8a8578">{{ clinicDaysNote }}</span>
+            </div>
+            <p style="font-size:13.5px;color:#8a8578;margin:0 0 14px">Greyed-out dates are outside this doctor's clinic days.</p>
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+              <span style="font-size:15px;font-weight:700">{{ monthLabel }}</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:420px">
+              <sc-for list="{{ dayHeaders }}" as="h" hint-placeholder-count="7">
+                <span style="text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#8a8578;padding-bottom:4px">{{ h }}</span>
+              </sc-for>
+              <sc-for list="{{ calendar }}" as="c" hint-placeholder-count="35">
+                <a href="#" onClick="{{ c.pick }}" style="{{ c.style }}">{{ c.label }}</a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasDate }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:24px;padding-top:24px;border-top:1px solid #eeece5">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:14px">
+              <h2 style="font-size:17px;font-weight:700;margin:0">4. Pick a time</h2>
+              <span style="font-size:13.5px;color:#8a8578">{{ selectedDateLabel }} · 20-minute slots</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:9px">
+              <sc-for list="{{ slots }}" as="s" hint-placeholder-count="9">
+                <a href="#" onClick="{{ s.pick }}" style="{{ s.style }}">{{ s.label }}</a>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-size:12.5px;color:#8a8578">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border-radius:3px;border:1px solid #ddd9cf;background:#fff"></span>Available</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border-radius:3px;background:#14357f"></span>Selected</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border-radius:3px;background:#f4f2ec"></span>Already taken</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasSlot }}" hint-placeholder-val="{{ false }}">
+          <div style="padding-top:24px;border-top:1px solid #eeece5">
+            <h2 style="font-size:17px;font-weight:700;margin:0 0 14px">Your details</h2>
+            <div style="background:#f2f4fa;border-radius:12px;padding:16px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:16px 26px">
+              <span style="display:flex;gap:9px;align-items:flex-start"><span class="ms" style="font-size:19px;color:#14357f">local_hospital</span><span><span style="display:block;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8a8578">Department</span><span style="display:block;font-size:14.5px;font-weight:600;margin-top:2px">{{ summaryDept }}</span></span></span>
+              <span style="display:flex;gap:9px;align-items:flex-start"><span class="ms" style="font-size:19px;color:#14357f">stethoscope</span><span><span style="display:block;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8a8578">Doctor</span><span style="display:block;font-size:14.5px;font-weight:600;margin-top:2px">{{ summaryDoctor }}</span></span></span>
+              <span style="display:flex;gap:9px;align-items:flex-start"><span class="ms" style="font-size:19px;color:#14357f">event_available</span><span><span style="display:block;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8a8578">When</span><span style="display:block;font-size:14.5px;font-weight:600;margin-top:2px">{{ summaryWhen }}</span></span></span>
+              <a href="#" onClick="{{ resetBooking }}" style="margin-left:auto;align-self:center;font-size:13.5px;font-weight:700">Change</a>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+              <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Full name<input placeholder="Juan dela Cruz" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Mobile number<input placeholder="0917 000 0000" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">PhilHealth number (optional)<input placeholder="00-000000000-0" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+              <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Is this your first visit?<select style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0;background:#fff"><option>Yes, first time at DCH</option><option>No, I have a patient record</option></select></label>
+              <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Reason for visit<textarea rows="3" placeholder="Follow-up check-up, lab request, etc." style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0;resize:vertical"></textarea></label>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:22px">
+              <button style="background:#14357f;color:#fff;border:0;border-radius:10px;padding:14px 24px;font:700 15.5px 'Source Sans 3',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px"><span class="ms" style="font-size:20px">send</span>Request this slot</button>
+              <span style="font-size:13.5px;color:#8a8578;flex:1 1 240px;line-height:1.5">Slots are requests, not confirmations — OPD staff will text you within one working day. Not for emergencies; for urgent cases call (032) 484 1234.</span>
+            </div>
+          </div>
+        </sc-if>
+
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / Contact</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Contact us</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">Appointment requests, billing questions, or anything else — we reply within one working day.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:44px 24px 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;align-items:start">
+      <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:28px">
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:24px;font-weight:700;margin:0 0 8px">Send us a message</h2>
+        <p style="font-size:15px;line-height:1.6;color:#4a4741;margin:0 0 22px">For appointments, tell us the department or doctor and your preferred day — OPD staff will text you to confirm a schedule within one working day.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Full name<input placeholder="Juan dela Cruz" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Mobile number<input placeholder="0917 000 0000" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Email (optional)<input placeholder="juan@email.com" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Subject<select style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0;background:#fff"><option>Appointment request</option><option>Billing &amp; PhilHealth</option><option>Medical records</option><option>Feedback</option><option>Other</option></select></label>
+          <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Message<textarea rows="5" placeholder="e.g. Follow-up with Dr. Deiparine, any Monday morning" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0;resize:vertical"></textarea></label>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:22px">
+          <button style="background:#14357f;color:#fff;border:0;border-radius:10px;padding:14px 24px;font:700 15.5px 'Source Sans 3',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px"><span class="ms" style="font-size:20px">send</span>Send message</button>
+          <span style="font-size:13.5px;color:#8a8578;flex:1 1 240px;line-height:1.5">Not for emergencies. For urgent cases call (032) 484 1234.</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden">
+          <svg viewBox="0 0 400 200" style="width:100%;height:170px;display:block;background:#eef1f8">
+            <defs><pattern id="mapstripe" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#eef1f8"></rect><rect width="4" height="10" fill="#e0e5f2"></rect></pattern></defs>
+            <rect width="400" height="200" fill="url(#mapstripe)"></rect>
+            <text x="200" y="104" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#7b86a3">[ map embed — Sibonga, Cebu ]</text>
+          </svg>
+          <div style="padding:22px;display:flex;flex-direction:column;gap:13px;font-size:15px">
+            <span style="display:flex;gap:10px"><span class="ms" style="font-size:20px;color:#14357f">location_on</span>National Highway, Poblacion,<br>Sibonga, 6020 Cebu</span>
+            <span style="display:flex;gap:10px;align-items:center"><span class="ms" style="font-size:20px;color:#14357f">call</span>(032) 484 1200</span>
+            <span style="display:flex;gap:10px;align-items:center"><span class="ms" style="font-size:20px;color:#14357f">mail</span>info@dch-sibonga.ph</span>
+          </div>
+        </div>
+        <div style="background:#8f1d1d;border-radius:16px;padding:24px;color:#fff;display:flex;gap:14px;align-items:flex-start">
+          <span class="ms" style="font-size:28px;color:#f0b8b8">emergency</span>
+          <div>
+            <h3 style="font-size:19px;font-weight:700;margin:0 0 6px">Emergency hotline</h3>
+            <p style="font-size:15px;line-height:1.5;color:#f3cccc;margin:0 0 8px">Ambulance and ER are staffed 24 hours a day.</p>
+            <strong style="font-size:22px;font-family:'Source Serif 4',Georgia,serif">(032) 484 1234</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / About / About DCH</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">About DCH</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">A family-run community hospital that has cared for southern Cebu since 1974.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:48px 24px 8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:36px;align-items:start">
+      <div>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Our story</span>
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;margin:8px 0 16px;letter-spacing:-0.5px">From a six-bed clinic to a 60-bed hospital</h2>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0 0 14px">Deiparine Community Hospital opened in 1974 as a small lying-in clinic along the national highway in Poblacion, Sibonga. Families who once travelled two hours to Cebu City for a delivery or an appendectomy could finally be treated in their own town.</p>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0 0 14px">Five decades later the hospital is DOH-licensed and PhilHealth-accredited, with a 24-hour emergency room, two operating rooms, a delivery suite, and a diagnostic complex that includes digital X-ray, ultrasound, and a 16-slice CT scanner.</p>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0">Ownership and leadership remain with the Deiparine family, and the majority of the 120-person care team was hired from Sibonga and the neighbouring municipalities of Argao, Dumanjug, and Barili.</p>
+      </div>
+      <div style="display:grid;gap:12px">
+        <img src="assets/staff-hallway.png" alt="Hospital corridor" style="width:100%;height:230px;object-fit:cover;border-radius:14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <img src="assets/conference.png" alt="Staff meeting" style="width:100%;height:150px;object-fit:cover;border-radius:14px">
+          <img src="assets/patient-room.png" alt="Patient room" style="width:100%;height:150px;object-fit:cover;border-radius:14px">
+        </div>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:48px 24px">
+      <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Milestones</span>
+      <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;margin:8px 0 16px;letter-spacing:-0.5px">Fifty years, marked</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:8px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px"><div style="font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;color:#14357f">1974</div><p style="font-size:14.5px;line-height:1.55;color:#6d6a62;margin:8px 0 0">Opened as a six-bed lying-in clinic in Poblacion.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px"><div style="font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;color:#14357f">1992</div><p style="font-size:14.5px;line-height:1.55;color:#6d6a62;margin:8px 0 0">First operating room and 24-hour emergency service.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px"><div style="font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;color:#14357f">2009</div><p style="font-size:14.5px;line-height:1.55;color:#6d6a62;margin:8px 0 0">PhilHealth accreditation and expansion to 60 beds.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px"><div style="font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;color:#14357f">2026</div><p style="font-size:14.5px;line-height:1.55;color:#6d6a62;margin:8px 0 0">16-slice CT scanner installed; imaging open daily.</p></div>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:8px 24px 72px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px"><span class="ms" style="font-size:28px;color:#14357f">verified</span><h3 style="font-size:19px;font-weight:700;margin:12px 0 6px">Licenses &amp; accreditation</h3><p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">DOH Level 1 licence, PhilHealth accreditation, and a DOH-certified clinical laboratory and X-ray facility.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px"><span class="ms" style="font-size:28px;color:#14357f">handshake</span><h3 style="font-size:19px;font-weight:700;margin:12px 0 6px">Partners</h3><p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Accredited with major HMOs, the LGU indigent programme, and referral tie-ups with tertiary hospitals in Cebu City.</p></div>
+        <div style="background:#14357f;border-radius:16px;padding:24px;color:#fff"><span class="ms" style="font-size:28px;color:#e8b23a">flag</span><h3 style="font-size:19px;font-weight:700;margin:12px 0 6px">Where we are headed</h3><p style="font-size:14.5px;line-height:1.6;color:#cfd9ee;margin:0 0 14px">Read the vision, mission, and values that guide our next decade.</p><a href="#" onClick="{{ goVision }}" style="display:inline-flex;align-items:center;gap:7px;color:#e8b23a;font-weight:700;font-size:15px" style-hover="color:#f3cd74">Vision &amp; Values<span class="ms" style="font-size:19px">arrow_forward</span></a></div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isVision }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / About / Vision &amp; Values</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Vision, Mission &amp; Values</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">The commitments we hold ourselves to, written plainly.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:48px 24px 8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px">
+      <div style="background:#14357f;border-radius:18px;padding:32px;color:#fff">
+        <span class="ms" style="font-size:30px;color:#e8b23a">visibility</span>
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:28px;font-weight:700;margin:14px 0 12px">Our vision</h2>
+        <p style="font-size:18px;line-height:1.6;color:#e7edfa;margin:0">That no family in southern Cebu has to travel far, or wait long, for competent and dignified hospital care.</p>
+      </div>
+      <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:32px">
+        <span class="ms" style="font-size:30px;color:#2f8b3c">local_hospital</span>
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:28px;font-weight:700;margin:14px 0 12px">Our mission</h2>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0">To provide accessible emergency, maternal, surgical, and diagnostic services to the people of Sibonga and neighbouring towns — delivered by a locally hired team, priced within reach of every household, and supported by equipment that keeps care close to home.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:48px 24px 72px">
+      <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Our values</span>
+      <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;margin:8px 0 16px;letter-spacing:-0.5px">Six things we will not compromise</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px"><span class="ms" style="font-size:30px;color:#2f8b3c">favorite</span><h3 style="font-size:18.5px;font-weight:700;margin:14px 0 7px">Compassion first</h3><p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Every patient is somebody’s parent, child, or neighbour. Care is explained in Bisaya, at the pace the family needs.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px"><span class="ms" style="font-size:30px;color:#2f8b3c">balance</span><h3 style="font-size:18.5px;font-weight:700;margin:14px 0 7px">Fair access</h3><p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">PhilHealth, senior, and PWD benefits are applied without being asked for. No patient is turned away from the ER.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px"><span class="ms" style="font-size:30px;color:#2f8b3c">workspace_premium</span><h3 style="font-size:18.5px;font-weight:700;margin:14px 0 7px">Clinical competence</h3><p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Continuing education for every clinician, and a medical staff committee that reviews outcomes each quarter.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px"><span class="ms" style="font-size:30px;color:#2f8b3c">lock</span><h3 style="font-size:18.5px;font-weight:700;margin:14px 0 7px">Confidentiality</h3><p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Patient records and results are released only to the patient or an authorised representative.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px"><span class="ms" style="font-size:30px;color:#2f8b3c">groups</span><h3 style="font-size:18.5px;font-weight:700;margin:14px 0 7px">Community roots</h3><p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">We hire, train, and promote locally, and we bring services out to the barangays through medical missions.</p></div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px"><span class="ms" style="font-size:30px;color:#2f8b3c">receipt_long</span><h3 style="font-size:18.5px;font-weight:700;margin:14px 0 7px">Honest billing</h3><p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0">Itemised statements, posted room rates, and a billing desk that will walk through every line with you.</p></div>
+      </div>
+      <div style="margin-top:32px;background:#eef7f0;border:1px solid #cfe6d6;border-radius:16px;padding:26px;display:flex;flex-wrap:wrap;gap:18px;align-items:center">
+        <span class="ms" style="font-size:30px;color:#2f8b3c">volunteer_activism</span>
+        <p style="flex:1 1 320px;font-size:16px;line-height:1.6;color:#22432c;margin:0">Patient rights and responsibilities are posted at every nurses' station and available at the admitting desk on request.</p>
+        <a href="#" onClick="{{ goContact }}" style="background:#2f8b3c;color:#fff;padding:13px 20px;border-radius:10px;font-weight:700;font-size:15px" style-hover="background:#22432c;color:#fff">Talk to us</a>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isCareers }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / About / Careers</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Careers at DCH</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">Build a clinical career without leaving the province. We hire locally and train continuously.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:48px 24px 8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:34px;align-items:start">
+      <div>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Open positions</span>
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;margin:8px 0 16px;letter-spacing:-0.5px">7 roles currently open</h2>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+        <a href="#" onClick="{{ goCareerDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+          <span class="ms" style="font-size:26px;color:#14357f">vaccines</span>
+          <span style="flex:1 1 240px">
+            <span style="display:block;font-weight:700;font-size:18px">Staff Nurse – Emergency Room</span>
+            <span style="display:block;font-size:14px;color:#6d6a62;margin-top:3px">Nursing Service · Sibonga, Cebu</span>
+          </span>
+          <span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:6px">Full-time</span>
+          <span class="ms" style="font-size:22px;color:#8a8578">arrow_forward</span>
+        </a>
+        <a href="#" onClick="{{ goCareerDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+          <span class="ms" style="font-size:26px;color:#14357f">pregnant_woman</span>
+          <span style="flex:1 1 240px">
+            <span style="display:block;font-weight:700;font-size:18px">Staff Nurse – Delivery Room</span>
+            <span style="display:block;font-size:14px;color:#6d6a62;margin-top:3px">Nursing Service · Sibonga, Cebu</span>
+          </span>
+          <span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:6px">Full-time</span>
+          <span class="ms" style="font-size:22px;color:#8a8578">arrow_forward</span>
+        </a>
+        <a href="#" onClick="{{ goCareerDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+          <span class="ms" style="font-size:26px;color:#14357f">labs</span>
+          <span style="flex:1 1 240px">
+            <span style="display:block;font-weight:700;font-size:18px">Medical Technologist</span>
+            <span style="display:block;font-size:14px;color:#6d6a62;margin-top:3px">Clinical Laboratory · Sibonga, Cebu</span>
+          </span>
+          <span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:6px">Full-time</span>
+          <span class="ms" style="font-size:22px;color:#8a8578">arrow_forward</span>
+        </a>
+        <a href="#" onClick="{{ goCareerDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+          <span class="ms" style="font-size:26px;color:#14357f">radiology</span>
+          <span style="flex:1 1 240px">
+            <span style="display:block;font-weight:700;font-size:18px">Radiologic Technologist</span>
+            <span style="display:block;font-size:14px;color:#6d6a62;margin-top:3px">Imaging &amp; Radiology · Sibonga, Cebu</span>
+          </span>
+          <span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:6px">Full-time</span>
+          <span class="ms" style="font-size:22px;color:#8a8578">arrow_forward</span>
+        </a>
+        <a href="#" onClick="{{ goCareerDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+          <span class="ms" style="font-size:26px;color:#14357f">child_care</span>
+          <span style="flex:1 1 240px">
+            <span style="display:block;font-weight:700;font-size:18px">Midwife</span>
+            <span style="display:block;font-size:14px;color:#6d6a62;margin-top:3px">Maternity Ward · Sibonga, Cebu</span>
+          </span>
+          <span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:6px">Full-time</span>
+          <span class="ms" style="font-size:22px;color:#8a8578">arrow_forward</span>
+        </a>
+        <a href="#" onClick="{{ goCareerDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+          <span class="ms" style="font-size:26px;color:#14357f">receipt_long</span>
+          <span style="flex:1 1 240px">
+            <span style="display:block;font-weight:700;font-size:18px">Billing &amp; PhilHealth Clerk</span>
+            <span style="display:block;font-size:14px;color:#6d6a62;margin-top:3px">Finance · Sibonga, Cebu</span>
+          </span>
+          <span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:6px">Full-time</span>
+          <span class="ms" style="font-size:22px;color:#8a8578">arrow_forward</span>
+        </a>
+        <a href="#" onClick="{{ goCareerDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+          <span class="ms" style="font-size:26px;color:#14357f">stethoscope</span>
+          <span style="flex:1 1 240px">
+            <span style="display:block;font-weight:700;font-size:18px">Resident Physician</span>
+            <span style="display:block;font-size:14px;color:#6d6a62;margin-top:3px">Medical Staff · Sibonga, Cebu</span>
+          </span>
+          <span style="background:#f2f4fa;color:#14357f;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:6px">Contract</span>
+          <span class="ms" style="font-size:22px;color:#8a8578">arrow_forward</span>
+        </a>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <img src="assets/conference.png" alt="DCH team" style="width:100%;height:200px;object-fit:cover;border-radius:14px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <h3 style="font-size:19px;font-weight:700;margin:0 0 14px">Why work here</h3>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px">
+            <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c">check_circle</span>Government-mandated benefits from day one</li>
+            <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c">check_circle</span>Free consults and discounted care for staff family</li>
+            <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c">check_circle</span>Sponsored CPD units and in-house BLS/ACLS training</li>
+            <li style="display:flex;gap:9px;font-size:15px;line-height:1.5"><span class="ms" style="font-size:19px;color:#2f8b3c">check_circle</span>Work close to home — no Cebu City commute</li>
+          </ul>
+        </div>
+        <div style="background:#14357f;border-radius:16px;padding:24px;color:#fff">
+          <h3 style="font-size:19px;font-weight:700;margin:0 0 8px">Don't see your role?</h3>
+          <p style="font-size:14.5px;line-height:1.6;color:#cfd9ee;margin:0 0 14px">Send your CV to hr@dch-sibonga.ph and we will keep it on file for six months.</p>
+          <a href="#" style="display:inline-flex;align-items:center;gap:7px;color:#e8b23a;font-weight:700;font-size:15px" style-hover="color:#f3cd74"><span class="ms" style="font-size:19px">mail</span>hr@dch-sibonga.ph</a>
+        </div>
+      </div>
+    </section>
+    <div style="height:56px"></div>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isCareerDetail }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px"><a href="#" onClick="{{ goCareers }}" style="color:#9fb2dc">Careers</a> / Staff Nurse – Emergency Room</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:42px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Staff Nurse – Emergency Room</h1>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:18px">
+          <span style="background:rgba(255,255,255,.12);color:#fff;font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:999px">Nursing Service</span>
+          <span style="background:rgba(255,255,255,.12);color:#fff;font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:999px">Full-time · rotating shifts</span>
+          <span style="background:rgba(232,178,58,.2);color:#f3cd74;font-size:13.5px;font-weight:700;padding:8px 14px;border-radius:999px">2 openings</span>
+        </div>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:44px 24px 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;align-items:start">
+      <article style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:30px">
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:24px;font-weight:700;margin:0 0 10px">The role</h2>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0 0 22px">You will work in a six-bay emergency room alongside a resident physician and two nursing aides, handling triage, resuscitation, and stabilisation for walk-ins and ambulance arrivals from Sibonga and neighbouring towns.</p>
+        <h3 style="font-size:19px;font-weight:700;margin:0 0 12px">What you will do</h3>
+        <ul style="margin:0 0 24px;padding-left:22px;display:flex;flex-direction:column;gap:9px;font-size:16px;line-height:1.7;color:#4a4741">
+          <li>Perform triage and initial assessment on arrival, and escalate red-tag cases immediately.</li>
+          <li>Administer medications and IV therapy per physician order, with accurate charting.</li>
+          <li>Assist in minor procedures — suturing, splinting, nebulisation, catheterisation.</li>
+          <li>Prepare patients for admission, transfer, or referral to tertiary hospitals.</li>
+          <li>Endorse cases clearly at shift change and maintain ER supply readiness.</li>
+        </ul>
+        <h3 style="font-size:19px;font-weight:700;margin:0 0 12px">What we are looking for</h3>
+        <ul style="margin:0 0 24px;padding-left:22px;display:flex;flex-direction:column;gap:9px;font-size:16px;line-height:1.7;color:#4a4741">
+          <li>Registered Nurse with an active PRC licence.</li>
+          <li>At least one year of ER, ward, or ICU experience (new graduates with strong internship records are considered).</li>
+          <li>Current BLS certification; ACLS an advantage.</li>
+          <li>Comfortable explaining care in Cebuano and English.</li>
+          <li>Willing to work rotating shifts, weekends, and holidays.</li>
+        </ul>
+        <h3 style="font-size:19px;font-weight:700;margin:0 0 12px">Compensation &amp; benefits</h3>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0">Competitive salary based on experience, night and holiday differentials, SSS/PhilHealth/Pag-IBIG, service incentive leave, free consults for staff and immediate family, and sponsored CPD units.</p>
+      </article>
+      <aside style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <h3 style="font-size:19px;font-weight:700;margin:0 0 16px">Apply for this role</h3>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Full name<input placeholder="Juan dela Cruz" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+            <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">Email or mobile<input placeholder="0917 000 0000" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+            <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#4a4741">PRC licence no.<input placeholder="0000000" style="border:1px solid #ddd9cf;border-radius:9px;padding:12px 13px;font:400 15px 'Source Sans 3',sans-serif;outline:0"></label>
+            <div style="border:1.5px dashed #ddd9cf;border-radius:10px;padding:20px;text-align:center;color:#8a8578;font-size:14px"><span class="ms" style="font-size:26px;display:block;margin-bottom:6px">upload_file</span>Attach CV (PDF or DOCX)</div>
+            <button style="background:#14357f;color:#fff;border:0;border-radius:10px;padding:14px;font:700 15.5px 'Source Sans 3',sans-serif;cursor:pointer">Submit application</button>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <h3 style="font-size:17px;font-weight:700;margin:0 0 12px">Hiring process</h3>
+          <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:#4a4741">
+            <span style="display:flex;gap:10px"><span class="ms" style="font-size:19px;color:#2f8b3c">looks_one</span>CV screening within 3 working days</span>
+            <span style="display:flex;gap:10px"><span class="ms" style="font-size:19px;color:#2f8b3c">looks_two</span>Interview with Chief Nurse</span>
+            <span style="display:flex;gap:10px"><span class="ms" style="font-size:19px;color:#2f8b3c">looks_3</span>Skills demonstration &amp; medical exam</span>
+            <span style="display:flex;gap:10px"><span class="ms" style="font-size:19px;color:#2f8b3c">looks_4</span>Job offer and orientation</span>
+          </div>
+        </div>
+        <a href="#" onClick="{{ goCareers }}" style="display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:15px"><span class="ms" style="font-size:19px">arrow_back</span>All open positions</a>
+      </aside>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isNews }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / News &amp; Announcements</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">News &amp; Announcements</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">Advisories, service updates, and community programmes from DCH.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:40px 24px 8px">
+      <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));color:#14181f" style-hover="border-color:#14357f;color:#14181f">
+        <img src="assets/imaging.png" alt="" style="width:100%;height:100%;min-height:260px;object-fit:cover">
+        <span style="padding:34px;display:flex;flex-direction:column;justify-content:center">
+          <span style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><span style="background:#fdf5e4;color:#8a6512;font-size:12px;font-weight:700;padding:5px 10px;border-radius:5px">FEATURED</span><span style="font-size:13px;color:#8a8578;font-weight:600">Sep 8, 2026</span></span>
+          <span style="display:block;font-family:'Source Serif 4',Georgia,serif;font-size:30px;font-weight:700;line-height:1.2;margin-bottom:12px">New 16-slice CT scanner now serving southern Cebu</span>
+          <span style="display:block;font-size:16px;line-height:1.7;color:#4a4741;margin-bottom:16px">Head, chest, and abdominal studies are now read the same day — no more referral trips to Cebu City for a basic scan.</span>
+          <span style="display:inline-flex;align-items:center;gap:7px;color:#14357f;font-weight:700;font-size:15px">Read the announcement<span class="ms" style="font-size:19px">arrow_forward</span></span>
+        </span>
+      </a>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:32px 24px 72px">
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px">
+        <span style="background:#14357f;color:#fff;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">All</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">Advisories</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">Service updates</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">Community</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">Careers</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#14357f;color:#14181f">
+          <img src="assets/consult.png" alt="" style="width:100%;height:170px;object-fit:cover">
+          <span style="padding:20px;display:block">
+            <span style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span style="background:#f2f4fa;color:#14357f;font-size:12px;font-weight:700;padding:4px 9px;border-radius:5px">ADVISORY</span><span style="font-size:12.5px;color:#8a8578;font-weight:600">Sep 2, 2026</span></span>
+            <span style="display:block;font-weight:700;font-size:18px;line-height:1.35;margin-bottom:7px">Free flu vaccination for senior citizens</span>
+            <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">Walk-in at the OPD annex every Wednesday this month, 8 AM to 12 NN.</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#14357f;color:#14181f">
+          <img src="assets/conference.png" alt="" style="width:100%;height:170px;object-fit:cover">
+          <span style="padding:20px;display:block">
+            <span style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span style="background:#f2f4fa;color:#14357f;font-size:12px;font-weight:700;padding:4px 9px;border-radius:5px">COMMUNITY</span><span style="font-size:12.5px;color:#8a8578;font-weight:600">Aug 4, 2026</span></span>
+            <span style="display:block;font-weight:700;font-size:18px;line-height:1.35;margin-bottom:7px">Medical mission in Barangay Bagacay</span>
+            <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">Free consults, BP screening, and minor dental services for 300 residents.</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#14357f;color:#14181f">
+          <img src="assets/ultrasound.png" alt="" style="width:100%;height:170px;object-fit:cover">
+          <span style="padding:20px;display:block">
+            <span style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span style="background:#f2f4fa;color:#14357f;font-size:12px;font-weight:700;padding:4px 9px;border-radius:5px">SERVICE UPDATE</span><span style="font-size:12.5px;color:#8a8578;font-weight:600">Jul 21, 2026</span></span>
+            <span style="display:block;font-weight:700;font-size:18px;line-height:1.35;margin-bottom:7px">Prenatal ultrasound now available on Saturdays</span>
+            <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">Extra slots opened for working mothers, by appointment.</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#14357f;color:#14181f">
+          <img src="assets/emergency.png" alt="" style="width:100%;height:170px;object-fit:cover">
+          <span style="padding:20px;display:block">
+            <span style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span style="background:#f2f4fa;color:#14357f;font-size:12px;font-weight:700;padding:4px 9px;border-radius:5px">ADVISORY</span><span style="font-size:12.5px;color:#8a8578;font-weight:600">Jul 3, 2026</span></span>
+            <span style="display:block;font-weight:700;font-size:18px;line-height:1.35;margin-bottom:7px">Dengue watch: what to do before coming to the ER</span>
+            <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">Warning signs that mean you should not wait until morning.</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#14357f;color:#14181f">
+          <img src="assets/reception.png" alt="" style="width:100%;height:170px;object-fit:cover">
+          <span style="padding:20px;display:block">
+            <span style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span style="background:#f2f4fa;color:#14357f;font-size:12px;font-weight:700;padding:4px 9px;border-radius:5px">SERVICE UPDATE</span><span style="font-size:12.5px;color:#8a8578;font-weight:600">Jun 15, 2026</span></span>
+            <span style="display:block;font-weight:700;font-size:18px;line-height:1.35;margin-bottom:7px">Admitting section renovation complete</span>
+            <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">A wider lobby, numbered queueing, and a dedicated PhilHealth window.</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#14357f;color:#14181f">
+          <img src="assets/cath-lab.png" alt="" style="width:100%;height:170px;object-fit:cover">
+          <span style="padding:20px;display:block">
+            <span style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span style="background:#f2f4fa;color:#14357f;font-size:12px;font-weight:700;padding:4px 9px;border-radius:5px">CAREERS</span><span style="font-size:12.5px;color:#8a8578;font-weight:600">Jun 2, 2026</span></span>
+            <span style="display:block;font-weight:700;font-size:18px;line-height:1.35;margin-bottom:7px">DCH is hiring nurses and med techs</span>
+            <span style="display:block;font-size:14.5px;line-height:1.55;color:#6d6a62">Seven positions open across nursing, laboratory, and imaging.</span>
+          </span>
+        </a>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isNewsDetail }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto;max-width:860px">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:14px"><a href="#" onClick="{{ goNews }}" style="color:#9fb2dc">News &amp; Announcements</a> / Service update</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:42px;line-height:1.15;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">New 16-slice CT scanner now serving southern Cebu</h1>
+        <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:20px;font-size:14px;color:#cfd9ee">
+          <span style="display:flex;gap:8px;align-items:center"><span class="ms" style="font-size:18px;color:#7f9ad6">calendar_month</span>September 8, 2026</span>
+          <span style="display:flex;gap:8px;align-items:center"><span class="ms" style="font-size:18px;color:#7f9ad6">person</span>Hospital Information Office</span>
+          <span style="display:flex;gap:8px;align-items:center"><span class="ms" style="font-size:18px;color:#7f9ad6">schedule</span>3 min read</span>
+        </div>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:0 24px">
+      <img src="assets/imaging.png" alt="CT suite at DCH" style="width:100%;max-width:1000px;margin:-28px auto 0;display:block;height:380px;object-fit:cover;border-radius:16px;position:relative;box-shadow:0 18px 44px rgba(14,37,89,.18)">
+      <p style="max-width:1000px;margin:12px auto 0;font-size:13px;color:#8a8578">The new imaging suite on the ground floor, beside the emergency room.</p>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:40px 24px 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:start">
+      <article style="max-width:70ch">
+        <p style="font-size:19px;line-height:1.65;color:#14181f;margin:0 0 20px;font-weight:500">Deiparine Community Hospital has begun operating a 16-slice computed tomography scanner, ending a long-standing need for patients in Sibonga and nearby towns to travel to Cebu City for even routine scans.</p>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0 0 18px">The unit is installed in the renovated imaging suite beside the emergency room, which means trauma and stroke cases arriving by ambulance can be scanned within minutes of triage. Head, chest, abdominal, and spine studies are available, with contrast studies scheduled on weekday mornings.</p>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0 0 18px">Studies performed before 2 PM are read the same day by our radiologist, and results can be released to the patient or forwarded directly to the referring physician. Emergency scans are read on call, around the clock.</p>
+        <blockquote style="margin:26px 0;padding:22px 26px;border-left:4px solid #2f8b3c;background:#eef7f0;border-radius:0 12px 12px 0">
+          <p style="font-size:18px;line-height:1.6;color:#22432c;margin:0 0 10px;font-style:italic">For a stroke or a head injury, the two hours it used to take to reach a scanner in the city were two hours we could not get back. Now the scan happens here.</p>
+          <footer style="font-size:14px;font-weight:700;color:#2f8b3c">— Dr. James Deiparine, Medical Director</footer>
+        </blockquote>
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:26px;font-weight:700;margin:32px 0 12px">What patients need to know</h2>
+        <ul style="margin:0 0 18px;padding-left:22px;display:flex;flex-direction:column;gap:10px;font-size:16px;line-height:1.7;color:#4a4741">
+          <li>A physician's request is required for all CT studies, including those ordered from the ER.</li>
+          <li>Fasting of six hours is needed for abdominal studies with contrast.</li>
+          <li>Bring previous X-ray, ultrasound, or CT results if you have them.</li>
+          <li>PhilHealth and accredited HMO coverage may be applied at the billing window before the scan.</li>
+        </ul>
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:26px;font-weight:700;margin:32px 0 12px">Schedule and fees</h2>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0 0 18px">Non-emergency scans are performed daily from 8 AM to 5 PM by appointment through the imaging desk at (032) 484 1200, local 112. A schedule of fees is posted at the imaging counter and at the billing section.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;padding-top:24px;border-top:1px solid #e6e3da">
+          <a href="#" onClick="{{ goServiceDetail }}" style="display:inline-flex;align-items:center;gap:8px;background:#14357f;color:#fff;padding:13px 20px;border-radius:10px;font-weight:700;font-size:15px" style-hover="background:#0e2559;color:#fff"><span class="ms" style="font-size:19px">radiology</span>Imaging &amp; Radiology department</a>
+          <a href="#" onClick="{{ goNews }}" style="display:inline-flex;align-items:center;gap:8px;border:1px solid #ddd9cf;padding:13px 20px;border-radius:10px;font-weight:700;font-size:15px" style-hover="border-color:#14357f"><span class="ms" style="font-size:19px">arrow_back</span>Back to all news</a>
+        </div>
+      </article>
+      <aside style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <h3 style="font-size:17px;font-weight:700;margin:0 0 14px">Related updates</h3>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <a href="#" onClick="{{ goNewsDetail }}" style="color:#14181f;font-size:15px;line-height:1.45;font-weight:600" style-hover="color:#14357f">Prenatal ultrasound now available on Saturdays<span style="display:block;font-size:12.5px;color:#8a8578;font-weight:600;margin-top:4px">Jul 21, 2026</span></a>
+            <a href="#" onClick="{{ goNewsDetail }}" style="color:#14181f;font-size:15px;line-height:1.45;font-weight:600" style-hover="color:#14357f">Admitting section renovation complete<span style="display:block;font-size:12.5px;color:#8a8578;font-weight:600;margin-top:4px">Jun 15, 2026</span></a>
+            <a href="#" onClick="{{ goNewsDetail }}" style="color:#14181f;font-size:15px;line-height:1.45;font-weight:600" style-hover="color:#14357f">Free flu vaccination for senior citizens<span style="display:block;font-size:12.5px;color:#8a8578;font-weight:600;margin-top:4px">Sep 2, 2026</span></a>
+          </div>
+        </div>
+        <div style="background:#14357f;border-radius:16px;padding:24px;color:#fff">
+          <span class="ms" style="font-size:26px;color:#e8b23a">event_available</span>
+          <h3 style="font-size:18px;font-weight:700;margin:12px 0 8px">Need a scan scheduled?</h3>
+          <p style="font-size:14.5px;line-height:1.6;color:#cfd9ee;margin:0 0 14px">Imaging desk: (032) 484 1200 local 112, daily 8 AM – 5 PM.</p>
+          <a href="#" onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:7px;color:#e8b23a;font-weight:700;font-size:15px" style-hover="color:#f3cd74">Request an appointment<span class="ms" style="font-size:19px">arrow_forward</span></a>
+        </div>
+      </aside>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isHealth }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="background:#0e2559;padding:52px 24px">
+      <div style="max-width:1240px;margin:0 auto">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:10px">Home / Health Information</div>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.8px">Health Information</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:38em;margin:14px 0 0;line-height:1.55">Plain-language guides written by our own doctors and nurses — for prevention, not self-diagnosis.</p>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:40px 24px 8px">
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px">
+        <span style="background:#2f8b3c;color:#fff;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px">All topics</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">Mother &amp; child</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">Diabetes &amp; hypertension</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">Infectious disease</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">First aid</span>
+        <span style="background:#fff;border:1px solid #e6e3da;border-radius:999px;color:#4a4741;font-size:14px;font-weight:600;padding:9px 16px">Nutrition</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#2f8b3c;color:#14181f">
+          <img src="assets/consult.png" alt="" style="width:100%;height:160px;object-fit:cover">
+          <span style="padding:20px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <span style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#2f8b3c">Diabetes &amp; hypertension</span>
+            <span style="font-weight:700;font-size:17.5px;line-height:1.35">Checking your blood pressure at home, correctly</span>
+            <span style="font-size:14.5px;line-height:1.55;color:#6d6a62">Cuff position, timing, and the numbers that mean you should come in.</span>
+            <span style="margin-top:auto;padding-top:10px;font-size:13px;color:#8a8578">Dr. Ramon L. Deiparine · Internal Medicine</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#2f8b3c;color:#14181f">
+          <img src="assets/ultrasound.png" alt="" style="width:100%;height:160px;object-fit:cover">
+          <span style="padding:20px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <span style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#2f8b3c">Mother &amp; child</span>
+            <span style="font-weight:700;font-size:17.5px;line-height:1.35">Your first prenatal visit: what happens and what to bring</span>
+            <span style="font-size:14.5px;line-height:1.55;color:#6d6a62">A walkthrough of the check-up, the lab work, and the schedule ahead.</span>
+            <span style="margin-top:auto;padding-top:10px;font-size:13px;color:#8a8578">Dr. Maria A. Alcantara · OB-Gyne</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#2f8b3c;color:#14181f">
+          <img src="assets/emergency.png" alt="" style="width:100%;height:160px;object-fit:cover">
+          <span style="padding:20px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <span style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#2f8b3c">Infectious disease</span>
+            <span style="font-weight:700;font-size:17.5px;line-height:1.35">Dengue: the warning signs that cannot wait until morning</span>
+            <span style="font-size:14.5px;line-height:1.55;color:#6d6a62">Six symptoms that mean a trip to the ER tonight, not tomorrow.</span>
+            <span style="margin-top:auto;padding-top:10px;font-size:13px;color:#8a8578">Dr. Nelia S. Sanchez · Family Medicine</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#2f8b3c;color:#14181f">
+          <img src="assets/patient-room.png" alt="" style="width:100%;height:160px;object-fit:cover">
+          <span style="padding:20px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <span style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#2f8b3c">First aid</span>
+            <span style="font-weight:700;font-size:17.5px;line-height:1.35">Burns, cuts, and sprains: what to do in the first ten minutes</span>
+            <span style="font-size:14.5px;line-height:1.55;color:#6d6a62">What helps, what makes it worse, and when stitches are needed.</span>
+            <span style="margin-top:auto;padding-top:10px;font-size:13px;color:#8a8578">ER Nursing Team</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#2f8b3c;color:#14181f">
+          <img src="assets/conference.png" alt="" style="width:100%;height:160px;object-fit:cover">
+          <span style="padding:20px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <span style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#2f8b3c">Nutrition</span>
+            <span style="font-weight:700;font-size:17.5px;line-height:1.35">Eating well on a Sibonga budget</span>
+            <span style="font-size:14.5px;line-height:1.55;color:#6d6a62">Local, affordable food swaps for lowering blood sugar and salt intake.</span>
+            <span style="margin-top:auto;padding-top:10px;font-size:13px;color:#8a8578">DCH Dietary Section</span>
+          </span>
+        </a>
+        <a href="#" onClick="{{ goNewsDetail }}" style="background:#fff;border:1px solid #e6e3da;border-radius:16px;overflow:hidden;color:#14181f;display:flex;flex-direction:column" style-hover="border-color:#2f8b3c;color:#14181f">
+          <img src="assets/doctor-portrait.png" alt="" style="width:100%;height:160px;object-fit:cover">
+          <span style="padding:20px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <span style="font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#2f8b3c">Diabetes &amp; hypertension</span>
+            <span style="font-weight:700;font-size:17.5px;line-height:1.35">Living with type 2 diabetes: your first three months</span>
+            <span style="font-size:14.5px;line-height:1.55;color:#6d6a62">Medication habits, foot care, and the check-ups that keep you out of hospital.</span>
+            <span style="margin-top:auto;padding-top:10px;font-size:13px;color:#8a8578">Dr. Ramon L. Deiparine · Internal Medicine</span>
+          </span>
+        </a>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:40px 24px 72px">
+      <div style="background:#fdf5e4;border:1px solid #eddfbb;border-radius:16px;padding:26px;display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+        <span class="ms" style="font-size:28px;color:#8a6512">info</span>
+        <p style="flex:1 1 320px;font-size:15.5px;line-height:1.6;color:#5e4708;margin:0">These articles are general health information, not a diagnosis. If symptoms are severe or worsening, go to the emergency room or call (032) 484 1234.</p>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isServiceDetail }}" hint-placeholder-val="{{ false }}">
+  <main>
+    <section style="position:relative;background:#0e2559;overflow:hidden">
+      <img src="assets/imaging.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35">
+      <div style="position:absolute;inset:0;background:linear-gradient(92deg,#0e2559 10%,rgba(14,37,89,.7) 100%)"></div>
+      <div style="position:relative;max-width:1240px;margin:0 auto;padding:56px 24px">
+        <div style="font-size:13.5px;color:#9fb2dc;margin-bottom:12px"><a href="#" onClick="{{ goServices }}" style="color:#9fb2dc">Services</a> / Imaging &amp; Radiology</div>
+        <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:#fff;font-size:13px;font-weight:700;padding:7px 13px;border-radius:999px"><span class="ms" style="font-size:17px;color:#e8b23a">radiology</span>Diagnostics</span>
+        <h1 style="font-family:'Source Serif 4',Georgia,serif;font-size:44px;font-weight:700;color:#fff;margin:18px 0 0;letter-spacing:-0.8px">Imaging &amp; Radiology</h1>
+        <p style="font-size:17.5px;color:#cfd9ee;max-width:40em;margin:14px 0 0;line-height:1.55">Digital X-ray, ultrasound, ECG, and 16-slice CT — read the same day, beside the emergency room.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px">
+          <a href="#" onClick="{{ goContact }}" style="display:flex;align-items:center;gap:9px;background:#e8b23a;color:#1d1503;padding:14px 20px;border-radius:11px;font-size:15px;font-weight:700" style-hover="background:#f3cd74;color:#1d1503"><span class="ms" style="font-size:20px">event_available</span>Schedule a study</a>
+          <a href="#" onClick="{{ goDoctors }}" style="display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.45);color:#fff;padding:14px 20px;border-radius:11px;font-size:15px;font-weight:700" style-hover="background:rgba(255,255,255,.2);color:#fff"><span class="ms" style="font-size:20px">stethoscope</span>Meet the radiologist</a>
+        </div>
+      </div>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:44px 24px 8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:34px;align-items:start">
+      <div>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#2f8b3c">Overview</span>
+        <h2 style="font-family:'Source Serif 4',Georgia,serif;font-size:32px;font-weight:700;margin:8px 0 16px;letter-spacing:-0.5px">Diagnostics without the trip to the city</h2>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0 0 16px">The imaging section sits on the ground floor next to the emergency room, so trauma, stroke, and acute abdominal cases can be scanned within minutes of triage. Outpatients are seen by appointment or walk-in, with most plain studies completed in under thirty minutes.</p>
+        <p style="font-size:16px;line-height:1.7;color:#4a4741;margin:0 0 28px">All studies are interpreted by a licensed radiologist. Reports for studies done before 2 PM are released the same day; emergency studies are read on call, twenty-four hours.</p>
+        <h3 style="font-size:20px;font-weight:700;margin:0 0 14px">Procedures offered</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:18px;display:flex;gap:11px"><span class="ms" style="font-size:22px;color:#14357f">radiology</span><span><span style="display:block;font-weight:700;font-size:15.5px">Digital X-ray</span><span style="display:block;font-size:13.5px;color:#6d6a62;margin-top:3px">Chest, skull, spine, extremities</span></span></div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:18px;display:flex;gap:11px"><span class="ms" style="font-size:22px;color:#14357f">monitor_heart</span><span><span style="display:block;font-weight:700;font-size:15.5px">16-slice CT scan</span><span style="display:block;font-size:13.5px;color:#6d6a62;margin-top:3px">Head, chest, abdomen, spine; with or without contrast</span></span></div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:18px;display:flex;gap:11px"><span class="ms" style="font-size:22px;color:#14357f">pregnant_woman</span><span><span style="display:block;font-weight:700;font-size:15.5px">Ultrasound</span><span style="display:block;font-size:13.5px;color:#6d6a62;margin-top:3px">Prenatal, whole abdomen, KUB, thyroid, breast</span></span></div>
+          <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:18px;display:flex;gap:11px"><span class="ms" style="font-size:22px;color:#14357f">cardiology</span><span><span style="display:block;font-weight:700;font-size:15.5px">ECG &amp; 2D-echo</span><span style="display:block;font-size:13.5px;color:#6d6a62;margin-top:3px">Resting ECG daily; 2D-echo Tue &amp; Fri</span></span></div>
+        </div>
+        <h3 style="font-size:20px;font-weight:700;margin:32px 0 14px">How to prepare</h3>
+        <ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px;font-size:16px;line-height:1.7;color:#4a4741">
+          <li>Bring a physician's request — required for every study.</li>
+          <li>Fast for six hours before an abdominal ultrasound or a contrast CT.</li>
+          <li>For pelvic ultrasound, drink water and keep a full bladder.</li>
+          <li>Tell the technologist if you are pregnant or allergic to contrast dye.</li>
+          <li>Bring any previous imaging results for comparison.</li>
+        </ul>
+      </div>
+      <aside style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <h3 style="font-size:18px;font-weight:700;margin:0 0 14px">Schedule &amp; location</h3>
+          <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px;color:#4a4741">
+            <span style="display:flex;gap:9px"><span class="ms" style="font-size:19px;color:#8a8578">schedule</span>Outpatient: daily 8 AM – 5 PM</span>
+            <span style="display:flex;gap:9px"><span class="ms" style="font-size:19px;color:#8a8578">emergency</span>Emergency studies: 24/7 on call</span>
+            <span style="display:flex;gap:9px"><span class="ms" style="font-size:19px;color:#8a8578">meeting_room</span>Ground floor, beside the ER</span>
+            <span style="display:flex;gap:9px"><span class="ms" style="font-size:19px;color:#8a8578">call</span>(032) 484 1200 local 112</span>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <h3 style="font-size:18px;font-weight:700;margin:0 0 14px">Department staff</h3>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;gap:13px;align-items:center"><div style="width:48px;height:48px;border-radius:50%;background:#eef1f8;color:#14357f;display:flex;align-items:center;justify-content:center;font:700 17px 'Source Sans 3',sans-serif;flex:none">EP</div><div><div style="font-weight:700;font-size:15.5px">Dr. Edgar P. Pacaña</div><div style="font-size:13.5px;color:#2f8b3c;font-weight:600">Radiologist</div></div></div>
+            <div style="display:flex;gap:13px;align-items:center"><div style="width:48px;height:48px;border-radius:50%;background:#eef1f8;color:#14357f;display:flex;align-items:center;justify-content:center;font:700 17px 'Source Sans 3',sans-serif;flex:none">JL</div><div><div style="font-weight:700;font-size:15.5px">Jomar L. Tabada, RRT</div><div style="font-size:13.5px;color:#2f8b3c;font-weight:600">Chief Radiologic Technologist</div></div></div>
+          </div>
+          <a href="#" onClick="{{ goDoctors }}" style="display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-weight:700;font-size:14.5px">All doctors<span class="ms" style="font-size:18px">arrow_forward</span></a>
+        </div>
+        <div style="background:#fff;border:1px solid #e6e3da;border-radius:16px;padding:24px">
+          <h3 style="font-size:18px;font-weight:700;margin:0 0 12px">Coverage</h3>
+          <p style="font-size:14.5px;line-height:1.6;color:#6d6a62;margin:0 0 12px">PhilHealth, accredited HMOs, and senior/PWD discounts are applied at the billing window before the study.</p>
+          <a href="#" onClick="{{ goPatients }}" style="font-weight:700;font-size:14.5px">Billing information →</a>
+        </div>
+        <div style="background:#8f1d1d;border-radius:16px;padding:24px;color:#fff;display:flex;gap:13px;align-items:flex-start">
+          <span class="ms" style="font-size:26px;color:#f0b8b8">emergency</span>
+          <div><h3 style="font-size:17.5px;font-weight:700;margin:0 0 6px">Emergency imaging</h3><p style="font-size:14.5px;line-height:1.5;color:#f3cccc;margin:0">Go straight to the ER — no appointment needed. (032) 484 1234</p></div>
+        </div>
+      </aside>
+    </section>
+    <section style="max-width:1240px;margin:0 auto;padding:44px 24px 72px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+        <img src="assets/imaging.png" alt="CT suite" style="width:100%;height:190px;object-fit:cover;border-radius:14px">
+        <img src="assets/ultrasound.png" alt="Ultrasound room" style="width:100%;height:190px;object-fit:cover;border-radius:14px">
+        <img src="assets/cath-lab.png" alt="Procedure room" style="width:100%;height:190px;object-fit:cover;border-radius:14px">
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <footer style="margin-top:auto;background:#0e2559;color:#cfd9ee">
+    <div style="max-width:1240px;margin:0 auto;padding:52px 24px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px">
+      <div>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px">
+          <img src="assets/dch-logo.jpg" alt="" style="width:48px;height:48px;border-radius:50%">
+          <span style="font-family:'Source Serif 4',Georgia,serif;font-size:17px;font-weight:700;color:#fff;line-height:1.25">Deiparine Community<br>Hospital</span>
+        </div>
+        <p style="font-size:14.5px;line-height:1.6;margin:0 0 16px;max-width:30em">A DOH-licensed, PhilHealth-accredited community hospital serving Sibonga and southern Cebu.</p>
+        <div style="display:flex;gap:10px">
+          <a href="#" style="width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff" style-hover="background:#e8b23a;color:#1d1503"><span class="ms" style="font-size:20px">public</span></a>
+          <a href="#" style="width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff" style-hover="background:#e8b23a;color:#1d1503"><span class="ms" style="font-size:20px">chat</span></a>
+          <a href="#" style="width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff" style-hover="background:#e8b23a;color:#1d1503"><span class="ms" style="font-size:20px">mail</span></a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#e8b23a;margin:0 0 14px">Patients</h4>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14.5px">
+          <a href="#" onClick="{{ goContact }}" style="color:#cfd9ee">Book an appointment</a>
+          <a href="#" onClick="{{ goPatients }}" style="color:#cfd9ee">Admission &amp; discharge</a>
+          <a href="#" onClick="{{ goPatients }}" style="color:#cfd9ee">Billing &amp; PhilHealth</a>
+          <a href="#" onClick="{{ goPatients }}" style="color:#cfd9ee">Visiting hours</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#e8b23a;margin:0 0 14px">Hospital</h4>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14.5px">
+          <a href="#" onClick="{{ goAbout }}" style="color:#cfd9ee">About DCH</a>
+          <a href="#" onClick="{{ goServices }}" style="color:#cfd9ee">Services</a>
+          <a href="#" onClick="{{ goDoctors }}" style="color:#cfd9ee">Doctors directory</a>
+          <a href="#" onClick="{{ goStaff }}" style="color:#cfd9ee">Our staff &amp; leadership</a>
+          <a href="#" onClick="{{ goVision }}" style="color:#cfd9ee">Vision &amp; values</a>
+          <a href="#" onClick="{{ goCareers }}" style="color:#cfd9ee">Careers</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#e8b23a;margin:0 0 14px">Contact</h4>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14.5px">
+          <span>National Highway, Poblacion<br>Sibonga, 6020 Cebu</span>
+          <span style="color:#fff;font-weight:700">ER: (032) 484 1234</span>
+          <span>Trunkline: (032) 484 1200</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.12)">
+      <div style="max-width:1240px;margin:0 auto;padding:24px;display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:4px;flex:0 1 auto">
+          <span style="font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#e8b23a">Licensed &amp; accredited</span>
+          <span style="font-size:13px;color:#9fb2dc">Accreditation no. — to be supplied</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <div style="background:#fff;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:11px">
+            <image-slot id="footer-philhealth-logo" shape="rect" fit="contain" style="width:104px;height:58px" placeholder="PhilHealth logo"></image-slot>
+            <span style="display:flex;flex-direction:column;line-height:1.25">
+              <span style="font-size:13.5px;font-weight:700;color:#14357f">PhilHealth</span>
+              <span style="font-size:11.5px;color:#6d6a62">Accredited facility</span>
+            </span>
+          </div>
+          <div style="background:#fff;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:11px">
+            <image-slot id="footer-doh-logo" shape="rect" fit="contain" style="width:104px;height:58px" placeholder="DOH logo"></image-slot>
+            <span style="display:flex;flex-direction:column;line-height:1.25">
+              <span style="font-size:13.5px;font-weight:700;color:#14357f">Department of Health</span>
+              <span style="font-size:11.5px;color:#6d6a62">Level 1 licence</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.12)">
+      <div style="max-width:1240px;margin:0 auto;padding:18px 24px;display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:#9fb2dc">
+        <span>© 2026 Deiparine Community Hospital · Mockup for design review</span>
+        <span style="margin-left:auto;display:flex;gap:18px"><a href="#" style="color:#9fb2dc">Privacy</a><a href="#" style="color:#9fb2dc">Patient rights</a><a href="#" style="color:#9fb2dc">Sitemap</a></span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showTopBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showStats&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+const DAYS = ['M', 'T', 'W', 'Th', 'F', 'S'];
+const DAY_ON = 'flex:1;min-width:0;text-align:center;padding:7px 0;border-radius:8px;background:#14357f;color:#fff;font-size:12.5px;font-weight:700';
+const DAY_OFF = 'flex:1;min-width:0;text-align:center;padding:7px 0;border-radius:8px;background:#f4f2ec;color:#b3aea1;font-size:12.5px;font-weight:600';
+
+const DIRECTORY = [
+  { initials: 'JD', photo: 'assets/dr-james-deiparine.png', name: 'Dr. James Deiparine', specialty: 'Internal Medicine · Medical Director', on: [0, 3], hours: '9:00 AM – 12:00 NN' },
+  { initials: 'RD', photo: 'assets/doctor-portrait.png', name: 'Dr. Ramon L. Deiparine', specialty: 'Internal Medicine · Adult Cardiology', on: [1, 4], hours: '1:00 – 5:00 PM' },
+  { initials: 'MA', name: 'Dr. Maria A. Alcantara', specialty: 'OB-Gynecology', on: [0, 2, 5], hours: '9:00 AM – 12:00 NN' },
+  { initials: 'JB', name: 'Dr. Jose B. Bacaltos', specialty: 'General Surgery', on: [3], hours: '8:00 AM – 12:00 NN' },
+  { initials: 'LC', name: 'Dr. Liza C. Canonigo', specialty: 'Pediatrics', on: [0, 1, 2, 3, 4], hours: '2:00 – 5:00 PM' },
+  { initials: 'EP', name: 'Dr. Edgar P. Pacaña', specialty: 'Radiology', on: [0, 1, 2, 3, 4, 5], hours: 'On call · daily' },
+  { initials: 'NS', name: 'Dr. Nelia S. Sanchez', specialty: 'Family Medicine', on: [0, 1, 2, 3, 4, 5], hours: '8:00 AM – 5:00 PM' },
+  { initials: 'AG', name: 'Dr. Arnel M. Gantuangco', specialty: 'Orthopedic Surgery', on: [2], hours: '1:00 – 4:00 PM' },
+  { initials: 'CR', name: 'Dr. Cecilia V. Rosales', specialty: 'Anesthesiology', on: [1, 3, 5], hours: 'By OR schedule' },
+  { initials: 'BO', name: 'Dr. Benjie T. Olmedo', specialty: 'Emergency Medicine', on: [0, 1, 2, 3, 4, 5], hours: '24-hour rotation' },
+];
+
+const DEPARTMENTS = [
+  { id: 'im', name: 'Internal Medicine', icon: 'cardiology' },
+  { id: 'ob', name: 'OB-Gynecology', icon: 'pregnant_woman' },
+  { id: 'peds', name: 'Pediatrics', icon: 'child_care' },
+  { id: 'surg', name: 'General Surgery', icon: 'surgical' },
+  { id: 'imaging', name: 'Imaging & Radiology', icon: 'radiology' },
+  { id: 'fam', name: 'Family Medicine', icon: 'stethoscope' },
+];
+
+// on: 0=Mon … 5=Sat · from/to in 24h decimal · taken: slot labels already booked
+const BOOK_DOCTORS = [
+  { id: 'jd', dept: 'im', initials: 'JD', photo: 'assets/dr-james-deiparine.png', name: 'Dr. James Deiparine', specialty: 'Internal Medicine · Medical Director', on: [0, 3], from: 9, to: 12, hours: '9:00 AM – 12:00 NN', taken: ['10:00 AM'] },
+  { id: 'rd', dept: 'im', initials: 'RD', photo: 'assets/doctor-portrait.png', name: 'Dr. Ramon L. Deiparine', specialty: 'Internal Medicine · Adult Cardiology', on: [1, 4], from: 13, to: 17, hours: '1:00 – 5:00 PM', taken: ['1:40 PM', '3:00 PM'] },
+  { id: 'ma', dept: 'ob', initials: 'MA', name: 'Dr. Maria A. Alcantara', specialty: 'OB-Gynecology', on: [0, 2, 5], from: 9, to: 12, hours: '9:00 AM – 12:00 NN', taken: ['9:20 AM', '11:00 AM'] },
+  { id: 'lc', dept: 'peds', initials: 'LC', name: 'Dr. Liza C. Canonigo', specialty: 'Pediatrics', on: [0, 1, 2, 3, 4], from: 14, to: 17, hours: '2:00 – 5:00 PM', taken: ['3:20 PM'] },
+  { id: 'jb', dept: 'surg', initials: 'JB', name: 'Dr. Jose B. Bacaltos', specialty: 'General Surgery', on: [3], from: 8, to: 12, hours: '8:00 AM – 12:00 NN', taken: [] },
+  { id: 'ag', dept: 'surg', initials: 'AG', name: 'Dr. Arnel M. Gantuangco', specialty: 'Orthopedic Surgery', on: [2], from: 13, to: 16, hours: '1:00 – 4:00 PM', taken: ['2:00 PM'] },
+  { id: 'ep', dept: 'imaging', initials: 'EP', name: 'Dr. Edgar P. Pacaña', specialty: 'Radiology', on: [0, 1, 2, 3, 4, 5], from: 8, to: 17, hours: '8:00 AM – 5:00 PM', taken: ['10:40 AM', '1:00 PM'] },
+  { id: 'ns', dept: 'fam', initials: 'NS', name: 'Dr. Nelia S. Sanchez', specialty: 'Family Medicine', on: [0, 1, 2, 3, 4, 5], from: 8, to: 17, hours: '8:00 AM – 5:00 PM', taken: ['8:40 AM'] },
+];
+
+const FAQS = [
+  {
+    q: 'Do I need an appointment, or can I walk in?',
+    a: 'The emergency room and the laboratory accept walk-ins around the clock. Outpatient clinics also accept walk-ins, but consultants see booked patients first — requesting a slot ahead through our Contact page means you will not wait behind the morning queue.',
+  },
+  {
+    q: 'What should I bring on the day of my visit?',
+    a: 'A valid ID for the patient and companion, your PhilHealth MDR or member ID, any HMO letter of authorization, your senior citizen or PWD booklet if applicable, and previous lab or imaging results.',
+  },
+  {
+    q: 'Is PhilHealth applied automatically?',
+    a: 'Yes. Present your MDR or member ID at the admitting desk and the deduction is applied to your bill before you pay. Ward admissions under the case-rate packages carry no balance billing. The billing section will walk through each line with you.',
+  },
+  {
+    q: 'How long do laboratory and imaging results take?',
+    a: 'Routine blood chemistry and urinalysis are released the same day. X-ray and ultrasound reports are ready within 24 hours, and CT studies done before 2 PM are read the same day. Emergency studies are read on call.',
+  },
+  {
+    q: 'Can someone stay with the patient overnight?',
+    a: 'One watcher is allowed per patient at all times. General ward visiting hours are 10 AM to 8 PM, maternity 1 to 7 PM, and ICU 4 to 6 PM. Children under seven are not permitted in patient rooms.',
+  },
+  {
+    q: 'Do you have an ambulance for barangay transfers?',
+    a: 'Yes. Call (032) 484 1234 and the ER will dispatch. We serve Sibonga and the neighbouring towns, and we coordinate transfers to tertiary hospitals in Cebu City when a case needs a higher level of care.',
+  },
+];
+
+const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const CHIP_ON = 'flex:1;min-width:0;text-align:center;padding:6px 0;border-radius:7px;background:#14357f;color:#fff;font-size:12px;font-weight:700';
+const CHIP_OFF = 'flex:1;min-width:0;text-align:center;padding:6px 0;border-radius:7px;background:#f4f2ec;color:#b3aea1;font-size:12px;font-weight:600';
+
+const fmtTime = (h, m) => {
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const hr = h % 12 === 0 ? 12 : h % 12;
+  return hr + ':' + String(m).padStart(2, '0') + ' ' + ampm;
+};
+
+class Component extends DCLogic {
+  state = { page: 'home', menu: null, dept: null, doctor: null, day: null, slot: null, faq: 0 };
+  go(page) {
+    return (e) => { if (e) e.preventDefault(); this.setState({ page, menu: null }); window.scrollTo(0, 0); };
+  }
+  bookingVals() {
+    const S = this.state;
+    const pick = (patch) => (e) => { if (e) e.preventDefault(); this.setState(patch); };
+
+    const dept = DEPARTMENTS.find((d) => d.id === S.dept) || null;
+    const deptDocs = BOOK_DOCTORS.filter((d) => d.dept === S.dept);
+    const doctor = BOOK_DOCTORS.find((d) => d.id === S.doctor) || null;
+
+    // September 2026: the 1st is a Tuesday, so weekday index of day n is (n + 1) % 7 with 0 = Sunday.
+    const YEAR = 2026, MONTH = 8, FIRST_WEEKDAY = 2, DAYS_IN_MONTH = 30, TODAY = 17;
+    const jsDow = (n) => (FIRST_WEEKDAY + n - 1) % 7;          // 0 = Sun
+    const clinicIndex = (n) => (jsDow(n) + 6) % 7;             // 0 = Mon
+    const open = (n) => doctor && n > TODAY && clinicIndex(n) < 6 && doctor.on.indexOf(clinicIndex(n)) > -1;
+
+    const cells = [];
+    for (let i = 0; i < FIRST_WEEKDAY; i++) cells.push({ label: '', style: 'padding:9px 0' });
+    for (let n = 1; n <= DAYS_IN_MONTH; n++) {
+      const isOpen = open(n);
+      const sel = S.day === n;
+      const base = 'text-align:center;padding:9px 0;border-radius:9px;font-size:14px;';
+      cells.push({
+        label: String(n),
+        pick: isOpen ? pick({ day: n, slot: null }) : (e) => { if (e) e.preventDefault(); },
+        style: sel
+          ? base + 'background:#14357f;color:#fff;font-weight:700;border:1px solid #14357f'
+          : isOpen
+            ? base + 'background:#fff;color:#14357f;font-weight:700;border:1px solid #ddd9cf;cursor:pointer'
+            : base + 'background:transparent;color:#b3aea1;font-weight:400;border:1px solid transparent;cursor:default',
+      });
+    }
+
+    let slots = [];
+    if (doctor && S.day) {
+      for (let h = doctor.from; h < doctor.to; h++) {
+        for (const m of [0, 20, 40]) {
+          if (h === 12 && doctor.to > 13) continue; // lunch break on all-day clinics
+          const label = fmtTime(h, m);
+          const isTaken = doctor.taken.indexOf(label) > -1;
+          const sel = S.slot === label;
+          const base = 'text-align:center;padding:12px 0;border-radius:10px;font-size:14.5px;';
+          slots.push({
+            label,
+            pick: isTaken ? (e) => { if (e) e.preventDefault(); } : pick({ slot: label }),
+            style: sel
+              ? base + 'background:#14357f;color:#fff;font-weight:700;border:1px solid #14357f'
+              : isTaken
+                ? base + 'background:#f4f2ec;color:#b3aea1;font-weight:600;border:1px solid #f4f2ec;cursor:default;text-decoration:line-through'
+                : base + 'background:#fff;color:#14357f;font-weight:700;border:1px solid #ddd9cf;cursor:pointer',
+          });
+        }
+      }
+    }
+
+    const stepState = [!!dept, !!doctor, !!S.day, !!S.slot];
+    const stepStyle = (done, active) => 'display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font-size:13.5px;font-weight:600;' +
+      (done ? 'background:#eef7f0;color:#22432c' : active ? 'background:#f2f4fa;color:#14357f' : 'background:#f7f6f2;color:#8a8578;border:1px solid #eeece5');
+    const numStyle = (done, active) => 'width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex:none;' +
+      (done ? 'background:#2f8b3c;color:#fff' : active ? 'background:#14357f;color:#fff' : 'background:#e6e3da;color:#8a8578');
+
+    return {
+      steps: ['Department', 'Doctor', 'Date', 'Time'].map((label, i) => {
+        const done = stepState[i];
+        const active = !done && (i === 0 || stepState[i - 1]);
+        return { label, num: String(i + 1), style: stepStyle(done, active), numStyle: numStyle(done, active) };
+      }),
+
+      departments: DEPARTMENTS.map((d) => {
+        const n = BOOK_DOCTORS.filter((x) => x.dept === d.id).length;
+        const on = S.dept === d.id;
+        return {
+          ...d,
+          count: n + (n === 1 ? ' doctor' : ' doctors'),
+          pick: pick({ dept: d.id, doctor: null, day: null, slot: null }),
+          style: 'display:flex;gap:11px;align-items:center;padding:14px;border-radius:12px;text-decoration:none;color:#14181f;border:1px solid ' +
+            (on ? '#14357f;background:#f2f4fa' : '#e6e3da;background:#fff'),
+          iconStyle: 'font-size:24px;flex:none;color:' + (on ? '#14357f' : '#2f8b3c'),
+        };
+      }),
+
+      hasDept: !!dept,
+      deptDoctors: deptDocs.map((d) => {
+        const on = S.doctor === d.id;
+        return {
+          ...d,
+          pick: pick({ doctor: d.id, day: null, slot: null }),
+          style: 'display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:16px;border-radius:12px;text-decoration:none;color:#14181f;border:1px solid ' +
+            (on ? '#14357f;background:#f2f4fa' : '#e6e3da;background:#fff'),
+          avatar: d.photo
+            ? React.createElement('img', { src: d.photo, alt: d.name, style: { width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', objectPosition: 'center 18%', flex: 'none' } })
+            : React.createElement('div', { style: { width: 48, height: 48, borderRadius: '50%', background: '#eef1f8', color: '#14357f', display: 'flex', alignItems: 'center', justifyContent: 'center', font: "700 17px 'Source Sans 3', sans-serif", flex: 'none' } }, d.initials),
+          week: ['M', 'T', 'W', 'Th', 'F', 'S'].map((label, i) => ({ label, style: d.on.indexOf(i) > -1 ? CHIP_ON : CHIP_OFF })),
+        };
+      }),
+
+      hasDoctor: !!doctor,
+      clinicDaysNote: doctor ? doctor.on.map((i) => DAY_NAMES[i]).join(', ') + ' · ' + doctor.hours : '',
+      monthLabel: MONTHS[MONTH] + ' ' + YEAR,
+      dayHeaders: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      calendar: cells,
+
+      hasDate: !!(doctor && S.day),
+      selectedDateLabel: S.day ? MONTHS[MONTH] + ' ' + S.day + ', ' + YEAR : '',
+      slots,
+
+      hasSlot: !!S.slot,
+      summaryDept: dept ? dept.name : '',
+      summaryDoctor: doctor ? doctor.name : '',
+      summaryWhen: S.day && S.slot ? DAY_NAMES[clinicIndex(S.day)] + ', ' + MONTHS[MONTH] + ' ' + S.day + ' · ' + S.slot : '',
+      resetBooking: pick({ dept: null, doctor: null, day: null, slot: null }),
+    };
+  }
+
+  renderVals() {
+    const p = this.state.page;
+    return {
+      ...this.bookingVals(),
+
+      faqs: FAQS.map((f, i) => {
+        const open = this.state.faq === i;
+        return {
+          ...f,
+          open,
+          toggle: (e) => { if (e) e.preventDefault(); this.setState({ faq: open ? null : i }); },
+          cardStyle: 'background:#fff;border-radius:14px;border:1px solid ' + (open ? '#14357f' : '#e6e3da'),
+          icon: open ? 'remove' : 'add',
+          iconStyle: 'font-size:22px;flex:none;margin-top:1px;color:' + (open ? '#14357f' : '#8a8578'),
+        };
+      }),
+      showTopBar: this.props.showTopBar ?? true,
+      showStats: this.props.showStats ?? true,
+      isHome: p === 'home', isServices: p === 'services', isStaff: p === 'staff', isDoctors: p === 'doctors',
+      isPatients: p === 'patients', isContact: p === 'contact', isBooking: p === 'booking',
+      isAbout: p === 'about', isVision: p === 'vision', isCareers: p === 'careers',
+      isCareerDetail: p === 'careerDetail', isNews: p === 'news', isNewsDetail: p === 'newsDetail',
+      isHealth: p === 'health', isServiceDetail: p === 'serviceDetail',
+      servicesOpen: this.state.menu === 'services',
+      aboutOpen: this.state.menu === 'about',
+      newsOpen: this.state.menu === 'news',
+      openServices: () => this.setState({ menu: 'services' }),
+      openAbout: () => this.setState({ menu: 'about' }),
+      openNews: () => this.setState({ menu: 'news' }),
+      closeMenu: () => this.setState({ menu: null }),
+      goHome: this.go('home'), goServices: this.go('services'), goStaff: this.go('staff'),
+      goDoctors: this.go('doctors'),
+      directory: DIRECTORY.map((d) => ({
+        ...d,
+        avatar: d.photo
+          ? React.createElement('img', { src: d.photo, alt: d.name, style: { width: 58, height: 58, borderRadius: '50%', objectFit: 'cover', objectPosition: 'center 18%', flex: 'none' } })
+          : React.createElement('div', { style: { width: 58, height: 58, borderRadius: '50%', background: '#eef1f8', color: '#14357f', display: 'flex', alignItems: 'center', justifyContent: 'center', font: "700 20px 'Source Sans 3', sans-serif", flex: 'none' } }, d.initials),
+        week: DAYS.map((label, i) => ({ label, style: d.on.indexOf(i) > -1 ? DAY_ON : DAY_OFF })),
+      })),
+      heads: [
+        { icon: 'emergency', section: 'Emergency room', name: 'Dr. Benjie T. Olmedo', role: 'ER Physician-in-Charge', detail: 'Oversees triage protocols and the 24-hour resident roster.' },
+        { icon: 'vaccines', section: 'Nursing service', name: 'Ana V. Villarosa, RN, MAN', role: 'Chief Nurse', detail: 'Leads ward, ER, and delivery-room nursing across three shifts.' },
+        { icon: 'labs', section: 'Clinical laboratory', name: 'Grace P. Enriquez, RMT', role: 'Chief Medical Technologist', detail: 'Runs hematology, chemistry, and the 24-hour on-call bench.' },
+        { icon: 'radiology', section: 'Imaging', name: 'Jomar L. Tabada, RRT', role: 'Chief Radiologic Technologist', detail: 'Schedules X-ray, ultrasound, and CT studies.' },
+        { icon: 'medication', section: 'Pharmacy', name: 'Luisa F. Mendoza, RPh', role: 'Chief Pharmacist', detail: 'Manages the formulary and the on-site pharmacy until 9:00 PM.' },
+        { icon: 'receipt_long', section: 'Administration', name: 'Teresita G. Lopez, CPA', role: 'Hospital Administrator', detail: 'Billing, PhilHealth claims, HMO accreditation, and HR.' },
+      ],
+      teamCounts: [
+        { count: '62', role: 'Nurses & nursing aides', note: 'Wards, ER, OR, and the delivery room' },
+        { count: '8', role: 'Midwives', note: 'Delivery room and prenatal clinic' },
+        { count: '11', role: 'Medical technologists', note: 'Laboratory, 24-hour coverage' },
+        { count: '6', role: 'Radiologic technologists', note: 'X-ray, ultrasound, and CT' },
+        { count: '5', role: 'Pharmacists & assistants', note: 'On-site pharmacy' },
+        { count: '28', role: 'Support & admin staff', note: 'Admitting, billing, dietary, maintenance' },
+      ],
+      goPatients: this.go('patients'), goContact: this.go('contact'),
+      goAbout: this.go('about'), goVision: this.go('vision'), goCareers: this.go('careers'),
+      goCareerDetail: this.go('careerDetail'), goNews: this.go('news'),
+      goNewsDetail: this.go('newsDetail'), goHealth: this.go('health'),
+      goServiceDetail: this.go('serviceDetail'),
+      doctors: [
+        { initials: 'RD', name: 'Dr. Ramon L. Deiparine', specialty: 'Internal Medicine', hours: 'Tue & Fri · 1–5 PM', room: 'OPD Clinic 2' },
+        { initials: 'MA', name: 'Dr. Maria A. Alcantara', specialty: 'OB-Gynecology', hours: 'Mon, Wed, Sat · 9 AM–12 NN', room: 'OPD Clinic 4' },
+        { initials: 'JB', name: 'Dr. Jose B. Bacaltos', specialty: 'General Surgery', hours: 'Thu · 8 AM–12 NN', room: 'Surgical Annex' },
+        { initials: 'LC', name: 'Dr. Liza C. Canonigo', specialty: 'Pediatrics', hours: 'Mon–Fri · 2–5 PM', room: 'OPD Clinic 1' },
+        { initials: 'EP', name: 'Dr. Edgar P. Pacaña', specialty: 'Radiology', hours: 'Daily · on call', room: 'Imaging Suite' },
+        { initials: 'NS', name: 'Dr. Nelia S. Sanchez', specialty: 'Family Medicine', hours: 'Mon–Sat · 8 AM–5 PM', room: 'OPD Clinic 3' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

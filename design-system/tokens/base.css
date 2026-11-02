@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-heading);
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+a { color: var(--text-link); text-decoration: none; transition: var(--transition-interactive); }
+a:hover { color: var(--text-link-hover); }
+
+.dch-icon {
+  font-family: var(--font-icon);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-variation-settings: "FILL" 1;
+}
+
+.dch-eyebrow {
+  font-size: var(--text-eyebrow-size);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-eyebrow);
+}
+
+.dch-prose { max-width: var(--prose-max); font-size: var(--text-body); line-height: var(--leading-prose); color: var(--text-body); }

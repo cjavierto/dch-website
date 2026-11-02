@@ -1,0 +1,17 @@
+:root {
+  --shadow-card: 0 8px 24px rgba(14, 37, 89, 0.07);
+  --shadow-card-emergency: 0 8px 24px rgba(143, 29, 29, 0.18);
+  --shadow-menu: 0 18px 44px rgba(14, 37, 89, 0.16);
+  --shadow-media: 0 18px 44px rgba(14, 37, 89, 0.18);
+  --shadow-float: 0 12px 30px rgba(0, 0, 0, 0.18);
+
+  --scrim-hero: linear-gradient(92deg, #0e2559 8%, rgba(14, 37, 89, 0.82) 48%, rgba(14, 37, 89, 0.35) 100%);
+  --scrim-hero-mobile: linear-gradient(180deg, rgba(14, 37, 89, 0.75), rgba(14, 37, 89, 0.95));
+  --scrim-hero-compact: linear-gradient(92deg, #0e2559 10%, rgba(14, 37, 89, 0.7) 100%);
+  --photo-opacity-hero: 0.42;
+  --photo-opacity-compact: 0.35;
+
+  --hairline: 1px solid var(--border-card);
+  --hairline-field: 1px solid var(--border-field);
+  --hairline-inverse: 1px solid rgba(255, 255, 255, 0.12);
+}
