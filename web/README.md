@@ -63,7 +63,7 @@ It is controlled by `NEXT_PUBLIC_BOOKING_ENABLED` (see `src/lib/features.ts`):
 
 ## Deploying to Namecheap shared hosting (via Git)
 
-The site runs as a Node.js app under cPanel → **Setup Node.js App** (Phusion Passenger) with `server.js` as the startup file, in `~/dch-web` (outside `public_html`). There is no database server: content lives in `data/dch.db`, uploads in `media/` and `uploads/`, all inside the app folder and **never in Git** — a deploy can't overwrite what staff edit.
+The site runs as a Node.js app under cPanel → **Setup Node.js App** (Phusion Passenger) with `server.cjs` as the startup file, in `~/dch-web` (outside `public_html`). There is no database server: content lives in `data/dch.db`, uploads in `media/` and `uploads/`, all inside the app folder and **never in Git** — a deploy can't overwrite what staff edit.
 
 **How a deploy works**
 
@@ -77,7 +77,7 @@ Pending database migrations run when the app starts.
 
 **One-time setup**
 
-1. cPanel → **Setup Node.js App** → Create application: Node.js **20.9 or newer** · mode Production · application root `dch-web` · your domain · startup file `server.js`. Environment variables: `NODE_ENV=production`, `DATABASE_URL=file:./data/dch.db`, `PAYLOAD_SECRET` (new long random value), `NEXT_PUBLIC_SERVER_URL=https://your-domain`.
+1. cPanel → **Setup Node.js App** → Create application: Node.js **20.9 or newer** · mode Production · application root `dch-web` · your domain · startup file `server.cjs`. Environment variables: `NODE_ENV=production`, `DATABASE_URL=file:./data/dch.db`, `PAYLOAD_SECRET` (new long random value), `NEXT_PUBLIC_SERVER_URL=https://your-domain`.
 2. Upload the starting content once: `data/`, `media/` and `uploads/` from this folder into `~/dch-web` (File Manager → upload a zip → Extract).
 3. Give cPanel read access to the private repo: cPanel → **SSH Access** → Manage SSH Keys → Generate a key **without a passphrase**; add its public key on GitHub → repo Settings → **Deploy keys** (read-only). cPanel's Git docs also need `~/.ssh/config` pointing `github.com` at that key.
 4. cPanel → **Git Version Control** → Create: Clone URL `git@github.com:cjavierto/dch-website.git`, path `repositories/dch-website`. Then Manage → switch the checked-out branch to **`deploy`** → Update from Remote → Deploy HEAD Commit.

@@ -34,7 +34,7 @@ mirror() {
 mirror .next
 mirror public
 mirror src
-for f in server.js next.config.ts package.json package-lock.json tsconfig.json; do
+for f in server.js server.cjs next.config.ts package.json package-lock.json tsconfig.json; do
   cp "$REPO_DIR/$f" "$APP_DIR/$f"
 done
 echo "Files copied."

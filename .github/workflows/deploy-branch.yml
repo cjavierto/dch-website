@@ -70,7 +70,7 @@ jobs:
           out="$RUNNER_TEMP/deploy"
           rm -rf "$out" && mkdir -p "$out"
           # Same file set as scripts/package-namecheap.sh, minus build caches.
-          cp -R .next public src server.js next.config.ts package.json package-lock.json tsconfig.json "$out/"
+          cp -R .next public src server.js server.cjs next.config.ts package.json package-lock.json tsconfig.json "$out/"
           rm -rf "$out/.next/cache" "$out/.next/dev"
           cp deploy/cpanel/.cpanel.yml deploy/cpanel/deploy.sh "$out/"
           {

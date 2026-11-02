@@ -1,6 +1,7 @@
 /**
- * Startup file for Namecheap's cPanel "Setup Node.js App" (Phusion Passenger).
- * Passenger starts this file and routes the domain's traffic to it; the port
+ * Production server for Namecheap's cPanel "Setup Node.js App" (Phusion
+ * Passenger), loaded through server.cjs (the configured startup file).
+ * Passenger routes the domain's traffic to it; the port
  * it passes in PORT is ignored by Passenger's own listener, so any value works.
  * Locally, use `npm run dev` / `npm start` instead.
  */

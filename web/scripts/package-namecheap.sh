@@ -11,7 +11,7 @@ cd "$(dirname "$0")/.."
 npm run build
 
 out="dch-web-$(date +%Y%m%d-%H%M).zip"
-items=(.next public src server.js next.config.ts package.json package-lock.json tsconfig.json)
+items=(.next public src server.js server.cjs next.config.ts package.json package-lock.json tsconfig.json)
 if [[ "${1:-}" == "--data" ]]; then items+=(data media); fi
 
 rm -f "$out"
