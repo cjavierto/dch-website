@@ -1,0 +1,42 @@
+{
+  "status": 200,
+  "headers": {
+    "link": "</_next/static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\", </_next/static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\"",
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(site)/layout,_N_T_/(site)/health-information/layout,_N_T_/(site)/health-information/page,_N_T_/health-information,site-settings,services,articles"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHNpdGUp",
+    "/!KHNpdGUp/health-information/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 49216,
+    "slots": {
+      "children": {
+        "hints": 49184,
+        "slots": {
+          "children": {
+            "hints": 49216,
+            "slots": {
+              "children": {
+                "hints": 49312,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/eb424e960c97dce7c1eb13ae7bd74101f8f2a59bb10d9842aa1b697b6baaa2c7/$/health-information",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/(site)/health-information/page"
+    },
+    "isFallback": false
+  }
+}

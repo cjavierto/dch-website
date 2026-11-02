@@ -1,0 +1,47 @@
+{
+  "status": 200,
+  "headers": {
+    "link": "</_next/static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\", </_next/static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\"",
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(site)/layout,_N_T_/(site)/careers/layout,_N_T_/(site)/careers/[slug]/layout,_N_T_/(site)/careers/[slug]/page,_N_T_/careers/radiologic-technologist,site-settings,services,jobs"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHNpdGUp",
+    "/!KHNpdGUp/careers/$d$slug/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 49216,
+    "slots": {
+      "children": {
+        "hints": 49184,
+        "slots": {
+          "children": {
+            "hints": 49216,
+            "slots": {
+              "children": {
+                "hints": 49248,
+                "slots": {
+                  "children": {
+                    "hints": 49312,
+                    "slots": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/7b5ac303235dc45867112e47a42278522069276e6acc691ebe8b4035acc4013a/$/careers/radiologic-technologist",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/(site)/careers/[slug]/page"
+    },
+    "isFallback": false
+  }
+}

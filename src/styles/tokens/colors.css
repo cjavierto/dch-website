@@ -1,0 +1,83 @@
+:root {
+  /* ---- Brand base ---------------------------------------------------- */
+  --dch-navy-900: #0e2559;   /* headers, page heroes, footer */
+  --dch-navy-700: #14357f;   /* primary actions, links, icons */
+  --dch-navy-050: #f2f4fa;   /* navy tint surface */
+  --dch-navy-075: #eef1f8;   /* avatar / initials surface */
+
+  --dch-green-600: #2f8b3c;  /* eyebrows, confirmations, secondary action */
+  --dch-green-900: #22432c;  /* text on green tint */
+  --dch-green-050: #eef7f0;  /* green tint surface */
+  --dch-green-100: #cfe6d6;  /* green tint border */
+
+  --dch-gold-500: #e8b23a;   /* hero CTA, footer headings, on-navy accent */
+  --dch-gold-300: #f3cd74;   /* gold hover / on-navy text */
+  --dch-gold-900: #1d1503;   /* text on gold */
+  --dch-gold-050: #fdf5e4;   /* gold tint surface */
+  --dch-gold-100: #eddfbb;   /* gold tint border */
+  --dch-gold-800: #8a6512;   /* text on gold tint */
+  --dch-gold-700: #5e4708;   /* body text on gold tint */
+
+  --dch-red-700: #8f1d1d;    /* emergency */
+  --dch-red-800: #7a1717;    /* emergency hover */
+  --dch-red-100: #f0b8b8;    /* icon on red */
+  --dch-red-200: #f3cccc;    /* body text on red */
+  --dch-red-050: #fdeeee;    /* red tint surface */
+
+  /* ---- Neutrals ------------------------------------------------------ */
+  --dch-paper: #f7f6f2;      /* page background */
+  --dch-white: #ffffff;      /* card background */
+  --dch-desk: #e9e7e0;       /* mockup desk / behind-device background */
+  --dch-line-200: #e6e3da;   /* card border */
+  --dch-line-300: #ddd9cf;   /* input border */
+  --dch-line-100: #eeece5;   /* inner divider */
+  --dch-line-050: #f4f2ec;   /* table row divider */
+  --dch-ink-900: #14181f;    /* primary text */
+  --dch-ink-700: #4a4741;    /* body text */
+  --dch-ink-500: #6d6a62;    /* supporting text */
+  --dch-ink-400: #8a8578;    /* meta / captions */
+  --dch-ink-300: #b3aea1;    /* chevrons, disabled glyphs */
+
+  /* ---- On-navy neutrals ---------------------------------------------- */
+  --dch-on-navy: #ffffff;
+  --dch-on-navy-body: #cfd9ee;
+  --dch-on-navy-muted: #9fb2dc;
+  --dch-on-navy-icon: #7f9ad6;
+  --dch-on-navy-bar: #dfe6f5;
+  --dch-on-navy-strong: #e7edfa;
+
+  /* ---- Semantic aliases ---------------------------------------------- */
+  --surface-page: var(--dch-paper);
+  --surface-card: var(--dch-white);
+  --surface-inverse: var(--dch-navy-900);
+  --surface-accent: var(--dch-navy-700);
+  --surface-info: var(--dch-navy-050);
+  --surface-success: var(--dch-green-050);
+  --surface-notice: var(--dch-gold-050);
+  --surface-danger: var(--dch-red-050);
+  --surface-emergency: var(--dch-red-700);
+
+  --border-card: var(--dch-line-200);
+  --border-field: var(--dch-line-300);
+  --border-divider: var(--dch-line-100);
+  --border-row: var(--dch-line-050);
+
+  --text-heading: var(--dch-ink-900);
+  --text-body: var(--dch-ink-700);
+  --text-supporting: var(--dch-ink-500);
+  --text-meta: var(--dch-ink-400);
+  --text-link: var(--dch-navy-700);
+  --text-link-hover: var(--dch-green-600);
+  --text-eyebrow: var(--dch-green-600);
+  --text-on-inverse: var(--dch-on-navy);
+  --text-on-inverse-body: var(--dch-on-navy-body);
+
+  --action-primary-bg: var(--dch-navy-700);
+  --action-primary-bg-hover: var(--dch-navy-900);
+  --action-primary-fg: var(--dch-white);
+  --action-accent-bg: var(--dch-gold-500);
+  --action-accent-bg-hover: var(--dch-gold-300);
+  --action-accent-fg: var(--dch-gold-900);
+  --action-emergency-bg: var(--dch-red-700);
+  --action-emergency-fg: var(--dch-white);
+}

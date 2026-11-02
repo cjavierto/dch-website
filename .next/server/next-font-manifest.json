@@ -1,0 +1,83 @@
+{
+  "app": {
+    "[project]/src/app/(site)/about/leadership/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/about/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/about/vision-and-values/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/book/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/careers/[slug]/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/careers/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/contact/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/doctors/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/health-information/[slug]/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/health-information/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/news/[slug]/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/news/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/patient-rights/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/patients-and-visitors/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/privacy/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/services/[slug]/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/services/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ],
+    "[project]/src/app/(site)/sitemap/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

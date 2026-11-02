@@ -1,0 +1,11 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/src/app/(site)/patients-and-visitors/page": [
+      "static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

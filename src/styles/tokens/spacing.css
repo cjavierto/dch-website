@@ -1,0 +1,59 @@
+:root {
+  /* Spacing steps observed in the mockups. Not a strict 4pt grid — DCH
+     layouts use 14/18/22/26 as often as 16/24; keep the real values. */
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 14px;
+  --space-7: 16px;
+  --space-8: 18px;
+  --space-9: 20px;
+  --space-10: 22px;
+  --space-11: 24px;
+  --space-12: 26px;
+  --space-13: 32px;
+  --space-14: 36px;
+  --space-15: 44px;
+  --space-16: 52px;
+  --space-17: 72px;
+
+  /* Layout */
+  --page-max: 1240px;
+  --prose-max: 70ch;
+  --gutter-desktop: 24px;
+  --gutter-mobile: 16px;
+  --card-pad: 24px;
+  --card-pad-sm: 18px;
+  --grid-gap: 18px;
+  --grid-min-card: 280px;
+  --grid-min-column: 320px;
+  --section-pad-y: 72px;
+  --hero-pad-y: 52px;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-tag: 6px;
+  --radius-input: 9px;
+  --radius-button: 10px;
+  --radius-button-lg: 11px;
+  --radius-card: 14px;
+  --radius-card-lg: 16px;
+  --radius-panel: 18px;
+  --radius-pill: 999px;
+
+  /* Controls */
+  --control-height: 44px;
+  --tap-min: 44px;
+  --icon-sm: 18px;
+  --icon-md: 21px;
+  --icon-lg: 26px;
+  --icon-xl: 30px;
+  --avatar-sm: 44px;
+  --avatar-md: 52px;
+  --avatar-lg: 58px;
+  --logo-header: 56px;
+  --logo-footer: 48px;
+  --logo-mobile: 40px;
+}

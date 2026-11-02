@@ -1,0 +1,42 @@
+{
+  "status": 200,
+  "headers": {
+    "link": "</_next/static/media/3f4e6703fed28c6b-s.p.35dbceu2tstou.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\", </_next/static/media/47df9ba1c7236d3b-s.p.2adce56gso3ku.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\"",
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(site)/layout,_N_T_/(site)/sitemap/layout,_N_T_/(site)/sitemap/page,_N_T_/sitemap,site-settings,services,news,articles,jobs"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHNpdGUp",
+    "/!KHNpdGUp/sitemap/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 49216,
+    "slots": {
+      "children": {
+        "hints": 49184,
+        "slots": {
+          "children": {
+            "hints": 49216,
+            "slots": {
+              "children": {
+                "hints": 49312,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/9a286474cbedb248d2cc0bb1e3a443ccbb23fa0cf4dd3e2b112fad53ed38f272/$/sitemap",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/(site)/sitemap/page"
+    },
+    "isFallback": false
+  }
+}

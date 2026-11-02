@@ -1,0 +1,3 @@
+{
+  "/(site)/health-information/[slug]/page": "app/(site)/health-information/[slug]/page.js"
+}

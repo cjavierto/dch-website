@@ -1,0 +1,3 @@
+module.exports=[298934,a=>{"use strict";var b=a.i(187924),c=a.i(16644);a.s(["f",0,function({name:a,initials:d,photo:e,size:f}){let g={44:"text-base",48:"text-[17px]",52:"text-lg",58:"text-xl"}[f];return e?(0,b.jsx)(c.default,{src:e,alt:a,width:f,height:f,className:"flex-none rounded-full object-cover object-[center_18%]",style:{width:f,height:f}}):(0,b.jsx)("span",{"aria-hidden":"true",className:`flex flex-none items-center justify-center rounded-full bg-navy-075 font-bold text-navy-700 ${g}`,style:{width:f,height:f},children:d})}])}];
+
+//# sourceMappingURL=src_components_ui_Avatar_tsx_15-ga88vy34_2._.js.map

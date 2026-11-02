@@ -1,0 +1,51 @@
+3:"$Sreact.fragment"
+4:"/_next/static/chunks/095g8usnrcprg.js"
+5:I[339756,["$4"],"default"]
+6:I[837457,["$4"],"default"]
+b:"/_next/static/chunks/3-lqpmror9-5f.js"
+c:"/_next/static/chunks/2wyscz_cweikr.js"
+d:I[522016,["$b","$c"],""]
+1f:"ViewportBoundary"
+20:I[897367,["$4"],"$1f"]
+21:"MetadataBoundary"
+22:I[897367,["$4"],"$21"]
+23:"$Sreact.suspense"
+24:I[27201,["$4"],"IconMark"]
+8:X
+8:C
+9:X
+9:300
+9:300
+9:C
+1e:X
+1e:C
+a:[["children",{"s":"__PAGE__","h":49314,"d":{"r":["$","$3","c",{"children":[[["$","section",null,{"className":"on-navy bg-navy-900","children":["$","div",null,{"className":"page-container pt-5 pb-[22px] nav:py-[52px]","children":[["$","nav",null,{"aria-label":"Breadcrumb","className":"mb-2 text-xs text-on-navy-muted nav:mb-2.5 nav:text-[13.5px]","children":["$","ol",null,{"className":"flex flex-wrap gap-1","children":[["$","li",null,{"children":["$","$Ld",null,{"href":"/","className":"text-on-navy-muted hover:text-white","children":"Home"}]}],[["$","li","Privacy notice",{"className":"flex gap-1","children":[["$","span",null,{"aria-hidden":"true","children":"/"}],["$","span",null,{"aria-current":"page","children":"Privacy notice"}]]}]]]}]}],["$","h1",null,{"className":"font-display text-[27px] font-bold tracking-[-0.5px] text-white nav:text-[44px] nav:tracking-[-0.8px]","children":"Privacy notice"}],["$","p",null,{"className":"mt-2.5 max-w-[38em] text-[14.5px] leading-[1.55] text-on-navy-body nav:mt-3.5 nav:text-[17.5px]","children":"How Deiparine Community Hospital collects, uses and protects the personal information you give us through this website, under the Data Privacy Act of 2012 (Republic Act No. 10173)."}],"$undefined"]}]}],["$","section",null,{"className":"page-container grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] items-start gap-8 pt-6 pb-8 nav:gap-10 nav:pt-11 nav:pb-[72px]","children":[["$","article",null,{"className":"max-w-[70ch] rounded-card-lg border border-line-200 bg-white p-[18px] nav:p-[30px] [&>h2:first-child]:mt-0","children":[[["$","h2","0",{"className":"mt-8 mb-3 font-display text-[22px] font-bold text-ink-900 nav:text-[26px]","children":"What we collect through this website"}],["$","ul","1",{"className":"mb-[18px] flex list-disc flex-col gap-2.5 pl-[22px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":[["$","li","Contact form: your name, mobile number, email address if you give one, the subject you choose, and your message.",{"children":"Contact form: your name, mobile number, email address if you give one, the subject you choose, and your message."}],["$","li","Job applications: your name, email or mobile number, PRC licence number where the role needs one, and your CV.",{"children":"Job applications: your name, email or mobile number, PRC licence number where the role needs one, and your CV."}],["$","li","Appointment requests, once online booking opens: your name, mobile number, PhilHealth number if you give one, whether it is your first visit, your reason for the visit, and the doctor, date and time you choose.",{"children":"Appointment requests, once online booking opens: your name, mobile number, PhilHealth number if you give one, whether it is your first visit, your reason for the visit, and the doctor, date and time you choose."}]]}],["$","p","2",{"className":"mb-[18px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":"Please do not send medical records, test results or other health details through the website. Bring them to the hospital instead."}],["$","h2","3",{"className":"mt-8 mb-3 font-display text-[22px] font-bold text-ink-900 nav:text-[26px]","children":"How we use it"}],["$","ul","4",{"className":"mb-[18px] flex list-disc flex-col gap-2.5 pl-[22px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":[["$","li","To reply to your message and schedule appointments.",{"children":"To reply to your message and schedule appointments."}],["$","li","To assess job applications and contact applicants.",{"children":"To assess job applications and contact applicants."}],"$Le"]}],"$Lf","$L10","$L11","$L12","$L13","$L14","$L15","$L16","$L17","$L18","$L19"],"$L1a"]}],"$L1b"]}]],null,"$L1c"]}],"p":"$@1d","v":"$1e","s":"$9"}}]]
+2:[["children",{"s":"privacy","h":49218,"d":{"r":["$","$3","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
+1:[["children",{"s":"(site)","h":49202,"c":"$Q2"}]]
+26:X
+26:C
+29:X
+29:C
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L20",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L22",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$23",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Privacy notice · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"How Deiparine Community Hospital handles personal information sent through this website."}],["$","link","2",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L24","3",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@25","v":"$26","s":"$9"}},"a":"$@27","u":"$@28","b":"UksNr5cLqhyBT6GlI3HQ1","r":"$29"}
+2a:I[897367,["$4"],"OutletBoundary"]
+e:["$","li","To keep a record of requests we have handled.",{"children":"To keep a record of requests we have handled."}]
+f:["$","p","5",{"className":"mb-[18px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":"We do not sell your information, and we do not use it for advertising."}]
+10:["$","h2","6",{"className":"mt-8 mb-3 font-display text-[22px] font-bold text-ink-900 nav:text-[26px]","children":"Who can see it"}]
+11:["$","p","7",{"className":"mb-[18px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":"Only authorised hospital staff who need it to respond — the OPD and admitting desk, human resources, and administration. The company that hosts the website stores the data on our behalf and may not use it for anything else."}]
+12:["$","h2","8",{"className":"mt-8 mb-3 font-display text-[22px] font-bold text-ink-900 nav:text-[26px]","children":"How long we keep it"}]
+13:["$","p","9",{"className":"mb-[18px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":"Contact messages and appointment requests are kept only as long as we need them to respond and follow up, in line with the hospital's records policy. CVs sent without a matching opening are kept on file for six months."}]
+14:["$","h2","10",{"className":"mt-8 mb-3 font-display text-[22px] font-bold text-ink-900 nav:text-[26px]","children":"Cookies"}]
+15:["$","p","11",{"className":"mb-[18px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":"The public website does not use advertising or tracking cookies. Staff who sign in to manage the website receive a cookie that keeps them signed in. The icon font is loaded from Google Fonts, which receives your browser's IP address when a page loads."}]
+16:["$","h2","12",{"className":"mt-8 mb-3 font-display text-[22px] font-bold text-ink-900 nav:text-[26px]","children":"Your rights"}]
+17:["$","p","13",{"className":"mb-[18px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":"Under the Data Privacy Act you have the right to be informed, to access your personal information, to have it corrected, to object to its processing, to have it erased or blocked, to data portability, and to claim damages. You may also file a complaint with the National Privacy Commission."}]
+18:["$","h2","14",{"className":"mt-8 mb-3 font-display text-[22px] font-bold text-ink-900 nav:text-[26px]","children":"Contact us"}]
+19:["$","p","15",{"className":"mb-[18px] text-[15.5px] leading-[1.7] text-ink-700 nav:text-base","children":"For privacy questions or requests, email info@dch-sibonga.ph and address your message to our Data Protection Officer, or call the trunkline at (032) 484 1200."}]
+1a:["$","p",null,{"className":"mt-6 border-t border-line-100 pt-4 text-[13.5px] text-ink-400","children":["Last updated ",["$","time",null,{"dateTime":"2026-11-02","children":"November 2, 2026"}]]}]
+1b:["$","aside",null,{"className":"flex flex-col gap-3 nav:gap-[18px]","children":[["$","div",null,{"className":"on-navy flex flex-col gap-3 rounded-card bg-navy-700 p-5 text-white nav:rounded-card-lg nav:p-6 ","children":[["$","span",null,{"className":"ms text-gold-500","style":{"fontSize":28,"width":28,"height":28,"overflow":"hidden"},"aria-hidden":true,"children":"mail"}],["$","h3",null,{"className":"text-[17px] font-bold nav:text-[19px]","children":"Questions?"}],["$","div",null,{"className":"text-[14.5px] leading-[1.6] text-on-navy-body","children":"Our staff reply within one working day."}],["$","$Ld",null,{"href":"/contact","className":"mt-auto inline-flex items-center gap-[7px] text-[15px] font-bold text-gold-500 hover:text-gold-300","children":["$undefined","Send us a message",["$","span",null,{"className":"ms ","style":{"fontSize":19,"width":19,"height":19,"overflow":"hidden"},"aria-hidden":true,"children":"arrow_forward"}]]}]]}],["$","div",null,{"className":"on-navy flex items-start gap-3 rounded-card bg-red-700 p-[18px] text-white nav:rounded-card-lg nav:p-6","children":[["$","span",null,{"className":"ms text-red-100","style":{"fontSize":26,"width":26,"height":26,"overflow":"hidden"},"aria-hidden":true,"children":"emergency"}],["$","div",null,{"children":[["$","h3",null,{"className":"mb-[5px] text-base font-bold nav:mb-1.5 nav:text-[17.5px]","children":"In an emergency"}],["$","p",null,{"className":"text-[14px] leading-[1.5] text-red-200 nav:text-[14.5px]","children":["Go straight to the ER — no appointment needed."," ",["$","a",null,{"href":"tel:+63324841234","className":"font-bold whitespace-nowrap text-white hover:text-red-200","children":"(032) 484 1234"}]]}]]}]]}]]}]
+1c:["$","$L2a",null,{"children":["$","$23",null,{"name":"Next.MetadataOutlet","children":"$@2b"}]}]
+28:false
+2b:null
+27:null
+7:"$undefined"
+25:"$undefined"
+1d:"$undefined"

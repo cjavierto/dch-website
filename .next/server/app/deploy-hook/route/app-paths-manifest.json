@@ -1,0 +1,3 @@
+{
+  "/deploy-hook/route": "app/deploy-hook/route.js"
+}

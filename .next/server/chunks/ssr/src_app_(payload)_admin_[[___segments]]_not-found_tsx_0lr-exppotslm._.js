@@ -1,0 +1,3 @@
+module.exports=[705027,a=>a.a(async(b,c)=>{try{var d=a.i(941766),e=a.i(586914),f=a.i(909785),g=a.i(370277),h=b([d]);[d]=h.then?(await h)():h,a.s(["default",0,function({params:a,searchParams:b}){return(0,f.r)({config:d.f,params:a,searchParams:b,importMap:g.f})},"generateMetadata",0,({params:a,searchParams:b})=>(0,e.f)({config:d.f,params:a,searchParams:b})]),c()}catch(a){c(a)}},!1),455813,function(a){a.n(a.i(705027))}];
+
+//# sourceMappingURL=src_app_%28payload%29_admin_%5B%5B___segments%5D%5D_not-found_tsx_0lr-exppotslm._.js.map

@@ -1,0 +1,10 @@
+:root {
+  /* DCH motion is restrained: colour and border transitions only, no
+     movement, no bounce. Menus and drawers appear instantly. */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0.2, 1);
+  --transition-interactive: color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
