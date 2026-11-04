@@ -24,5 +24,6 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/deploy-hook/route": "app/deploy-hook/route.js",
   "/icon.jpg/route": "app/icon.jpg/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
   "/sitemap.xml/route": "app/sitemap.xml/route.js"
 }

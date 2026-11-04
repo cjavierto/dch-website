@@ -24,5 +24,6 @@
   "/_not-found/page": "/_not-found",
   "/deploy-hook/route": "/deploy-hook",
   "/icon.jpg/route": "/icon.jpg",
+  "/robots.txt/route": "/robots.txt",
   "/sitemap.xml/route": "/sitemap.xml"
 }
