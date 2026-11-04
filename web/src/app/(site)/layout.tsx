@@ -3,6 +3,7 @@ import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { ICON_FONT_URL } from "@/components/Icon";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { INDEXABLE, SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 // Root layout for the public site. It lives in a route group so the admin
@@ -27,6 +28,8 @@ export const metadata: Metadata = {
   },
   description:
     "DOH-licensed, PhilHealth-accredited community hospital in Poblacion, Sibonga, Cebu. 24-hour emergency room, maternity, surgery and diagnostics.",
+  metadataBase: new URL(SITE_URL),
+  ...(INDEXABLE ? {} : { robots: { index: false, follow: false } }),
 };
 
 export const viewport: Viewport = {
