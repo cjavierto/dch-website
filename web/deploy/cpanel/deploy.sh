@@ -46,10 +46,15 @@ if [ "$lock_changed" = 1 ]; then
   activate="$(ls -d "$HOME"/nodevenv/"$app_name"/*/bin/activate 2>/dev/null | sort -V | tail -1 || true)"
   if [ -n "$activate" ]; then
     echo "Dependencies changed — installing (this can take a few minutes)…"
+    # cPanel's activate script reads unset variables, so relax `set -u` around it.
+    set +u
     # shellcheck disable=SC1090
     source "$activate"
+    set -u
     (cd "$APP_DIR" && npm install --omit=dev --no-audit --no-fund)
+    set +u
     deactivate || true
+    set -u
   else
     echo "WARNING: dependencies changed but no Node.js environment was found for '$app_name'."
     echo "         Create the app in cPanel → Setup Node.js App, then click 'Run NPM Install'."
