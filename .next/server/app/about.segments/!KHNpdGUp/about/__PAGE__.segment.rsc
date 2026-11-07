@@ -3,7 +3,7 @@
 5:I[339756,["$4"],"default"]
 6:I[837457,["$4"],"default"]
 b:"/_next/static/chunks/3-lqpmror9-5f.js"
-c:"/_next/static/chunks/2wyscz_cweikr.js"
+c:"/_next/static/chunks/08io9_fqroy-_.js"
 d:I[522016,["$b","$c"],""]
 14:"ViewportBoundary"
 15:I[897367,["$4"],"$14"]
@@ -26,7 +26,7 @@ a:[["children",{"s":"__PAGE__","h":49314,"d":{"r":["$","$3","c",{"children":[[["
 1b:C
 1e:X
 1e:C
-0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L15",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$18",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"About DCH · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"A family-run community hospital that has cared for southern Cebu since 1974."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L19","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1a","v":"$1b","s":"$9"}},"a":"$@1c","u":"$@1d","b":"wAEgh4lLGIGV56oh8WxRv","r":"$1e"}
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L15",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$18",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"About DCH · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"A family-run community hospital that has cared for southern Cebu since 1974."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L19","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1a","v":"$1b","s":"$9"}},"a":"$@1c","u":"$@1d","b":"V9fTy7slZRWnxTfZY-F-u","r":"$1e"}
 1f:I[605500,["$b","$c"],"Image"]
 20:I[897367,["$4"],"OutletBoundary"]
 e:["$","div",null,{"className":"grid gap-3","children":[["$","div",null,{"className":"relative h-[200px] overflow-hidden rounded-card nav:h-[230px]","children":["$","$L1f",null,{"src":"/api/media/file/staff-hallway.png","alt":"Hospital corridor","fill":true,"sizes":"(min-width: 60rem) 600px, 100vw","className":"object-cover"}]}],["$","div",null,{"className":"grid grid-cols-2 gap-3","children":[["$","div","/api/media/file/conference.png",{"className":"relative h-[130px] overflow-hidden rounded-card nav:h-[150px]","children":["$","$L1f",null,{"src":"/api/media/file/conference.png","alt":"Staff meeting","fill":true,"sizes":"(min-width: 60rem) 300px, 50vw","className":"object-cover"}]}],["$","div","/api/media/file/patient-room.png",{"className":"relative h-[130px] overflow-hidden rounded-card nav:h-[150px]","children":["$","$L1f",null,{"src":"/api/media/file/patient-room.png","alt":"Patient room","fill":true,"sizes":"(min-width: 60rem) 300px, 50vw","className":"object-cover"}]}]]}]]}]

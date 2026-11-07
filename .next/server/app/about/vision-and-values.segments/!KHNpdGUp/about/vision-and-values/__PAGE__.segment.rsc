@@ -3,7 +3,7 @@
 5:I[339756,["$4"],"default"]
 6:I[837457,["$4"],"default"]
 d:"/_next/static/chunks/3-lqpmror9-5f.js"
-e:"/_next/static/chunks/2wyscz_cweikr.js"
+e:"/_next/static/chunks/08io9_fqroy-_.js"
 f:I[522016,["$d","$e"],""]
 1b:"ViewportBoundary"
 1c:I[897367,["$4"],"$1b"]
@@ -27,7 +27,7 @@ a:[["children",{"s":"vision-and-values","h":49250,"d":{"r":["$","$3","c",{"child
 22:C
 25:X
 25:C
-0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L1c",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L1e",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1f",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Vision & Values · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"The vision, mission, and values of Deiparine Community Hospital."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L20","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@21","v":"$22","s":"$9"}},"a":"$@23","u":"$@24","b":"wAEgh4lLGIGV56oh8WxRv","r":"$25"}
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L1c",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L1e",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1f",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Vision & Values · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"The vision, mission, and values of Deiparine Community Hospital."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L20","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@21","v":"$22","s":"$9"}},"a":"$@23","u":"$@24","b":"V9fTy7slZRWnxTfZY-F-u","r":"$25"}
 26:I[897367,["$4"],"OutletBoundary"]
 10:["$","h3",null,{"className":"mt-3.5 mb-[7px] text-[17.5px] font-bold nav:text-[18.5px]","children":"Compassion first"}]
 11:["$","p",null,{"className":"text-[14.5px] leading-[1.6] text-ink-500","children":"Every patient is somebody’s parent, child, or neighbour. Care is explained in Bisaya, at the pace the family needs."}]

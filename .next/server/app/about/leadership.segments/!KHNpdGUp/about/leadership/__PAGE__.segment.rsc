@@ -3,7 +3,7 @@
 5:I[339756,["$4"],"default"]
 6:I[837457,["$4"],"default"]
 d:"/_next/static/chunks/3-lqpmror9-5f.js"
-e:"/_next/static/chunks/2wyscz_cweikr.js"
+e:"/_next/static/chunks/08io9_fqroy-_.js"
 f:I[522016,["$d","$e"],""]
 10:I[605500,["$d","$e"],"Image"]
 19:"ViewportBoundary"
@@ -28,7 +28,7 @@ a:[["children",{"s":"leadership","h":49250,"d":{"r":["$","$3","c",{"children":[n
 20:C
 23:X
 23:C
-0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L1a",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L1c",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1d",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Our Staff & Leadership Team · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"The people who run Deiparine Community Hospital, and the care team behind them."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L1e","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1f","v":"$20","s":"$9"}},"a":"$@21","u":"$@22","b":"wAEgh4lLGIGV56oh8WxRv","r":"$23"}
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L1a",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L1c",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1d",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Our Staff & Leadership Team · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"The people who run Deiparine Community Hospital, and the care team behind them."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L1e","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1f","v":"$20","s":"$9"}},"a":"$@21","u":"$@22","b":"V9fTy7slZRWnxTfZY-F-u","r":"$23"}
 28:I[897367,["$4"],"OutletBoundary"]
 11:["$","div",null,{"className":"text-[13.5px] font-semibold text-green-600","children":"Hospital Administrator"}]
 12:["$","div","Dr. Rico M. Navarro",{"className":"flex items-center gap-3.5","children":[["$","span",null,{"aria-hidden":"true","className":"flex flex-none items-center justify-center rounded-full bg-navy-075 font-bold text-navy-700 text-lg","style":{"width":52,"height":52},"children":"RM"}],["$","div",null,{"children":[["$","h3",null,{"className":"mb-0.5 text-base font-bold nav:text-[17px]","children":"Dr. Rico M. Navarro"}],["$","div",null,{"className":"text-[13.5px] font-semibold text-green-600","children":"Chair, Medical Staff Committee"}]]}]]}]

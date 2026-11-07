@@ -666,7 +666,19 @@ export interface Article {
    */
   slug: string;
   publishedAt: string;
-  category: 'mother-child' | 'diabetes-hypertension' | 'infectious-disease' | 'first-aid' | 'nutrition';
+  category:
+    | 'cancer'
+    | 'diabetes-hypertension'
+    | 'first-aid'
+    | 'flu-respiratory'
+    | 'heart-health'
+    | 'infectious-disease'
+    | 'kidney-health'
+    | 'mental-health'
+    | 'mother-child'
+    | 'nutrition'
+    | 'senior-health'
+    | 'vaccines';
   author: string;
   updatedAt: string;
   createdAt: string;

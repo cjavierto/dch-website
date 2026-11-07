@@ -3,7 +3,7 @@
 5:I[339756,["$4"],"default"]
 6:I[837457,["$4"],"default"]
 b:"/_next/static/chunks/3-lqpmror9-5f.js"
-c:"/_next/static/chunks/2wyscz_cweikr.js"
+c:"/_next/static/chunks/08io9_fqroy-_.js"
 d:"/_next/static/chunks/1i0cy0nvu_qbw.js"
 e:I[999508,["$b","$c","$d"],"DoctorDirectory"]
 f:I[522016,["$b","$c","$d"],""]
@@ -29,7 +29,7 @@ a:[["children",{"s":"__PAGE__","h":49314,"d":{"r":["$","$3","c",{"children":[[["
 1b:C
 1e:X
 1e:C
-0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$11",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Doctors Directory · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Consultants at Deiparine Community Hospital and their clinic days."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L19","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1a","v":"$1b","s":"$9"}},"a":"$@1c","u":"$@1d","b":"wAEgh4lLGIGV56oh8WxRv","r":"$1e"}
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$11",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Doctors Directory · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Consultants at Deiparine Community Hospital and their clinic days."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L19","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1a","v":"$1b","s":"$9"}},"a":"$@1c","u":"$@1d","b":"V9fTy7slZRWnxTfZY-F-u","r":"$1e"}
 12:null
 1d:false
 1c:null
