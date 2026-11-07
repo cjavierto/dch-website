@@ -108,6 +108,12 @@ function toSiteSettings(s: P.SiteSetting): SiteSettings {
       philhealthNumber: s.accreditation.philhealthNumber ?? "",
       dohLicenceLevel: s.accreditation.dohLicenceLevel,
     },
+    accreditationBadges: (s.accreditationBadges ?? []).map((b) => ({
+      name: b.name,
+      subtitle: opt(b.subtitle),
+      logo: image(b.logo),
+      link: opt(b.link),
+    })),
     footerText: s.footerText,
   };
 }
@@ -254,7 +260,7 @@ export async function getSiteSettings() {
   "use cache";
   cacheLife("hours");
   cacheTag("site-settings");
-  const s = await (await payload()).findGlobal({ slug: "site-settings", depth: 0 });
+  const s = await (await payload()).findGlobal({ slug: "site-settings", depth: 1 });
   return toSiteSettings(s);
 }
 

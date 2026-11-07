@@ -19,6 +19,14 @@ export function legalPagesData() {
   return { privacy: page(privacyPage), patientRights: page(patientRightsPage) };
 }
 
+/** The footer's starting logos: the two badges the prototype shows. */
+export function accreditationBadgesData(dohLicenceLevel: string) {
+  return [
+    { name: "PhilHealth", subtitle: "Accredited facility" },
+    { name: "Department of Health", subtitle: `${dohLicenceLevel} licence` },
+  ];
+}
+
 /** Prototype online-booking clinic windows, by doctor slug. */
 export const doctorBookingTimes = new Map(
   doctors.filter((d) => d.booking).map((d) => [d.slug, d.booking as NonNullable<PayloadDoctor["booking"]>] as const),

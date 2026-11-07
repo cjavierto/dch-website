@@ -1,9 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon, type IconName } from "@/components/Icon";
 import { getSiteSettings } from "@/lib/cms";
 import { telHref } from "@/lib/format";
 import { routes } from "@/lib/routes";
+import type { AccreditationBadge } from "@/lib/types";
 import { LogoMark } from "./Logo";
 
 const columns: { heading: string; links: { href: string; label: string }[] }[] = [
@@ -122,14 +124,15 @@ export async function SiteFooter() {
               Accreditation no. {s.accreditation.philhealthNumber || "— to be supplied"}
             </span>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <AccreditationPlate logoLabel="PhilHealth logo" title="PhilHealth" subtitle="Accredited facility" />
-            <AccreditationPlate
-              logoLabel="DOH logo"
-              title="Department of Health"
-              subtitle={`${s.accreditation.dohLicenceLevel} licence`}
-            />
-          </div>
+          {s.accreditationBadges.length > 0 && (
+            <ul className="flex flex-wrap items-center gap-3">
+              {s.accreditationBadges.map((b, i) => (
+                <li key={`${b.name}-${i}`}>
+                  <AccreditationPlate badge={b} />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
 
@@ -164,27 +167,35 @@ function FooterColumn({ heading, children }: { heading: string; children: ReactN
 }
 
 /**
- * White plate for an accreditation badge. The official PhilHealth and DOH
- * logo files have not been supplied yet, so the logo area is a labelled slot.
+ * White plate for a footer logo (Admin → Settings → Site settings →
+ * Accreditation & footer). Without a logo it shows the name only.
  */
-function AccreditationPlate({
-  logoLabel,
-  title,
-  subtitle,
-}: {
-  logoLabel: string;
-  title: string;
-  subtitle: string;
-}) {
-  return (
-    <div className="flex items-center gap-[11px] rounded-button bg-white px-3.5 py-2.5">
-      <span className="flex h-[58px] w-[104px] items-center justify-center rounded-tag border border-dashed border-line-300 bg-paper text-center text-xs text-ink-400">
-        {logoLabel}
-      </span>
+function AccreditationPlate({ badge }: { badge: AccreditationBadge }) {
+  const content = (
+    <>
+      {badge.logo && (
+        <span className="relative h-[58px] w-[104px]">
+          <Image src={badge.logo.src} alt={badge.logo.alt || `${badge.name} logo`} fill sizes="104px" className="object-contain" />
+        </span>
+      )}
       <span className="flex flex-col leading-[1.25]">
-        <span className="text-[13.5px] font-bold text-navy-700">{title}</span>
-        <span className="text-[11.5px] text-ink-500">{subtitle}</span>
+        <span className="text-[13.5px] font-bold text-navy-700">{badge.name}</span>
+        {badge.subtitle && <span className="text-[11.5px] text-ink-500">{badge.subtitle}</span>}
       </span>
-    </div>
+    </>
+  );
+  const plate = "flex min-h-[78px] items-center gap-[11px] rounded-button bg-white px-3.5 py-2.5";
+
+  if (!badge.link) return <div className={plate}>{content}</div>;
+  return (
+    <a
+      href={badge.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${plate} outline-offset-2 hover:ring-2 hover:ring-gold-500`}
+    >
+      {content}
+      <span className="sr-only">(opens in a new tab)</span>
+    </a>
   );
 }

@@ -100,6 +100,34 @@ export const SiteSettings: GlobalConfig = {
                 },
               ],
             },
+            {
+              name: "accreditationBadges",
+              label: "Footer logos (accreditations & partners)",
+              type: "array",
+              labels: { singular: "Logo", plural: "Logos" },
+              admin: {
+                description:
+                  "Shown in the footer under \"Licensed & accredited\", in this order. Drag to reorder; remove a row to take a logo off the site. Use the organisation's official logo (PNG or SVG, transparent or white background).",
+              },
+              fields: [
+                {
+                  type: "row",
+                  fields: [
+                    { name: "name", label: "Organisation", type: "text", required: true, admin: { placeholder: "PhilHealth" } },
+                    { name: "subtitle", label: "Line under the name", type: "text", admin: { placeholder: "Accredited facility" } },
+                  ],
+                },
+                imageField("logo", { admin: { description: "Leave empty to show the name only." } }),
+                {
+                  name: "link",
+                  label: "Link (optional)",
+                  type: "text",
+                  admin: { description: "Their website, e.g. https://www.philhealth.gov.ph. Opens in a new tab." },
+                  validate: (v: string | null | undefined) =>
+                    !v || /^https?:\/\//.test(v) || "Start the link with https://",
+                },
+              ],
+            },
             { name: "footerText", type: "text", required: true },
           ],
         },

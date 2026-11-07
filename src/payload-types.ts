@@ -2040,6 +2040,24 @@ export interface SiteSetting {
     philhealthNumber?: string | null;
     dohLicenceLevel: string;
   };
+  /**
+   * Shown in the footer under "Licensed & accredited", in this order. Drag to reorder; remove a row to take a logo off the site. Use the organisation's official logo (PNG or SVG, transparent or white background).
+   */
+  accreditationBadges?:
+    | {
+        name: string;
+        subtitle?: string | null;
+        /**
+         * Leave empty to show the name only.
+         */
+        logo?: (number | null) | Media;
+        /**
+         * Their website, e.g. https://www.philhealth.gov.ph. Opens in a new tab.
+         */
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   footerText: string;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -2289,6 +2307,15 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         philhealthNumber?: T;
         dohLicenceLevel?: T;
+      };
+  accreditationBadges?:
+    | T
+    | {
+        name?: T;
+        subtitle?: T;
+        logo?: T;
+        link?: T;
+        id?: T;
       };
   footerText?: T;
   updatedAt?: T;

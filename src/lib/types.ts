@@ -19,8 +19,12 @@ export type SiteSettings = {
   visitingRules: string;
   social: { facebook: string; messenger: string };
   accreditation: { philhealthNumber: string; dohLicenceLevel: string };
+  /** Footer logos of accrediting bodies and partners, in display order. */
+  accreditationBadges: AccreditationBadge[];
   footerText: string;
 };
+
+export type AccreditationBadge = { name: string; subtitle?: string; logo?: Image; link?: string };
 
 export type HomepageSettings = {
   showStats: boolean;
