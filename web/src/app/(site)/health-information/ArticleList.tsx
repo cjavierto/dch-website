@@ -11,6 +11,8 @@ import { ARTICLE_CATEGORIES, type Article, type ArticleCategory } from "@/lib/ty
 export function ArticleList({ articles }: { articles: Article[] }) {
   const [category, setCategory] = useState<ArticleCategory | null>(null);
   const shown = category ? articles.filter((a) => a.category === category) : articles;
+  // Only offer topics that have at least one article.
+  const topics = ARTICLE_CATEGORIES.filter((c) => articles.some((a) => a.category === c.value));
 
   return (
     <>
@@ -19,7 +21,7 @@ export function ArticleList({ articles }: { articles: Article[] }) {
           label="Filter by topic"
           allLabel="All topics"
           accent="green"
-          options={ARTICLE_CATEGORIES}
+          options={topics}
           value={category}
           onChange={setCategory}
         />

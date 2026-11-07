@@ -121,12 +121,21 @@ export type NewsPost = {
   sidebarCta?: { title: string; text: string; label: string; href: string };
 };
 
+// Alphabetical, so the CMS dropdown is easy to scan. Values are stored on
+// posts: rename a label freely, but never change or remove a value in use.
 export const ARTICLE_CATEGORIES = [
-  { value: "mother-child", label: "Mother & child" },
+  { value: "cancer", label: "Cancer" },
   { value: "diabetes-hypertension", label: "Diabetes & hypertension" },
-  { value: "infectious-disease", label: "Infectious disease" },
   { value: "first-aid", label: "First aid" },
+  { value: "flu-respiratory", label: "Flu & respiratory illness" },
+  { value: "heart-health", label: "Heart health" },
+  { value: "infectious-disease", label: "Infectious disease" },
+  { value: "kidney-health", label: "Kidney health" },
+  { value: "mental-health", label: "Mental health" },
+  { value: "mother-child", label: "Mother & child" },
   { value: "nutrition", label: "Nutrition" },
+  { value: "senior-health", label: "Senior health" },
+  { value: "vaccines", label: "Vaccines & immunization" },
 ] as const;
 
 export type ArticleCategory = (typeof ARTICLE_CATEGORIES)[number]["value"];
