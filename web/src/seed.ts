@@ -29,7 +29,7 @@ import {
 import type { Image } from "@/lib/types";
 import type { Doctor as PayloadDoctor } from "@/payload-types";
 import { blocksToLexical } from "@/payload/richText";
-import { legalPagesData } from "@/payload/starterData";
+import { accreditationBadgesData, legalPagesData } from "@/payload/starterData";
 
 const context = { skipRevalidate: true };
 const force = process.argv.includes("--force") || process.env.SEED_FORCE === "1";
@@ -80,7 +80,11 @@ async function seed() {
   const upload = mediaUploader(payload);
 
   // ---- Globals --------------------------------------------------------------
-  await payload.updateGlobal({ slug: "site-settings", data: siteSettings, context });
+  await payload.updateGlobal({
+    slug: "site-settings",
+    data: { ...siteSettings, accreditationBadges: accreditationBadgesData(siteSettings.accreditation.dohLicenceLevel) },
+    context,
+  });
   await payload.updateGlobal({ slug: "homepage-settings", data: homepageSettings, context });
   await payload.updateGlobal({
     slug: "about-page",

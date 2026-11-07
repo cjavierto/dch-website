@@ -6,7 +6,8 @@
  */
 import type { Faq, HomepageSettings, SiteSettings } from "@/lib/types";
 
-export const siteSettings: SiteSettings = {
+// Footer logos are added by the seed script (src/payload/starterData.ts).
+export const siteSettings: Omit<SiteSettings, "accreditationBadges"> = {
   hospitalName: "Deiparine Community Hospital",
   shortName: "DCH",
   tagline: "Sibonga, Cebu · Since 1974",
