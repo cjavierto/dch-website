@@ -28,7 +28,7 @@ export default async function HomePage() {
       <QuickActions emergencyNumber={settings.emergencyNumber} />
       <ServicesSection services={services} />
       {home.showStats && <StatsStrip stats={home.stats} />}
-      <FacilitySection />
+      <FacilitySection photos={home.facilityPhotos} />
       <FaqSection faqs={faqs} trunkline={settings.trunkline} />
       <SpotlightAndNews hospitalName={settings.hospitalName} news={news} />
     </>

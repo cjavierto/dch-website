@@ -50,6 +50,8 @@ export const homepageSettings: HomepageSettings = {
     { value: "34", label: "Consultants & residents", labelShort: "Consultants & residents" },
     { value: "24/7", label: "Emergency & delivery room", labelShort: "ER & delivery room" },
   ],
+  // Empty: the homepage uses its built-in photos until staff choose others.
+  facilityPhotos: {},
 };
 
 export const faqs: Faq[] = [

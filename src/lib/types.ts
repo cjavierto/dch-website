@@ -25,6 +25,8 @@ export type SiteSettings = {
 export type HomepageSettings = {
   showStats: boolean;
   stats: { value: string; label: string; labelShort: string }[];
+  /** "Our facility" photos; an empty slot falls back to the built-in photo. */
+  facilityPhotos: { large?: Image; left?: Image; right?: Image };
 };
 
 export type Image = { src: string; alt: string };

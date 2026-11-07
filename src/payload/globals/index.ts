@@ -130,6 +130,25 @@ export const HomepageSettings: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "facilityPhotos",
+      label: "\"Our facility\" photos",
+      type: "group",
+      admin: {
+        description:
+          "The three photos beside \"Built for the community it serves\". Leave a slot empty to keep the current photo. Landscape photos work best; describe each one in its Alt text.",
+      },
+      fields: [
+        imageField("large", { label: "Large photo (top)" }),
+        {
+          type: "row",
+          fields: [
+            imageField("left", { label: "Small photo (left)" }),
+            imageField("right", { label: "Small photo (right)" }),
+          ],
+        },
+      ],
+    },
   ],
 };
 

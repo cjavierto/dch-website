@@ -262,10 +262,15 @@ export async function getHomepageSettings() {
   "use cache";
   cacheLife("hours");
   cacheTag("homepage");
-  const h = await (await payload()).findGlobal({ slug: "homepage-settings", depth: 0 });
+  const h = await (await payload()).findGlobal({ slug: "homepage-settings", depth: 1 });
   return {
     showStats: Boolean(h.showStats),
     stats: (h.stats ?? []).map(({ value, label, labelShort }) => ({ value, label, labelShort })),
+    facilityPhotos: {
+      large: image(h.facilityPhotos?.large),
+      left: image(h.facilityPhotos?.left),
+      right: image(h.facilityPhotos?.right),
+    },
   } satisfies HomepageSettings;
 }
 

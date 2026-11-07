@@ -10,6 +10,6 @@ R.c("server/chunks/[root-of-the-server]__059_wssmrb6ok._.js")
 R.c("server/chunks/_1e0aljt466f05._.js")
 R.c("server/chunks/_1u8tdc0x0mcd9._.js")
 R.c("server/chunks/node_modules_next_dist_1b7kgs4a4xh1w._.js")
-R.c("server/chunks/node_modules_date-fns_locale_1qtn15n58_27b._.js")
+R.c("server/chunks/node_modules_date-fns_locale_0g_2xekskxp_4._.js")
 R.m(283345)
 module.exports=R.m(283345).exports

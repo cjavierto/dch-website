@@ -1,6 +1,6 @@
 var R=require("../../../../chunks/[turbopack]_runtime.js")("server/app/(payload)/api/[...slug]/route.js")
 R.c("server/chunks/[externals]_next_dist_shared_lib_no-fallback-error_external_0r3u29kz7xt8e.js")
-R.c("server/chunks/[root-of-the-server]__1enrv9f1cb9t4._.js")
+R.c("server/chunks/[root-of-the-server]__0gmyra35l7017._.js")
 R.c("server/chunks/node_modules_date-fns_locale_en-US_2026_yrikp4qd.js")
 R.c("server/chunks/[externals]__12co4p53c6up9._.js")
 R.c("server/chunks/node_modules_date-fns_0rgimjq5nh0s-._.js")
