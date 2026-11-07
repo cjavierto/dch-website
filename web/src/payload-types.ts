@@ -2059,6 +2059,14 @@ export interface HomepageSetting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * The three photos beside "Built for the community it serves". Leave a slot empty to keep the current photo. Landscape photos work best; describe each one in its Alt text.
+   */
+  facilityPhotos?: {
+    large?: (number | null) | Media;
+    left?: (number | null) | Media;
+    right?: (number | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2300,6 +2308,13 @@ export interface HomepageSettingsSelect<T extends boolean = true> {
         label?: T;
         labelShort?: T;
         id?: T;
+      };
+  facilityPhotos?:
+    | T
+    | {
+        large?: T;
+        left?: T;
+        right?: T;
       };
   updatedAt?: T;
   createdAt?: T;
