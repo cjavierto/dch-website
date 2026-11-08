@@ -40,8 +40,14 @@ ${note ? `<p style="color:#6d6a62;font-size:13px">${escape(note)}</p>` : ""}
   return { text, html };
 }
 
-async function send(payload: Payload, message: { to: string; subject: string; replyTo?: string; text: string; html: string }) {
-  if (!message.to) return;
+/** Main address plus the extra recipients from Site settings, without repeats. */
+export function recipients(main: string | null | undefined, extra: { email: string }[] | null | undefined) {
+  const all = [main, ...(extra ?? []).map((r) => r.email)].map((e) => e?.trim().toLowerCase()).filter(Boolean) as string[];
+  return [...new Set(all)];
+}
+
+async function send(payload: Payload, message: { to: string[]; subject: string; replyTo?: string; text: string; html: string }) {
+  if (!message.to.length) return;
   try {
     await payload.sendEmail(message);
   } catch (err) {
@@ -51,7 +57,7 @@ async function send(payload: Payload, message: { to: string; subject: string; re
 
 export async function notifyContact(
   payload: Payload,
-  to: string,
+  to: string[],
   id: number | string,
   s: { name: string; mobile: string; email: string | null; subject: ContactSubject; message: string },
 ) {
@@ -73,7 +79,7 @@ export async function notifyContact(
 
 export async function notifyJobApplication(
   payload: Payload,
-  to: string,
+  to: string[],
   id: number | string,
   a: { jobTitle: string; name: string; contact: string; prcLicence: string | null },
 ) {
@@ -93,7 +99,7 @@ export async function notifyJobApplication(
 
 export async function notifyBooking(
   payload: Payload,
-  to: string,
+  to: string[],
   id: number | string,
   r: { doctorName: string; date: string; time: string; name: string; mobile: string; reason: string },
 ) {

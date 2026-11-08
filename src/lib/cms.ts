@@ -28,7 +28,7 @@ import type {
   StaffMember,
   TeamCount,
 } from "@/lib/types";
-import { notifyBooking, notifyContact, notifyJobApplication } from "@/lib/notify";
+import { notifyBooking, notifyContact, notifyJobApplication, recipients } from "@/lib/notify";
 import type * as P from "@/payload-types";
 import { DOCTOR_GROUPS } from "@/payload/collections/People";
 import { lexicalToBlocks } from "@/payload/richText";
@@ -546,7 +546,7 @@ export async function saveContactSubmission(s: NewContactSubmission) {
     data: { ...s, status: "new" },
   });
   const settings = await p.findGlobal({ slug: "site-settings", depth: 0 });
-  await notifyContact(p, settings.email, doc.id, s);
+  await notifyContact(p, recipients(settings.email, settings.notifications?.contactRecipients), doc.id, s);
 }
 
 export type NewJobApplication = {
@@ -588,7 +588,7 @@ export async function saveJobApplication(a: NewJobApplication) {
     throw err;
   }
   const settings = await p.findGlobal({ slug: "site-settings", depth: 0 });
-  await notifyJobApplication(p, settings.careersEmail, applicationId, {
+  await notifyJobApplication(p, recipients(settings.careersEmail, settings.notifications?.applicationRecipients), applicationId, {
     jobTitle: docs[0].title,
     name: a.name,
     contact: a.contact,
@@ -655,9 +655,9 @@ export async function saveBookingRequest(r: NewBookingRequest) {
       status: "requested",
     },
   });
-  // No separate OPD address yet: requests go to the hospital inbox.
+  // No separate OPD address yet: requests go to the contact recipients.
   const settings = await p.findGlobal({ slug: "site-settings", depth: 0 });
-  await notifyBooking(p, settings.email, booking.id, {
+  await notifyBooking(p, recipients(settings.email, settings.notifications?.contactRecipients), booking.id, {
     doctorName: docs[0].name,
     date: formatBookingDate(r.date),
     time: formatTime(r.time),
