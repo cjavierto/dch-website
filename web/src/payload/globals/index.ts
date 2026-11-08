@@ -15,6 +15,16 @@ const iconCards = (name: string, label: string): ArrayField => ({
 
 const numbersNote = "Use {emergencyNumber} or {trunkline} to insert the numbers from Website settings.";
 
+/** Extra people who receive a notice email, one address per row. */
+const recipientList = (name: string, label: string): ArrayField => ({
+  name,
+  label,
+  type: "array",
+  maxRows: 10,
+  labels: { singular: "Recipient", plural: "Recipients" },
+  fields: [{ name: "email", type: "email", required: true }],
+});
+
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
   label: "Website settings",
@@ -69,6 +79,19 @@ export const SiteSettings: GlobalConfig = {
               name: "social",
               type: "group",
               fields: [{ type: "row", fields: [{ name: "facebook", type: "text" }, { name: "messenger", type: "text" }] }],
+            },
+            {
+              name: "notifications",
+              label: "Email notifications",
+              type: "group",
+              admin: {
+                description:
+                  "Who gets an email when the website receives something. The Email / Careers email above always get them; add anyone else here.",
+              },
+              fields: [
+                recipientList("contactRecipients", "Also send contact messages to"),
+                recipientList("applicationRecipients", "Also send job applications to"),
+              ],
             },
           ],
         },

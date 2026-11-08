@@ -2072,6 +2072,23 @@ export interface SiteSetting {
     facebook?: string | null;
     messenger?: string | null;
   };
+  /**
+   * Who gets an email when the website receives something. The Email / Careers email above always get them; add anyone else here.
+   */
+  notifications?: {
+    contactRecipients?:
+      | {
+          email: string;
+          id?: string | null;
+        }[]
+      | null;
+    applicationRecipients?:
+      | {
+          email: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   outpatientHours: string;
   visitingHours?:
     | {
@@ -2337,6 +2354,22 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         facebook?: T;
         messenger?: T;
+      };
+  notifications?:
+    | T
+    | {
+        contactRecipients?:
+          | T
+          | {
+              email?: T;
+              id?: T;
+            };
+        applicationRecipients?:
+          | T
+          | {
+              email?: T;
+              id?: T;
+            };
       };
   outpatientHours?: T;
   visitingHours?:
