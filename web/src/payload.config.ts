@@ -11,6 +11,7 @@ import { Doctors, StaffMembers } from "./payload/collections/People";
 import { ApplicantFiles, Media } from "./payload/collections/Media";
 import { Faqs } from "./payload/collections/Faqs";
 import { JobPostings } from "./payload/collections/JobPostings";
+import { postmarkAdapter } from "./payload/postmark";
 import { Services } from "./payload/collections/Services";
 import { AboutPage, CareersPage, HomepageSettings, LegalPages, PatientsPage, SiteSettings, VisionPage } from "./payload/globals";
 
@@ -66,7 +67,8 @@ export default buildConfig({
   sharp,
   typescript: { outputFile: path.resolve(dirname, "payload-types.ts") },
   graphQL: { disable: true },
-  // TODO(email): add an email adapter (e.g. @payloadcms/email-nodemailer) once
-  // the hospital's SMTP settings exist, then send the hospital inbox / HR a
-  // notice from afterChange hooks on contact-submissions and job-applications.
+  // Postmark when POSTMARK_SERVER_TOKEN is set (see src/payload/postmark.ts);
+  // otherwise emails are written to the console. Notices to the hospital are
+  // sent from src/lib/notify.ts.
+  ...(process.env.POSTMARK_SERVER_TOKEN ? { email: postmarkAdapter(process.env.POSTMARK_SERVER_TOKEN) } : {}),
 });
