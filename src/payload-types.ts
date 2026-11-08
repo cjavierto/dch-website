@@ -85,7 +85,16 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    media: {
+      usedInNews: 'news-posts';
+      usedInArticles: 'articles';
+      usedInServices: 'services';
+      usedInServiceGalleries: 'services';
+      usedInDoctors: 'doctors';
+      usedInStaff: 'staff-members';
+    };
+  };
   collectionsSelect: {
     services: ServicesSelect<false> | ServicesSelect<true>;
     'news-posts': NewsPostsSelect<false> | NewsPostsSelect<true>;
@@ -488,6 +497,36 @@ export interface Media {
    * Describe the photo for people using screen readers, e.g. “CT suite”.
    */
   alt: string;
+  usedInNews?: {
+    docs?: (number | NewsPost)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  usedInArticles?: {
+    docs?: (number | Article)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  usedInServices?: {
+    docs?: (number | Service)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  usedInServiceGalleries?: {
+    docs?: (number | Service)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  usedInDoctors?: {
+    docs?: (number | Doctor)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  usedInStaff?: {
+    docs?: (number | StaffMember)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1570,6 +1609,12 @@ export interface ApplicantFilesSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  usedInNews?: T;
+  usedInArticles?: T;
+  usedInServices?: T;
+  usedInServiceGalleries?: T;
+  usedInDoctors?: T;
+  usedInStaff?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

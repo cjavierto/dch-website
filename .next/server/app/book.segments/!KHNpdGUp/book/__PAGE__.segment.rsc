@@ -17,14 +17,14 @@ d:"$Sreact.suspense"
 9:C
 10:X
 10:C
-a:[["children",{"s":"__PAGE__","h":49314,"d":{"r":["$","$3","c",{"children":["$Lb",[["$","script","script-0",{"src":"/_next/static/chunks/2utr_mu39iaj8.js","async":true}]],["$","$Lc",null,{"children":["$","$d",null,{"name":"Next.MetadataOutlet","children":"$@e"}]}]]}],"p":"$@f","v":"$10","s":"$9"}}]]
+a:[["children",{"s":"__PAGE__","h":49314,"d":{"r":["$","$3","c",{"children":["$Lb",[["$","script","script-0",{"src":"/_next/static/chunks/36n46ltijxibm.js","async":true}]],["$","$Lc",null,{"children":["$","$d",null,{"name":"Next.MetadataOutlet","children":"$@e"}]}]]}],"p":"$@f","v":"$10","s":"$9"}}]]
 2:[["children",{"s":"book","h":49218,"d":{"r":["$","$3","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
 1:[["children",{"s":"(site)","h":49202,"c":"$Q2"}]]
 17:X
 17:C
 1a:X
 1a:C
-0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L12",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L14",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$d",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Book an appointment · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Request a clinic slot at Deiparine Community Hospital. OPD staff confirm by text within one working day."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L15","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@16","v":"$17","s":"$9"}},"a":"$@18","u":"$@19","b":"Qn7WovzQFZmU9uR1CQGOa","r":"$1a"}
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L12",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L14",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$d",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Book an appointment · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Request a clinic slot at Deiparine Community Hospital. OPD staff confirm by text within one working day."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L15","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@16","v":"$17","s":"$9"}},"a":"$@18","u":"$@19","b":"FyKWBmIr6rtcP9dnKQYj8","r":"$1a"}
 b:E{"digest":"NEXT_HTTP_ERROR_FALLBACK;404"}
 e:null
 19:false
