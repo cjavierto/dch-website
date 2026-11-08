@@ -11,6 +11,7 @@
 import { cacheLife, cacheTag } from "next/cache";
 import config from "@payload-config";
 import { getPayload, type Where } from "payload";
+import { formatBookingDate, formatTime } from "@/lib/booking";
 import { CV_TYPES } from "@/lib/careers";
 import type { ContactSubject } from "@/lib/contact";
 import type {
@@ -27,6 +28,7 @@ import type {
   StaffMember,
   TeamCount,
 } from "@/lib/types";
+import { notifyBooking, notifyContact, notifyJobApplication } from "@/lib/notify";
 import type * as P from "@/payload-types";
 import { DOCTOR_GROUPS } from "@/payload/collections/People";
 import { lexicalToBlocks } from "@/payload/richText";
@@ -538,12 +540,13 @@ export type NewContactSubmission = {
  * create entries that only signed-in staff can read.
  */
 export async function saveContactSubmission(s: NewContactSubmission) {
-  await (await payload()).create({
+  const p = await payload();
+  const doc = await p.create({
     collection: "contact-submissions",
     data: { ...s, status: "new" },
   });
-  // TODO(email): email the hospital inbox (settings.email) once SMTP settings
-  // exist — see the email TODO in src/payload.config.ts.
+  const settings = await p.findGlobal({ slug: "site-settings", depth: 0 });
+  await notifyContact(p, settings.email, doc.id, s);
 }
 
 export type NewJobApplication = {
@@ -573,17 +576,24 @@ export async function saveJobApplication(a: NewJobApplication) {
     data: {},
     file: { name: a.cv.name, mimetype, size: a.cv.size, data: Buffer.from(a.cv.data) },
   });
+  let applicationId: number;
   try {
-    await p.create({
+    ({ id: applicationId } = await p.create({
       collection: "job-applications",
       data: { job: docs[0].id, name: a.name, contact: a.contact, prcLicence: a.prcLicence, cv: cv.id, status: "new" },
-    });
+    }));
   } catch (err) {
     // Don't leave an orphaned CV behind.
     await p.delete({ collection: "applicant-files", id: cv.id });
     throw err;
   }
-  // TODO(email): notify HR (settings.careersEmail) once SMTP settings exist.
+  const settings = await p.findGlobal({ slug: "site-settings", depth: 0 });
+  await notifyJobApplication(p, settings.careersEmail, applicationId, {
+    jobTitle: docs[0].title,
+    name: a.name,
+    contact: a.contact,
+    prcLicence: a.prcLicence,
+  });
 }
 
 // ---- Booking -------------------------------------------------------------------
@@ -630,7 +640,7 @@ export async function saveBookingRequest(r: NewBookingRequest) {
   const { docs } = await p.find({ collection: "doctors", where: { slug: { equals: r.doctorSlug } }, limit: 1, depth: 0 });
   if (!docs[0]) throw new Error(`Unknown doctor: ${r.doctorSlug}`);
   if ((await getTakenSlots(r.doctorSlug, r.date)).includes(r.time)) throw new Error("slot-taken");
-  await p.create({
+  const booking = await p.create({
     collection: "booking-requests",
     data: {
       doctor: docs[0].id,
@@ -645,5 +655,14 @@ export async function saveBookingRequest(r: NewBookingRequest) {
       status: "requested",
     },
   });
-  // TODO(email): notify the OPD desk once SMTP settings exist.
+  // No separate OPD address yet: requests go to the hospital inbox.
+  const settings = await p.findGlobal({ slug: "site-settings", depth: 0 });
+  await notifyBooking(p, settings.email, booking.id, {
+    doctorName: docs[0].name,
+    date: formatBookingDate(r.date),
+    time: formatTime(r.time),
+    name: r.name,
+    mobile: r.mobile,
+    reason: r.reason,
+  });
 }
