@@ -13,7 +13,7 @@ import type {
 /** Every tag used in src/lib/cms.ts. */
 export const ALL_TAGS = ["site-settings", "homepage", "faqs", "pages", "services", "doctors", "staff", "news", "articles", "jobs", "legal"];
 
-function expire(tags: string[], req: PayloadRequest) {
+export function expire(tags: string[], req: PayloadRequest) {
   // The seed script runs outside Next.js, where there is no cache to expire.
   if (req.context.skipRevalidate) return;
   for (const tag of tags) {

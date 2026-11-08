@@ -50,6 +50,7 @@ The project currently lives in `~/Documents`, which is synced to iCloud Drive. i
 - **News, health articles and job postings** have drafts; only published items show. Job postings with a past closing date are hidden.
 - **Submissions**: the contact form creates *Contact us entries*; job applications create *Job applications* with the CV in *Applicant CVs* (private — not in the public media library).
 - **Email is not sent yet** (TODO in `src/payload.config.ts` and `src/lib/cms.ts`): add an SMTP adapter once the hospital's mail settings exist.
+- **Images**: uploads are shrunk to at most 2400px and saved as WebP (`Media.ts`); SVGs are kept as is. Pages serve them through `next/image`, which makes each width once and caches it for 30 days in `.next/cache/images` (kept across deploys by `deploy.sh`). Images uploaded before this existed: sign in to `/admin`, open `/api/media/optimize-existing`, and reload until it says all are optimised. Files in `public/images` are cached too, so a replaced file needs a new name.
 - **Schema changes** go through migrations (dev push is off so the SQLite file always matches production): edit a collection, then `npm run payload migrate:create <name>` and `npm run payload migrate`.
 
 ## Online booking (switched off for launch)
