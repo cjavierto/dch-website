@@ -1,5 +1,5 @@
 import path from "node:path";
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, CollectionSlug, JoinField } from "payload";
 import { CV_MAX_BYTES, CV_TYPES } from "@/lib/careers";
 import { optimizeExistingMedia } from "../optimizeMedia";
 import { ALL_TAGS, expire, revalidateCollection } from "../revalidate";
@@ -64,8 +64,29 @@ export const Media: CollectionConfig = {
       required: true,
       admin: { description: "Describe the photo for people using screen readers, e.g. “CT suite”." },
     },
+    {
+      type: "collapsible",
+      label: "Where this image is used",
+      admin: {
+        description:
+          "Replacing the file changes it in every place listed here. To change one page only, upload a new image on that page instead. (The homepage, About page and footer logos are not listed.)",
+      },
+      fields: [
+        usedIn("usedInNews", "News posts", "news-posts", "cover"),
+        usedIn("usedInArticles", "Health articles", "articles", "cover"),
+        usedIn("usedInServices", "Services (card image)", "services", "image"),
+        usedIn("usedInServiceGalleries", "Services (gallery)", "services", "detail.gallery"),
+        usedIn("usedInDoctors", "Doctors", "doctors", "photo"),
+        usedIn("usedInStaff", "Staff", "staff-members", "photo"),
+      ],
+    },
   ],
 };
+
+/** Read-only list of the documents whose `on` field points at this image. */
+function usedIn(name: string, label: string, collection: CollectionSlug, on: string): JoinField {
+  return { name, label, type: "join", collection, on, admin: { allowCreate: false } } as JoinField;
+}
 
 /**
  * CVs attached to job applications. Kept apart from Media because they hold

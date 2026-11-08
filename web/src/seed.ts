@@ -38,23 +38,18 @@ const manilaNoon = (day: string) => `${day}T12:00:00+08:00`;
 const rows = (items: string[] | undefined) => items?.map((text) => ({ text }));
 
 /** Uploads each distinct image once per alt text; empty alt reuses the file's first upload. */
+/** One media item per use, never shared: replacing a photo in the admin
+    must only change the page it was replaced on. */
 function mediaUploader(payload: Payload) {
-  const byKey = new Map<string, number>();
-  const bySrc = new Map<string, number>();
   return async function upload(image: Image | string | undefined, fallbackAlt = ""): Promise<number | undefined> {
     if (!image) return undefined;
     const { src, alt } = typeof image === "string" ? { src: image, alt: fallbackAlt } : image;
-    if (!alt && bySrc.has(src)) return bySrc.get(src);
-    const key = `${src}|${alt}`;
-    if (byKey.has(key)) return byKey.get(key);
     const doc = await payload.create({
       collection: "media",
       data: { alt: alt || path.basename(src, path.extname(src)).replaceAll("-", " ") },
       filePath: path.resolve(process.cwd(), "public", src.replace(/^\//, "")),
       context,
     });
-    byKey.set(key, doc.id);
-    if (!bySrc.has(src)) bySrc.set(src, doc.id);
     return doc.id;
   };
 }
