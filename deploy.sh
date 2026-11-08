@@ -24,14 +24,27 @@ if [ -f "$APP_DIR/package-lock.json" ] && cmp -s "$REPO_DIR/package-lock.json" "
 fi
 
 # Mirror a directory (removing files the new build no longer has).
+# Extra arguments are rsync excludes: paths kept on the server as they are.
 mirror() {
+  local dir=$1; shift
   if command -v rsync >/dev/null 2>&1; then
-    rsync -a --delete "$REPO_DIR/$1/" "$APP_DIR/$1/"
+    rsync -a --delete "$@" "$REPO_DIR/$dir/" "$APP_DIR/$dir/"
   else
-    rm -rf "${APP_DIR:?}/$1" && cp -R "$REPO_DIR/$1" "$APP_DIR/$1"
+    rm -rf "${APP_DIR:?}/$dir" && cp -R "$REPO_DIR/$dir" "$APP_DIR/$dir"
   fi
 }
-mirror .next
+
+# Resized images (next/image) live in .next/cache/images. Keep them across
+# deploys so every thumbnail isn't re-made, slowly, after each release.
+image_cache="$APP_DIR/.next/cache/images"
+kept_cache=""
+if ! command -v rsync >/dev/null 2>&1 && [ -d "$image_cache" ]; then
+  kept_cache="$(mktemp -d)" && mv "$image_cache" "$kept_cache/images"
+fi
+mirror .next --exclude /cache/images/
+if [ -n "$kept_cache" ]; then
+  mkdir -p "$APP_DIR/.next/cache" && mv "$kept_cache/images" "$image_cache" && rmdir "$kept_cache"
+fi
 mirror public
 mirror src
 for f in server.js server.cjs next.config.ts package.json package-lock.json tsconfig.json; do
