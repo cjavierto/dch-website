@@ -25,7 +25,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero licence={settings.accreditation.dohLicenceLevel} />
-      <QuickActions emergencyNumber={settings.emergencyNumber} />
+      <QuickActions links={home.quickLinks} emergency={home.emergencyCard} emergencyNumber={settings.emergencyNumber} />
       <ServicesSection services={services} />
       {home.showStats && <StatsStrip stats={home.stats} />}
       <FacilitySection photos={home.facilityPhotos} />

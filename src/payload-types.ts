@@ -2143,6 +2143,102 @@ export interface SiteSetting {
  */
 export interface HomepageSetting {
   id: number;
+  /**
+   * The cards under the hero, in order. The red emergency card always comes last (below). Phones show two cards per row, so 3 or 5 here gives even rows.
+   */
+  quickLinks?:
+    | {
+        title: string;
+        /**
+         * Material Symbols icon name.
+         */
+        icon:
+          | 'add'
+          | 'apartment'
+          | 'arrow_back'
+          | 'arrow_forward'
+          | 'assignment'
+          | 'badge'
+          | 'balance'
+          | 'bed'
+          | 'calendar_month'
+          | 'call'
+          | 'campaign'
+          | 'cardiology'
+          | 'chat'
+          | 'check_circle'
+          | 'chevron_right'
+          | 'child_care'
+          | 'close'
+          | 'emergency'
+          | 'error'
+          | 'event_available'
+          | 'expand_more'
+          | 'favorite'
+          | 'filter_list'
+          | 'flag'
+          | 'groups'
+          | 'handshake'
+          | 'home'
+          | 'info'
+          | 'labs'
+          | 'local_hospital'
+          | 'location_on'
+          | 'lock'
+          | 'looks_3'
+          | 'looks_4'
+          | 'looks_one'
+          | 'looks_two'
+          | 'mail'
+          | 'map'
+          | 'medication'
+          | 'meeting_room'
+          | 'menu'
+          | 'menu_book'
+          | 'monitor_heart'
+          | 'payments'
+          | 'person'
+          | 'pregnant_woman'
+          | 'public'
+          | 'radiology'
+          | 'receipt_long'
+          | 'remove'
+          | 'route'
+          | 'schedule'
+          | 'science'
+          | 'search'
+          | 'send'
+          | 'shield'
+          | 'stethoscope'
+          | 'support_agent'
+          | 'surgical'
+          | 'upload_file'
+          | 'vaccines'
+          | 'verified'
+          | 'visibility'
+          | 'volunteer_activism'
+          | 'work'
+          | 'workspace_premium';
+        /**
+         * Shown on computers only, under the title.
+         */
+        detail?: string | null;
+        link:
+          'book' | 'doctors' | 'patients' | 'services' | 'news' | 'health' | 'careers' | 'contact' | 'about' | 'custom';
+        /**
+         * A page on this site, like "/careers/staff-nurse", or a full https:// address.
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * The red card. It always calls the emergency number from Website settings; write {emergencyNumber} to show the number.
+   */
+  emergencyCard: {
+    title: string;
+    detail?: string | null;
+  };
   showStats?: boolean | null;
   stats?:
     | {
@@ -2418,6 +2514,22 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  * via the `definition` "homepage-settings_select".
  */
 export interface HomepageSettingsSelect<T extends boolean = true> {
+  quickLinks?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        detail?: T;
+        link?: T;
+        url?: T;
+        id?: T;
+      };
+  emergencyCard?:
+    | T
+    | {
+        title?: T;
+        detail?: T;
+      };
   showStats?: T;
   stats?:
     | T

@@ -31,6 +31,34 @@ export type HomepageSettings = {
   stats: { value: string; label: string; labelShort: string }[];
   /** "Our facility" photos; an empty slot falls back to the built-in photo. */
   facilityPhotos: { large?: Image; left?: Image; right?: Image };
+  /** Shortcut cards under the hero, before the emergency card. */
+  quickLinks: QuickLink[];
+  /** The red card at the end; always calls the emergency number. */
+  emergencyCard: { title: string; detail: string };
+};
+
+/** Pages a quick-link card can open. "book" follows the booking switch. */
+export const QUICK_LINK_TARGETS = [
+  { value: "book", label: "Book an appointment" },
+  { value: "doctors", label: "Doctors directory" },
+  { value: "patients", label: "Patients & visitors" },
+  { value: "services", label: "Services" },
+  { value: "news", label: "News & announcements" },
+  { value: "health", label: "Health information" },
+  { value: "careers", label: "Careers" },
+  { value: "contact", label: "Contact us" },
+  { value: "about", label: "About DCH" },
+  { value: "custom", label: "Another page or website (enter the link)" },
+] as const;
+export type QuickLinkTarget = (typeof QUICK_LINK_TARGETS)[number]["value"];
+
+export type QuickLink = {
+  icon: IconName;
+  title: string;
+  detail?: string;
+  link: QuickLinkTarget;
+  /** Only for link "custom": "/some-page" or "https://…". */
+  url?: string;
 };
 
 export type Image = { src: string; alt: string };

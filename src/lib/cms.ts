@@ -276,7 +276,8 @@ export async function getHomepageSettings() {
   cacheLife("hours");
   cacheTag("homepage");
   const h = await (await payload()).findGlobal({ slug: "homepage-settings", depth: 1 });
-  return {
+  const settings = await numbers();
+  return withSettings({
     showStats: Boolean(h.showStats),
     stats: (h.stats ?? []).map(({ value, label, labelShort }) => ({ value, label, labelShort })),
     facilityPhotos: {
@@ -284,7 +285,18 @@ export async function getHomepageSettings() {
       left: image(h.facilityPhotos?.left),
       right: image(h.facilityPhotos?.right),
     },
-  } satisfies HomepageSettings;
+    quickLinks: (h.quickLinks ?? []).map((q) => ({
+      icon: q.icon,
+      title: q.title,
+      detail: opt(q.detail),
+      link: q.link,
+      url: opt(q.url),
+    })),
+    emergencyCard: {
+      title: h.emergencyCard?.title || "Emergency Room",
+      detail: h.emergencyCard?.detail ?? "Open 24 hours · {emergencyNumber}",
+    },
+  } satisfies HomepageSettings, settings);
 }
 
 export async function getFaqs() {

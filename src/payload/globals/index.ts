@@ -1,3 +1,4 @@
+import { QUICK_LINK_TARGETS } from "@/lib/types";
 import type { ArrayField, GlobalConfig } from "payload";
 import { iconField, imageField, textList } from "../fields";
 import { revalidateGlobal } from "../revalidate";
@@ -165,6 +166,90 @@ export const HomepageSettings: GlobalConfig = {
   admin: { group: "Settings" },
   hooks: { afterChange: revalidateGlobal("homepage") },
   fields: [
+    {
+      name: "quickLinks",
+      label: "Shortcut cards",
+      labels: { singular: "Shortcut card", plural: "Shortcut cards" },
+      type: "array",
+      minRows: 1,
+      maxRows: 5,
+      admin: {
+        description:
+          "The cards under the hero, in order. The red emergency card always comes last (below). Phones show two cards per row, so 3 or 5 here gives even rows.",
+        components: { RowLabel: "@/payload/admin/QuickLinkLabel#QuickLinkLabel" },
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          type: "row",
+          fields: [
+            { name: "title", type: "text", required: true, maxLength: 40, admin: { width: "50%" } },
+            iconField("icon", { required: true, admin: { width: "50%", description: "Material Symbols icon name." } }),
+          ],
+        },
+        {
+          name: "detail",
+          label: "Short line",
+          type: "text",
+          maxLength: 60,
+          admin: { description: "Shown on computers only, under the title." },
+        },
+        {
+          type: "row",
+          fields: [
+            {
+              name: "link",
+              label: "Opens",
+              type: "select",
+              required: true,
+              defaultValue: "contact",
+              options: QUICK_LINK_TARGETS.map((t) => ({ label: t.label, value: t.value })),
+              admin: { width: "50%" },
+            },
+            {
+              name: "url",
+              label: "Link",
+              type: "text",
+              admin: {
+                width: "50%",
+                condition: (_, row) => row?.link === "custom",
+                description: 'A page on this site, like "/careers/staff-nurse", or a full https:// address.',
+              },
+              validate: (value: unknown, { siblingData }: { siblingData?: { link?: string } }) => {
+                if (siblingData?.link !== "custom") return true;
+                const v = String(value ?? "").trim();
+                if (!v) return "Enter the link.";
+                return /^(\/|https?:\/\/)/.test(v) || 'Start with "/" for a page on this site, or "https://".';
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "emergencyCard",
+      label: "Emergency card",
+      type: "group",
+      admin: {
+        description: "The red card. It always calls the emergency number from Website settings; write {emergencyNumber} to show the number.",
+      },
+      fields: [
+        {
+          type: "row",
+          fields: [
+            { name: "title", type: "text", required: true, defaultValue: "Emergency Room", maxLength: 40, admin: { width: "50%" } },
+            {
+              name: "detail",
+              label: "Short line",
+              type: "text",
+              defaultValue: "Open 24 hours · {emergencyNumber}",
+              maxLength: 60,
+              admin: { width: "50%" },
+            },
+          ],
+        },
+      ],
+    },
     { name: "showStats", label: "Show the stats strip", type: "checkbox", defaultValue: true },
     {
       name: "stats",
