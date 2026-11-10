@@ -21,6 +21,7 @@ import {
   type BookingErrors,
 } from "@/lib/booking";
 import { telHref } from "@/lib/format";
+import { isTimed, scheduleSummary } from "@/lib/schedule";
 import { fetchTakenSlots, submitBooking, type BookingState } from "./actions";
 
 const P = "book";
@@ -210,9 +211,15 @@ export function BookingPicker({
                       </span>
                     ))}
                   </span>
-                  <span className="flex flex-none items-center gap-1.5 text-[13.5px] text-ink-700">
-                    <Icon name="schedule" size={17} className="text-ink-400" />
-                    {d.hours}
+                  <span className="flex flex-none items-start gap-1.5 text-[13.5px] text-ink-700">
+                    <Icon name="schedule" size={17} className="mt-px text-ink-400" />
+                    <span>
+                      {scheduleSummary(d.schedule).map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </span>
                   </span>
                 </button>
               );
@@ -229,7 +236,7 @@ export function BookingPicker({
               3. Pick a date
             </h2>
             <span className="text-[13.5px] text-ink-400">
-              {doctor.days.map((i) => DAY_NAMES[i]).join(", ")} · {doctor.hours}
+              {scheduleSummary(doctor.schedule.filter(isTimed)).join("; ")}
             </span>
           </div>
           <p className="mb-3.5 text-[13.5px] text-ink-400">Greyed-out dates are outside this doctor&apos;s clinic days.</p>
@@ -253,7 +260,7 @@ export function BookingPicker({
           ) : (
             <>
               <div className="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-[9px]">
-                {clinicSlots(doctor.booking).map((t) => {
+                {clinicSlots(doctor, date).map((t) => {
                   const isTaken = taken.includes(t);
                   const on = slot === t;
                   return (

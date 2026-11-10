@@ -1,21 +1,21 @@
 import type { CollectionConfig } from "payload";
 import { doctorGroups } from "@/content/people";
+import { BOOKING_ENABLED } from "@/lib/features";
+import { formatTime, WEEKDAYS } from "@/lib/schedule";
 import { iconField, imageField, slugField, sortField } from "../fields";
 import { revalidateCollection } from "../revalidate";
 
 /** Directory filter chips, in display order. */
 export const DOCTOR_GROUPS = doctorGroups;
 
-/** Half-hour clinic boundaries, 6:00 AM – 8:00 PM, stored as "HH:MM" (24h). */
-const TIME_OPTIONS = Array.from({ length: 29 }, (_, i) => {
+/** Half-hour clinic boundaries, 6:00 AM – 9:00 PM, stored as "HH:MM" (24h). */
+const TIME_OPTIONS = Array.from({ length: 31 }, (_, i) => {
   const minutes = 6 * 60 + i * 30;
   const value = `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${minutes % 60 ? "30" : "00"}`;
-  const h = Math.floor(minutes / 60);
-  const label = `${h % 12 || 12}:${minutes % 60 ? "30" : "00"} ${h >= 12 ? "PM" : "AM"}`;
-  return { label, value };
+  return { label: formatTime(value), value };
 });
 
-export const DAY_OPTIONS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((label, i) => ({ label, value: String(i) }));
+export const DAY_OPTIONS = WEEKDAYS.map((d, i) => ({ label: d.full, value: String(i) }));
 
 export const Doctors: CollectionConfig = {
   slug: "doctors",
@@ -23,7 +23,7 @@ export const Doctors: CollectionConfig = {
   admin: {
     group: "Content",
     useAsTitle: "name",
-    defaultColumns: ["name", "specialty", "group", "days", "active"],
+    defaultColumns: ["name", "specialty", "group", "active"],
     description: "The public doctors directory. Leadership and department heads are under Staff.",
   },
   defaultSort: "sort",
@@ -58,30 +58,28 @@ export const Doctors: CollectionConfig = {
       ],
     },
     {
-      type: "row",
-      fields: [
-        { name: "days", label: "Clinic days", type: "select", hasMany: true, options: DAY_OPTIONS },
-        { name: "hours", type: "text", required: true, admin: { description: 'e.g. "9:00 AM – 12:00 NN".' } },
-      ],
-    },
-    {
-      name: "booking",
-      label: "Online booking",
-      type: "group",
+      name: "schedule",
+      label: "Clinic schedule",
+      labels: { singular: "Clinic session", plural: "Clinic sessions" },
+      type: "array",
       admin: {
         description:
-          "Clinic start and end times for online appointment requests (20-minute slots on the clinic days above; 12–1 PM is skipped for all-day clinics). Leave empty if this doctor cannot be booked online.",
+          "One row per clinic session. Add two rows for the same day for a morning and an afternoon clinic. Leave the times empty when hours vary (on call, by OR schedule).",
+        components: { RowLabel: "@/payload/admin/ClinicSessionLabel#ClinicSessionLabel" },
+        initCollapsed: true,
       },
       fields: [
         {
           type: "row",
           fields: [
-            { name: "from", label: "Clinic starts", type: "select", options: TIME_OPTIONS },
+            { name: "day", type: "select", required: true, options: DAY_OPTIONS, admin: { width: "34%" } },
+            { name: "from", label: "Starts", type: "select", options: TIME_OPTIONS, admin: { width: "33%" } },
             {
               name: "to",
-              label: "Clinic ends",
+              label: "Ends",
               type: "select",
               options: TIME_OPTIONS,
+              admin: { width: "33%" },
               validate: (value: unknown, { siblingData }: { siblingData?: { from?: string | null } }) => {
                 const from = siblingData?.from;
                 if (!from && !value) return true;
@@ -92,6 +90,22 @@ export const Doctors: CollectionConfig = {
           ],
         },
       ],
+    },
+    {
+      name: "scheduleNote",
+      label: "Schedule note",
+      type: "text",
+      admin: { description: 'Optional, shown with the schedule, e.g. "On call" or "By OR schedule".' },
+    },
+    {
+      name: "bookable",
+      label: "Accept online booking requests",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        hidden: !BOOKING_ENABLED,
+        description: "Patients can request 20-minute slots in the timed clinic sessions above (12–1 PM is skipped for all-day clinics).",
+      },
     },
     { name: "active", type: "checkbox", defaultValue: true, admin: { position: "sidebar", description: "Untick to hide from the directory." } },
     slugField("name"),

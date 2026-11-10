@@ -47,12 +47,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   if (!legal.privacy?.intro && !legal.patientRights?.intro) {
     await payload.updateGlobal({ slug: 'legal-pages', data: legalPagesData(), req, context })
   }
-  const { docs } = await payload.find({ collection: 'doctors', req, depth: 0, limit: 500, pagination: false })
-  for (const doctor of docs) {
-    const times = doctorBookingTimes.get(doctor.slug)
-    if (times && !doctor.booking?.from && !doctor.booking?.to) {
-      await payload.update({ collection: 'doctors', id: doctor.id, data: { booking: times }, req, context })
-    }
+  // Plain SQL: the doctors collection's fields have changed since (per-day
+  // schedules, 2026-11-10), so the Local API no longer matches this schema.
+  for (const [slug, times] of doctorBookingTimes) {
+    await db.run(sql`UPDATE \`doctors\` SET \`booking_from\` = ${times.from}, \`booking_to\` = ${times.to}
+      WHERE \`slug\` = ${slug} AND \`booking_from\` IS NULL AND \`booking_to\` IS NULL;`)
   }
 }
 

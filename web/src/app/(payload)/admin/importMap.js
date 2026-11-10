@@ -6,6 +6,7 @@ import { BlocksFeatureClient as BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { UnorderedListFeatureClient as UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { HeadingFeatureClient as HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ParagraphFeatureClient as ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { ClinicSessionLabel as ClinicSessionLabel_750b24f8be2a5642a9beb7fdc69ed159 } from '@/payload/admin/ClinicSessionLabel'
 import { Icon as Icon_b9e9b447baa5fc5b01f1bf12b506faed } from '@/payload/admin/Brand'
 import { Logo as Logo_b9e9b447baa5fc5b01f1bf12b506faed } from '@/payload/admin/Brand'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
@@ -20,6 +21,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnorderedListFeatureClient": UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#HeadingFeatureClient": HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ParagraphFeatureClient": ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@/payload/admin/ClinicSessionLabel#ClinicSessionLabel": ClinicSessionLabel_750b24f8be2a5642a9beb7fdc69ed159,
   "@/payload/admin/Brand#Icon": Icon_b9e9b447baa5fc5b01f1bf12b506faed,
   "@/payload/admin/Brand#Logo": Logo_b9e9b447baa5fc5b01f1bf12b506faed,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1

@@ -55,7 +55,7 @@ The project currently lives in `~/Documents`, which is synced to iCloud Drive. i
 
 ## Online booking (switched off for launch)
 
-`/book` is the 4-step appointment picker (department → doctor → date → 20-minute slot → details). It saves a *request* to Inbox → Booking entries for OPD staff to confirm by SMS. Only doctors with **Online booking** start/end times set (Content → Doctors directory) can be booked; requested and confirmed slots show as taken.
+`/book` is the 4-step appointment picker (department → doctor → date → 20-minute slot → details). It saves a *request* to Inbox → Booking entries for OPD staff to confirm by SMS. Only doctors with **Accept online booking requests** ticked and at least one timed **Clinic schedule** session (Content → Doctors directory) can be booked, in 20-minute slots inside those sessions; requested and confirmed slots show as taken.
 
 It is controlled by `NEXT_PUBLIC_BOOKING_ENABLED` (see `src/lib/features.ts`):
 
