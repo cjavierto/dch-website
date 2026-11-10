@@ -5,6 +5,7 @@ import * as migration_20261107_104745_footer_logos from './20261107_104745_foote
 import * as migration_20261108_044900_split_shared_media from './20261108_044900_split_shared_media';
 import * as migration_20261108_051550_notification_recipients from './20261108_051550_notification_recipients';
 import * as migration_20261110_120812_doctor_schedule from './20261110_120812_doctor_schedule';
+import * as migration_20261110_124525_homepage_quick_links from './20261110_124525_homepage_quick_links';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261110_120812_doctor_schedule.up,
     down: migration_20261110_120812_doctor_schedule.down,
-    name: '20261110_120812_doctor_schedule'
+    name: '20261110_120812_doctor_schedule',
+  },
+  {
+    up: migration_20261110_124525_homepage_quick_links.up,
+    down: migration_20261110_124525_homepage_quick_links.down,
+    name: '20261110_124525_homepage_quick_links'
   },
 ];

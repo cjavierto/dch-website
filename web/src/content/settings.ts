@@ -53,6 +53,12 @@ export const homepageSettings: HomepageSettings = {
   ],
   // Empty: the homepage uses its built-in photos until staff choose others.
   facilityPhotos: {},
+  quickLinks: [
+    { icon: "event_available", title: "Book Appointment", detail: "Message OPD to request a slot", link: "book" },
+    { icon: "badge", title: "Doctors Directory", detail: "Who is in clinic today", link: "doctors" },
+    { icon: "assignment", title: "Patients & Visitors", detail: "Admission, billing, visiting hours", link: "patients" },
+  ],
+  emergencyCard: { title: "Emergency Room", detail: "Open 24 hours · {emergencyNumber}" },
 };
 
 export const faqs: Faq[] = [
