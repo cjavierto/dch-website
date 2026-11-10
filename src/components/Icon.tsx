@@ -21,6 +21,7 @@ export const ICON_NAMES = [
   "chevron_right",
   "child_care",
   "close",
+  "directions",
   "emergency",
   "error",
   "event_available",

@@ -2,7 +2,7 @@
 4:"/_next/static/chunks/095g8usnrcprg.js"
 5:I[339756,["$4"],"default"]
 6:I[837457,["$4"],"default"]
-b:"/_next/static/chunks/3-lqpmror9-5f.js"
+b:"/_next/static/chunks/3bca0_wyukihf.js"
 c:"/_next/static/chunks/0x8b34faa_kj2.js"
 d:"/_next/static/chunks/02vr32nx36vk8.js"
 e:I[522016,["$b","$c","$d"],""]
@@ -29,7 +29,7 @@ a:[["children",{"s":"__PAGE__","h":49314,"d":{"r":["$","$3","c",{"children":[[["
 1c:C
 1f:X
 1f:C
-0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$19",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"News & Announcements · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Advisories, service updates, and community programmes from Deiparine Community Hospital."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L1a","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1b","v":"$1c","s":"$9"}},"a":"$@1d","u":"$@1e","b":"p9YwUm6cn7wAkOyiCK2o3","r":"$1f"}
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$19",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"News & Announcements · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Advisories, service updates, and community programmes from Deiparine Community Hospital."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L1a","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1b","v":"$1c","s":"$9"}},"a":"$@1d","u":"$@1e","b":"bq505gGkFHp1GOaU86Z2p","r":"$1f"}
 20:I[897367,["$4"],"OutletBoundary"]
 11:["$","script","script-0",{"src":"/_next/static/chunks/02vr32nx36vk8.js","async":true}]
 12:["$","$L20",null,{"children":["$","$19",null,{"name":"Next.MetadataOutlet","children":"$@21"}]}]

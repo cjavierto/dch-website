@@ -2,7 +2,7 @@
 4:"/_next/static/chunks/095g8usnrcprg.js"
 5:I[339756,["$4"],"default"]
 6:I[837457,["$4"],"default"]
-b:"/_next/static/chunks/3-lqpmror9-5f.js"
+b:"/_next/static/chunks/3bca0_wyukihf.js"
 c:"/_next/static/chunks/0x8b34faa_kj2.js"
 d:"/_next/static/chunks/35fyedp8lari5.js"
 e:I[999508,["$b","$c","$d"],"DoctorDirectory"]
@@ -28,7 +28,7 @@ a:[["children",{"s":"__PAGE__","h":49314,"d":{"r":["$","$3","c",{"children":[[["
 1a:C
 1d:X
 1d:C
-0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L14",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L16",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$17",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Doctors Directory · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Consultants at Deiparine Community Hospital and their clinic days."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L18","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@19","v":"$1a","s":"$9"}},"a":"$@1b","u":"$@1c","b":"p9YwUm6cn7wAkOyiCK2o3","r":"$1d"}
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L14",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L16",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$17",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Doctors Directory · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Consultants at Deiparine Community Hospital and their clinic days."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L18","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@19","v":"$1a","s":"$9"}},"a":"$@1b","u":"$@1c","b":"bq505gGkFHp1GOaU86Z2p","r":"$1d"}
 1e:I[897367,["$4"],"OutletBoundary"]
 10:["$","$L1e",null,{"children":["$","$17",null,{"name":"Next.MetadataOutlet","children":"$@1f"}]}]
 1c:false

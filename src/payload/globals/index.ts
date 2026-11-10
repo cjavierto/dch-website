@@ -57,6 +57,21 @@ export const SiteSettings: GlobalConfig = {
               ],
             },
             { name: "mapUrl", label: "Map link (directions)", type: "text", required: true },
+            {
+              name: "mapEmbed",
+              label: "Map on the contact page",
+              type: "textarea",
+              admin: {
+                rows: 3,
+                description:
+                  "Optional. In Google Maps, find the hospital, click Share → Embed a map → Copy HTML, and paste it here. Leave empty to show the map for the hospital name and address above.",
+              },
+              validate: (value: unknown) => {
+                const v = String(value ?? "").trim();
+                if (!v) return true;
+                return /https:\/\/www\.google\.com\/maps\/embed\?/.test(v) || "Paste the code from Google Maps → Share → Embed a map.";
+              },
+            },
           ],
         },
         {

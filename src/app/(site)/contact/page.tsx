@@ -37,18 +37,14 @@ export default async function ContactPage() {
 
         <aside className="flex flex-col gap-3 nav:gap-[18px]" aria-label="How to reach us">
           <div className="overflow-hidden rounded-card-lg border border-line-200 bg-white">
-            {/* Striped placeholder until a map embed is chosen (see README open items). */}
-            <a
-              href={s.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-[140px] items-center justify-center bg-navy-075 bg-[repeating-linear-gradient(45deg,var(--dch-navy-075)_0_6px,#e0e5f2_6px_10px)] nav:h-[170px]"
-            >
-              <span className="flex items-center gap-2 rounded-button border border-line-200 bg-white px-4 py-2.5 text-[14.5px] font-bold text-navy-700 shadow-card">
-                <Icon name="map" size={19} />
-                Open map — {address.town}, {address.province}
-              </span>
-            </a>
+            <iframe
+              src={s.mapEmbedUrl}
+              title={`Map: ${s.hospitalName}, ${address.town}, ${address.province}`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              className="block h-[220px] w-full border-0 bg-navy-075 nav:h-[260px]"
+            />
             <div className="flex flex-col gap-[11px] p-[18px] text-[14.5px] text-ink-900 nav:gap-[13px] nav:p-[22px] nav:text-[15px]">
               <span className="flex gap-2.5">
                 <Icon name="location_on" size={20} className="text-navy-700" />
@@ -65,6 +61,15 @@ export default async function ContactPage() {
               <a href={`mailto:${s.email}`} className="flex items-center gap-2.5 text-ink-900 hover:text-navy-700">
                 <Icon name="mail" size={20} className="text-navy-700" />
                 {s.email}
+              </a>
+              <a
+                href={s.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 font-bold text-navy-700 hover:text-navy-900"
+              >
+                <Icon name="directions" size={20} />
+                Get directions
               </a>
             </div>
           </div>
