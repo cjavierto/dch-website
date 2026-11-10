@@ -194,6 +194,7 @@ export interface Service {
     | 'chevron_right'
     | 'child_care'
     | 'close'
+    | 'directions'
     | 'emergency'
     | 'error'
     | 'event_available'
@@ -327,6 +328,7 @@ export interface Service {
             | 'chevron_right'
             | 'child_care'
             | 'close'
+            | 'directions'
             | 'emergency'
             | 'error'
             | 'event_available'
@@ -410,6 +412,7 @@ export interface Service {
             | 'chevron_right'
             | 'child_care'
             | 'close'
+            | 'directions'
             | 'emergency'
             | 'error'
             | 'event_available'
@@ -617,6 +620,7 @@ export interface NewsPost {
     | 'chevron_right'
     | 'child_care'
     | 'close'
+    | 'directions'
     | 'emergency'
     | 'error'
     | 'event_available'
@@ -885,6 +889,7 @@ export interface StaffMember {
         | 'chevron_right'
         | 'child_care'
         | 'close'
+        | 'directions'
         | 'emergency'
         | 'error'
         | 'event_available'
@@ -973,6 +978,7 @@ export interface JobPosting {
     | 'chevron_right'
     | 'child_care'
     | 'close'
+    | 'directions'
     | 'emergency'
     | 'error'
     | 'event_available'
@@ -1772,6 +1778,7 @@ export interface AboutPage {
           | 'chevron_right'
           | 'child_care'
           | 'close'
+          | 'directions'
           | 'emergency'
           | 'error'
           | 'event_available'
@@ -1869,6 +1876,7 @@ export interface VisionPage {
           | 'chevron_right'
           | 'child_care'
           | 'close'
+          | 'directions'
           | 'emergency'
           | 'error'
           | 'event_available'
@@ -1960,6 +1968,7 @@ export interface PatientsPage {
           | 'chevron_right'
           | 'child_care'
           | 'close'
+          | 'directions'
           | 'emergency'
           | 'error'
           | 'event_available'
@@ -2074,6 +2083,10 @@ export interface SiteSetting {
     province: string;
   };
   mapUrl: string;
+  /**
+   * Optional. In Google Maps, find the hospital, click Share → Embed a map → Copy HTML, and paste it here. Leave empty to show the map for the hospital name and address above.
+   */
+  mapEmbed?: string | null;
   emergencyNumber: string;
   trunkline: string;
   email: string;
@@ -2170,6 +2183,7 @@ export interface HomepageSetting {
           | 'chevron_right'
           | 'child_care'
           | 'close'
+          | 'directions'
           | 'emergency'
           | 'error'
           | 'event_available'
@@ -2454,6 +2468,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         province?: T;
       };
   mapUrl?: T;
+  mapEmbed?: T;
   emergencyNumber?: T;
   trunkline?: T;
   email?: T;

@@ -85,6 +85,16 @@ const day = (iso: string) => new Date(iso).toLocaleDateString("en-CA", { timeZon
 
 const published: Where = { _status: { equals: "published" } };
 
+/** The pasted Google Maps embed code's address, or a map searched from the
+    hospital name and address. */
+function mapEmbedUrl(s: P.SiteSetting) {
+  const pasted = s.mapEmbed?.match(/https:\/\/www\.google\.com\/maps\/embed\?[^"'\s<>]+/)?.[0];
+  if (pasted) return pasted.replaceAll("&amp;", "&");
+  const a = s.address;
+  const query = [s.hospitalName, a.street, a.barangay, a.town, a.province, "Philippines"].filter(Boolean).join(", ");
+  return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=16&output=embed`;
+}
+
 function toSiteSettings(s: P.SiteSetting): SiteSettings {
   return {
     hospitalName: s.hospitalName,
@@ -104,6 +114,7 @@ function toSiteSettings(s: P.SiteSetting): SiteSettings {
     careersEmail: s.careersEmail,
     outpatientHours: s.outpatientHours,
     mapUrl: s.mapUrl,
+    mapEmbedUrl: mapEmbedUrl(s),
     visitingHours: (s.visitingHours ?? []).map(({ area, hours }) => ({ area, hours })),
     visitingRules: s.visitingRules,
     social: { facebook: s.social?.facebook ?? "", messenger: s.social?.messenger ?? "" },

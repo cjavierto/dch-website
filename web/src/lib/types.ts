@@ -15,6 +15,8 @@ export type SiteSettings = {
   outpatientHours: string;
   /** Link to the hospital on a map (directions). */
   mapUrl: string;
+  /** Google Maps embed address for the contact page map. */
+  mapEmbedUrl: string;
   visitingHours: { area: string; hours: string }[];
   visitingRules: string;
   social: { facebook: string; messenger: string };

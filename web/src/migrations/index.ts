@@ -6,6 +6,7 @@ import * as migration_20261108_044900_split_shared_media from './20261108_044900
 import * as migration_20261108_051550_notification_recipients from './20261108_051550_notification_recipients';
 import * as migration_20261110_120812_doctor_schedule from './20261110_120812_doctor_schedule';
 import * as migration_20261110_124525_homepage_quick_links from './20261110_124525_homepage_quick_links';
+import * as migration_20261110_125720_map_embed from './20261110_125720_map_embed';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20261110_124525_homepage_quick_links.up,
     down: migration_20261110_124525_homepage_quick_links.down,
-    name: '20261110_124525_homepage_quick_links'
+    name: '20261110_124525_homepage_quick_links',
+  },
+  {
+    up: migration_20261110_125720_map_embed.up,
+    down: migration_20261110_125720_map_embed.down,
+    name: '20261110_125720_map_embed'
   },
 ];
