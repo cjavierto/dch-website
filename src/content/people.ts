@@ -3,19 +3,25 @@
  * heads) are separate collections, as the handoff requires. Rosters and
  * schedules are prototype placeholders until DCH sends the real ones.
  */
-import type { Doctor, StaffMember, TeamCount } from "@/lib/types";
+import type { ClinicSession, Doctor, StaffMember, TeamCount } from "@/lib/types";
 
-export const doctors: Doctor[] = [
-  { slug: "james-deiparine", initials: "JD", photo: "/images/dr-james-deiparine.png", name: "Dr. James Deiparine", specialty: "Internal Medicine · Medical Director", group: "Internal Medicine", service: "internal-medicine", days: [0, 3], hours: "9:00 AM – 12:00 NN", booking: { from: "09:00", to: "12:00" } },
-  { slug: "ramon-deiparine", initials: "RD", photo: "/images/doctor-portrait.png", name: "Dr. Ramon L. Deiparine", specialty: "Internal Medicine · Adult Cardiology", group: "Internal Medicine", service: "internal-medicine", days: [1, 4], hours: "1:00 – 5:00 PM", booking: { from: "13:00", to: "17:00" } },
-  { slug: "maria-alcantara", initials: "MA", name: "Dr. Maria A. Alcantara", specialty: "OB-Gynecology", group: "OB-Gynecology", service: "ob-gynecology", days: [0, 2, 5], hours: "9:00 AM – 12:00 NN", booking: { from: "09:00", to: "12:00" } },
-  { slug: "jose-bacaltos", initials: "JB", name: "Dr. Jose B. Bacaltos", specialty: "General Surgery", group: "Surgery", service: "general-surgery", days: [3], hours: "8:00 AM – 12:00 NN", booking: { from: "08:00", to: "12:00" } },
-  { slug: "liza-canonigo", initials: "LC", name: "Dr. Liza C. Canonigo", specialty: "Pediatrics", group: "Pediatrics", service: "pediatrics", days: [0, 1, 2, 3, 4], hours: "2:00 – 5:00 PM", booking: { from: "14:00", to: "17:00" } },
-  { slug: "edgar-pacana", initials: "EP", name: "Dr. Edgar P. Pacaña", specialty: "Radiology", group: "Diagnostics", service: "imaging-radiology", days: [0, 1, 2, 3, 4, 5], hours: "On call · daily", booking: { from: "08:00", to: "17:00" } },
-  { slug: "nelia-sanchez", initials: "NS", name: "Dr. Nelia S. Sanchez", specialty: "Family Medicine", group: "Family & emergency medicine", days: [0, 1, 2, 3, 4, 5], hours: "8:00 AM – 5:00 PM", booking: { from: "08:00", to: "17:00" } },
-  { slug: "arnel-gantuangco", initials: "AG", name: "Dr. Arnel M. Gantuangco", specialty: "Orthopedic Surgery", group: "Surgery", service: "general-surgery", days: [2], hours: "1:00 – 4:00 PM", booking: { from: "13:00", to: "16:00" } },
-  { slug: "cecilia-rosales", initials: "CR", name: "Dr. Cecilia V. Rosales", specialty: "Anesthesiology", group: "Surgery", service: "general-surgery", days: [1, 3, 5], hours: "By OR schedule" },
-  { slug: "benjie-olmedo", initials: "BO", name: "Dr. Benjie T. Olmedo", specialty: "Emergency Medicine", group: "Family & emergency medicine", service: "emergency-medicine", days: [0, 1, 2, 3, 4, 5], hours: "24-hour rotation" },
+/** The same clinic hours on several days. */
+const week = (days: number[], from?: string, to?: string): ClinicSession[] => days.map((day) => ({ day, from, to }));
+
+/** Seed shape: clinic days are derived from the schedule. */
+export type DoctorSeed = Omit<Doctor, "days">;
+
+export const doctors: DoctorSeed[] = [
+  { slug: "james-deiparine", initials: "JD", photo: "/images/dr-james-deiparine.png", name: "Dr. James Deiparine", specialty: "Internal Medicine · Medical Director", group: "Internal Medicine", service: "internal-medicine", schedule: [...week([0, 3], "09:00", "12:00"), { day: 3, from: "14:00", to: "16:00" }], bookable: true },
+  { slug: "ramon-deiparine", initials: "RD", photo: "/images/doctor-portrait.png", name: "Dr. Ramon L. Deiparine", specialty: "Internal Medicine · Adult Cardiology", group: "Internal Medicine", service: "internal-medicine", schedule: week([1, 4], "13:00", "17:00"), bookable: true },
+  { slug: "maria-alcantara", initials: "MA", name: "Dr. Maria A. Alcantara", specialty: "OB-Gynecology", group: "OB-Gynecology", service: "ob-gynecology", schedule: week([0, 2, 5], "09:00", "12:00"), bookable: true },
+  { slug: "jose-bacaltos", initials: "JB", name: "Dr. Jose B. Bacaltos", specialty: "General Surgery", group: "Surgery", service: "general-surgery", schedule: week([3], "08:00", "12:00"), bookable: true },
+  { slug: "liza-canonigo", initials: "LC", name: "Dr. Liza C. Canonigo", specialty: "Pediatrics", group: "Pediatrics", service: "pediatrics", schedule: week([0, 1, 2, 3, 4], "14:00", "17:00"), bookable: true },
+  { slug: "edgar-pacana", initials: "EP", name: "Dr. Edgar P. Pacaña", specialty: "Radiology", group: "Diagnostics", service: "imaging-radiology", schedule: week([0, 1, 2, 3, 4, 5], "08:00", "17:00"), bookable: true, scheduleNote: "On call" },
+  { slug: "nelia-sanchez", initials: "NS", name: "Dr. Nelia S. Sanchez", specialty: "Family Medicine", group: "Family & emergency medicine", schedule: [...week([0, 1, 2, 3, 4], "08:00", "17:00"), ...week([5], "08:00", "12:00")], bookable: true },
+  { slug: "arnel-gantuangco", initials: "AG", name: "Dr. Arnel M. Gantuangco", specialty: "Orthopedic Surgery", group: "Surgery", service: "general-surgery", schedule: week([2], "13:00", "16:00"), bookable: true },
+  { slug: "cecilia-rosales", initials: "CR", name: "Dr. Cecilia V. Rosales", specialty: "Anesthesiology", group: "Surgery", service: "general-surgery", schedule: week([1, 3, 5]), bookable: false, scheduleNote: "By OR schedule" },
+  { slug: "benjie-olmedo", initials: "BO", name: "Dr. Benjie T. Olmedo", specialty: "Emergency Medicine", group: "Family & emergency medicine", service: "emergency-medicine", schedule: week([0, 1, 2, 3, 4, 5]), bookable: false, scheduleNote: "24-hour rotation" },
 ];
 
 /** Directory filter chips, in display order. */

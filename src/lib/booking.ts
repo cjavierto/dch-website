@@ -4,7 +4,10 @@
  */
 import type { IconName } from "@/components/Icon";
 import { normalizePhMobile } from "@/lib/contact";
+import { isTimed, sessionsOn, toMinutes } from "@/lib/schedule";
 import type { Doctor } from "@/lib/types";
+
+export { formatTime } from "@/lib/schedule";
 
 export const SLOT_MINUTES = 20;
 /** How far ahead patients can request a slot. */
@@ -23,9 +26,10 @@ export const DEPARTMENT_ICONS: Record<string, IconName> = {
 
 export const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-export type BookableDoctor = Doctor & { booking: { from: string; to: string } };
+export type BookableDoctor = Doctor & { bookable: true };
 
-export const isBookable = (d: Doctor): d is BookableDoctor => Boolean(d.booking);
+/** Ticked for online booking and has at least one timed clinic session. */
+export const isBookable = (d: Doctor): d is BookableDoctor => d.bookable && d.schedule.some(isTimed);
 
 // ---- Dates -------------------------------------------------------------------
 
@@ -47,12 +51,12 @@ export function weekdayIndex(day: string) {
 }
 
 /** A date the doctor can be booked on: tomorrow onwards, within the window,
-    on one of their clinic days. */
-export function isBookableDate(doctor: Pick<Doctor, "days">, day: string, today = manilaToday()) {
+    on a day with a timed clinic session. */
+export function isBookableDate(doctor: Pick<Doctor, "schedule">, day: string, today = manilaToday()) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return false;
   const first = addDays(today, 1);
   const last = addDays(today, BOOKING_WINDOW_DAYS);
-  return day >= first && day <= last && doctor.days.includes(weekdayIndex(day));
+  return day >= first && day <= last && sessionsOn(doctor.schedule, weekdayIndex(day)).some(isTimed);
 }
 
 /** "2026-10-21" → "Wednesday, October 21, 2026" */
@@ -68,30 +72,22 @@ export function formatBookingDate(day: string) {
 
 // ---- Slots -------------------------------------------------------------------
 
-const toMinutes = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3, 5));
 const fromMinutes = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 
-/** "13:40" → "1:40 PM" (12 NN for noon, per the house style). */
-export function formatTime(t: string) {
-  const m = toMinutes(t);
-  const h = Math.floor(m / 60);
-  const min = String(m % 60).padStart(2, "0");
-  if (h === 12 && m % 60 === 0) return "12:00 NN";
-  return `${h % 12 || 12}:${min} ${h >= 12 ? "PM" : "AM"}`;
-}
-
-/** 20-minute slot start times inside the clinic window. All-day clinics
-    skip the 12–1 PM lunch hour. */
-export function clinicSlots(booking: { from: string; to: string }) {
-  const start = toMinutes(booking.from);
-  const end = toMinutes(booking.to);
-  const allDay = start < 12 * 60 && end > 13 * 60;
-  const slots: string[] = [];
-  for (let m = start; m + SLOT_MINUTES <= end; m += SLOT_MINUTES) {
-    if (allDay && m >= 12 * 60 && m < 13 * 60) continue;
-    slots.push(fromMinutes(m));
+/** 20-minute slot start times in the doctor's clinic sessions on that date
+    ("YYYY-MM-DD"). All-day sessions skip the 12–1 PM lunch hour. */
+export function clinicSlots(doctor: Pick<Doctor, "schedule">, day: string) {
+  const slots = new Set<string>();
+  for (const s of sessionsOn(doctor.schedule, weekdayIndex(day)).filter(isTimed)) {
+    const start = toMinutes(s.from);
+    const end = toMinutes(s.to);
+    const allDay = start < 12 * 60 && end > 13 * 60;
+    for (let m = start; m + SLOT_MINUTES <= end; m += SLOT_MINUTES) {
+      if (allDay && m >= 12 * 60 && m < 13 * 60) continue;
+      slots.add(fromMinutes(m));
+    }
   }
-  return slots;
+  return [...slots].sort();
 }
 
 // ---- Patient details -----------------------------------------------------------

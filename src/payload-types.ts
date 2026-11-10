@@ -744,82 +744,93 @@ export interface Doctor {
    * Listed under "Doctors" on this department's page.
    */
   service?: (number | null) | Service;
-  days?: ('0' | '1' | '2' | '3' | '4' | '5')[] | null;
   /**
-   * e.g. "9:00 AM – 12:00 NN".
+   * One row per clinic session. Add two rows for the same day for a morning and an afternoon clinic. Leave the times empty when hours vary (on call, by OR schedule).
    */
-  hours: string;
+  schedule?:
+    | {
+        day: '0' | '1' | '2' | '3' | '4' | '5';
+        from?:
+          | (
+              | '06:00'
+              | '06:30'
+              | '07:00'
+              | '07:30'
+              | '08:00'
+              | '08:30'
+              | '09:00'
+              | '09:30'
+              | '10:00'
+              | '10:30'
+              | '11:00'
+              | '11:30'
+              | '12:00'
+              | '12:30'
+              | '13:00'
+              | '13:30'
+              | '14:00'
+              | '14:30'
+              | '15:00'
+              | '15:30'
+              | '16:00'
+              | '16:30'
+              | '17:00'
+              | '17:30'
+              | '18:00'
+              | '18:30'
+              | '19:00'
+              | '19:30'
+              | '20:00'
+              | '20:30'
+              | '21:00'
+            )
+          | null;
+        to?:
+          | (
+              | '06:00'
+              | '06:30'
+              | '07:00'
+              | '07:30'
+              | '08:00'
+              | '08:30'
+              | '09:00'
+              | '09:30'
+              | '10:00'
+              | '10:30'
+              | '11:00'
+              | '11:30'
+              | '12:00'
+              | '12:30'
+              | '13:00'
+              | '13:30'
+              | '14:00'
+              | '14:30'
+              | '15:00'
+              | '15:30'
+              | '16:00'
+              | '16:30'
+              | '17:00'
+              | '17:30'
+              | '18:00'
+              | '18:30'
+              | '19:00'
+              | '19:30'
+              | '20:00'
+              | '20:30'
+              | '21:00'
+            )
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   /**
-   * Clinic start and end times for online appointment requests (20-minute slots on the clinic days above; 12–1 PM is skipped for all-day clinics). Leave empty if this doctor cannot be booked online.
+   * Optional, shown with the schedule, e.g. "On call" or "By OR schedule".
    */
-  booking?: {
-    from?:
-      | (
-          | '06:00'
-          | '06:30'
-          | '07:00'
-          | '07:30'
-          | '08:00'
-          | '08:30'
-          | '09:00'
-          | '09:30'
-          | '10:00'
-          | '10:30'
-          | '11:00'
-          | '11:30'
-          | '12:00'
-          | '12:30'
-          | '13:00'
-          | '13:30'
-          | '14:00'
-          | '14:30'
-          | '15:00'
-          | '15:30'
-          | '16:00'
-          | '16:30'
-          | '17:00'
-          | '17:30'
-          | '18:00'
-          | '18:30'
-          | '19:00'
-          | '19:30'
-          | '20:00'
-        )
-      | null;
-    to?:
-      | (
-          | '06:00'
-          | '06:30'
-          | '07:00'
-          | '07:30'
-          | '08:00'
-          | '08:30'
-          | '09:00'
-          | '09:30'
-          | '10:00'
-          | '10:30'
-          | '11:00'
-          | '11:30'
-          | '12:00'
-          | '12:30'
-          | '13:00'
-          | '13:30'
-          | '14:00'
-          | '14:30'
-          | '15:00'
-          | '15:30'
-          | '16:00'
-          | '16:30'
-          | '17:00'
-          | '17:30'
-          | '18:00'
-          | '18:30'
-          | '19:00'
-          | '19:30'
-          | '20:00'
-        )
-      | null;
-  };
+  scheduleNote?: string | null;
+  /**
+   * Patients can request 20-minute slots in the timed clinic sessions above (12–1 PM is skipped for all-day clinics).
+   */
+  bookable?: boolean | null;
   /**
    * Untick to hide from the directory.
    */
@@ -1455,14 +1466,16 @@ export interface DoctorsSelect<T extends boolean = true> {
   specialty?: T;
   group?: T;
   service?: T;
-  days?: T;
-  hours?: T;
-  booking?:
+  schedule?:
     | T
     | {
+        day?: T;
         from?: T;
         to?: T;
+        id?: T;
       };
+  scheduleNote?: T;
+  bookable?: T;
   active?: T;
   slug?: T;
   sort?: T;

@@ -40,7 +40,7 @@ export async function submitBooking(_prev: BookingState, formData: FormData): Pr
   const doctor = await findBookableDoctor(get("doctor"));
   const date = get("date");
   const time = get("time");
-  if (!doctor || !isBookableDate(doctor, date) || !clinicSlots(doctor.booking).includes(time)) {
+  if (!doctor || !isBookableDate(doctor, date) || !clinicSlots(doctor, date).includes(time)) {
     return { status: "invalid", errors: { slot: "Choose the department, doctor, date and time again." } };
   }
 

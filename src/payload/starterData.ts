@@ -4,7 +4,6 @@
  */
 import { doctors } from "@/content/people";
 import { patientRightsPage, privacyPage } from "@/content/legal";
-import type { Doctor as PayloadDoctor } from "@/payload-types";
 import { blocksToLexical } from "./richText";
 
 /** Draft privacy notice / patient rights copy for the legal-pages global. */
@@ -27,7 +26,12 @@ export function accreditationBadgesData(dohLicenceLevel: string) {
   ];
 }
 
-/** Prototype online-booking clinic windows, by doctor slug. */
+/** Prototype online-booking clinic windows, by doctor slug. Only the
+    2026-10-22 migration reads this (it predates per-day schedules), so it
+    takes each bookable doctor's first timed session. */
 export const doctorBookingTimes = new Map(
-  doctors.filter((d) => d.booking).map((d) => [d.slug, d.booking as NonNullable<PayloadDoctor["booking"]>] as const),
+  doctors.flatMap((d) => {
+    const s = d.bookable ? d.schedule.find((x) => x.from && x.to) : undefined;
+    return s ? [[d.slug, { from: s.from!, to: s.to! }] as const] : [];
+  }),
 );

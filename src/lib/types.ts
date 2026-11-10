@@ -167,11 +167,23 @@ export type Doctor = {
   group: string;
   /** Service slug, for "related doctors" on a department page. */
   service?: string;
-  /** Regular clinic days, 0 = Mon … 5 = Sat. */
+  /** Weekly clinic sessions; a day can have several. See lib/schedule. */
+  schedule: ClinicSession[];
+  /** Clinic days derived from the schedule, 0 = Mon … 5 = Sat. */
   days: number[];
-  hours: string;
-  /** Clinic window for online booking ("HH:MM", 24h). Absent = not bookable. */
-  booking?: { from: string; to: string };
+  /** Free text shown with the schedule, e.g. "On call" or "By OR schedule". */
+  scheduleNote?: string;
+  /** Can be booked online (in the timed sessions above). */
+  bookable: boolean;
+};
+
+/** One clinic session. No times = in on that day, hours vary. */
+export type ClinicSession = {
+  /** 0 = Mon … 5 = Sat. */
+  day: number;
+  /** "HH:MM", 24-hour. */
+  from?: string;
+  to?: string;
 };
 
 export type StaffMember = {

@@ -5,16 +5,8 @@ import { Icon } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Avatar } from "@/components/ui/Avatar";
 import { FilterChips } from "@/components/ui/FilterChips";
+import { dayHours, scheduleSummary, sessionsOn, WEEKDAYS as DAYS } from "@/lib/schedule";
 import type { Doctor } from "@/lib/types";
-
-const DAYS = [
-  { short: "M", label: "Mon", full: "Monday" },
-  { short: "T", label: "Tue", full: "Tuesday" },
-  { short: "W", label: "Wed", full: "Wednesday" },
-  { short: "Th", label: "Thu", full: "Thursday" },
-  { short: "F", label: "Fri", full: "Friday" },
-  { short: "S", label: "Sat", full: "Saturday" },
-];
 
 /**
  * Filterable consultant list: name search and specialty in the hero search
@@ -131,34 +123,87 @@ export function DoctorDirectory({ doctors, groups }: { doctors: Doctor[]; groups
                 <div className="min-w-0 flex-[1_1_220px]">
                   <h2 className="mb-[3px] text-[17px] font-bold nav:text-[17.5px]">{d.name}</h2>
                   <div className="text-sm font-semibold text-green-600">{d.specialty}</div>
+                  {d.scheduleNote && (
+                    <div className="mt-1.5 flex items-center gap-1.5 text-[13.5px] text-ink-500">
+                      <Icon name="info" size={16} className="text-ink-400" />
+                      {d.scheduleNote}
+                    </div>
+                  )}
                 </div>
-                <ul className="flex flex-[1_1_300px] gap-[7px]" aria-label="Clinic days">
-                  {DAYS.map((dd, i) => {
-                    const on = d.days.includes(i);
-                    return (
-                      <li
-                        key={dd.short}
-                        className={`min-w-0 flex-1 rounded-[8px] py-[7px] text-center text-[12.5px] ${
-                          on ? "bg-navy-700 font-bold text-white" : "bg-line-050 font-semibold text-ink-300"
-                        }`}
-                      >
-                        <span aria-hidden="true">{dd.short}</span>
-                        <span className="sr-only">
-                          {dd.full}: {on ? "clinic" : "no clinic"}
-                        </span>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <div className="flex flex-[1_1_180px] items-center gap-2 text-sm text-ink-700">
-                  <Icon name="schedule" size={18} className="text-ink-400" />
-                  {d.hours}
-                </div>
+                <Schedule doctor={d} />
               </li>
             ))}
           </ul>
         )}
       </div>
     </>
+  );
+}
+
+/**
+ * Desktop: the week as six columns, each clinic day with its hours.
+ * Phone/tablet: the day strip, then the hours grouped by day.
+ */
+function Schedule({ doctor }: { doctor: Doctor }) {
+  return (
+    <div className="w-full nav:w-auto nav:flex-[2_1_520px]">
+      <ul className="hidden grid-cols-6 gap-[7px] nav:grid" aria-label="Clinic schedule">
+        {DAYS.map((day, i) => {
+          const sessions = sessionsOn(doctor.schedule, i);
+          const on = sessions.length > 0;
+          const hours = dayHours(sessions);
+          return (
+            <li
+              key={day.label}
+              className={`flex min-w-0 flex-col overflow-hidden rounded-[8px] text-center ${
+                on ? "border border-navy-700 bg-white" : "bg-line-050"
+              }`}
+            >
+              <span
+                className={`py-[5px] text-[12.5px] ${on ? "bg-navy-700 font-bold text-white" : "font-semibold text-ink-300"}`}
+              >
+                <span aria-hidden="true">{day.label}</span>
+                <span className="sr-only">{day.full}:</span>
+              </span>
+              <span className="flex flex-1 flex-col justify-center gap-1 px-1 py-[7px] text-[12.5px] leading-[1.3] text-ink-700">
+                {!on ? (
+                  <span className="sr-only">no clinic</span>
+                ) : hours ? (
+                  hours.split(", ").map((h) => <span key={h}>{h}</span>)
+                ) : (
+                  <span className="text-ink-500">Hours vary</span>
+                )}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+
+      <div className="nav:hidden">
+        <ul className="flex gap-[7px]" aria-hidden="true">
+          {DAYS.map((day) => {
+            const on = doctor.days.includes(DAYS.indexOf(day));
+            return (
+              <li
+                key={day.short}
+                className={`min-w-0 flex-1 rounded-[8px] py-[7px] text-center text-[12.5px] ${
+                  on ? "bg-navy-700 font-bold text-white" : "bg-line-050 font-semibold text-ink-300"
+                }`}
+              >
+                {day.short}
+              </li>
+            );
+          })}
+        </ul>
+        <ul className="mt-2.5 flex flex-col gap-1 text-sm text-ink-700" aria-label="Clinic schedule">
+          {scheduleSummary(doctor.schedule).map((line) => (
+            <li key={line} className="flex items-start gap-2">
+              <Icon name="schedule" size={18} className="text-ink-400" />
+              {line}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }

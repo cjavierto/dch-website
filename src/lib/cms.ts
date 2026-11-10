@@ -30,6 +30,7 @@ import type {
 } from "@/lib/types";
 import { notifyBooking, notifyContact, notifyJobApplication, recipients } from "@/lib/notify";
 import type * as P from "@/payload-types";
+import { scheduleDays } from "@/lib/schedule";
 import { DOCTOR_GROUPS } from "@/payload/collections/People";
 import { lexicalToBlocks } from "@/payload/richText";
 
@@ -165,6 +166,9 @@ function toService(s: P.Service): Service {
 }
 
 function toDoctor(d: P.Doctor): Doctor {
+  const schedule = (d.schedule ?? [])
+    .map((s) => ({ day: Number(s.day), from: opt(s.from), to: opt(s.to) }))
+    .sort((a, b) => a.day - b.day || (a.from ?? "").localeCompare(b.from ?? ""));
   return {
     slug: d.slug,
     name: d.name,
@@ -173,9 +177,10 @@ function toDoctor(d: P.Doctor): Doctor {
     specialty: d.specialty,
     group: d.group,
     service: slugOf(d.service as P.Service | number | null),
-    days: (d.days ?? []).map(Number),
-    hours: d.hours,
-    booking: d.booking?.from && d.booking?.to ? { from: d.booking.from, to: d.booking.to } : undefined,
+    schedule,
+    days: scheduleDays(schedule),
+    scheduleNote: opt(d.scheduleNote),
+    bookable: Boolean(d.bookable),
   };
 }
 
