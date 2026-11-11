@@ -7,6 +7,7 @@ import * as migration_20261108_051550_notification_recipients from './20261108_0
 import * as migration_20261110_120812_doctor_schedule from './20261110_120812_doctor_schedule';
 import * as migration_20261110_124525_homepage_quick_links from './20261110_124525_homepage_quick_links';
 import * as migration_20261110_125720_map_embed from './20261110_125720_map_embed';
+import * as migration_20261110_215851_activity_log from './20261110_215851_activity_log';
 
 export const migrations = [
   {
@@ -52,6 +53,11 @@ export const migrations = [
   {
     up: migration_20261110_125720_map_embed.up,
     down: migration_20261110_125720_map_embed.down,
-    name: '20261110_125720_map_embed'
+    name: '20261110_125720_map_embed',
+  },
+  {
+    up: migration_20261110_215851_activity_log.up,
+    down: migration_20261110_215851_activity_log.down,
+    name: '20261110_215851_activity_log'
   },
 ];

@@ -80,6 +80,7 @@ export interface Config {
     'applicant-files': ApplicantFile;
     media: Media;
     users: User;
+    'audit-log': AuditLog;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -109,6 +110,7 @@ export interface Config {
     'applicant-files': ApplicantFilesSelect<false> | ApplicantFilesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'audit-log': AuditLogSelect<false> | AuditLogSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -1206,6 +1208,29 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Who changed what in the admin, newest first. Entries can't be edited or deleted.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audit-log".
+ */
+export interface AuditLog {
+  id: number;
+  summary: string;
+  action: 'create' | 'update' | 'draft' | 'publish' | 'delete' | 'login' | 'logout';
+  /**
+   * Collection or page settings.
+   */
+  section?: string | null;
+  documentTitle?: string | null;
+  documentId?: string | null;
+  changes?: string | null;
+  user?: (number | null) | User;
+  userName?: string | null;
+  userEmail?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -1280,6 +1305,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'audit-log';
+        value: number | AuditLog;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1684,6 +1713,23 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audit-log_select".
+ */
+export interface AuditLogSelect<T extends boolean = true> {
+  summary?: T;
+  action?: T;
+  section?: T;
+  documentTitle?: T;
+  documentId?: T;
+  changes?: T;
+  user?: T;
+  userName?: T;
+  userEmail?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

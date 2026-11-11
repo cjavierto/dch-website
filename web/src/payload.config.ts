@@ -4,6 +4,7 @@ import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { migrations } from "./migrations";
+import { AuditLog, withAudit, withAuditGlobals } from "./payload/audit";
 import { bodyEditor } from "./payload/fields";
 import { Articles, NewsPosts } from "./payload/collections/Posts";
 import { BookingRequests, ContactSubmissions, JobApplications, Users } from "./payload/collections/Inbox";
@@ -37,21 +38,24 @@ export default buildConfig({
   // Order sets the sidebar: Content, Inbox, Library, Settings.
   // Booking requests stay hidden in the admin until booking launches.
   collections: [
-    Services,
-    NewsPosts,
-    Articles,
-    Doctors,
-    StaffMembers,
-    JobPostings,
-    Faqs,
-    ContactSubmissions,
-    BookingRequests,
-    JobApplications,
-    ApplicantFiles,
-    Media,
-    Users,
+    ...withAudit([
+      Services,
+      NewsPosts,
+      Articles,
+      Doctors,
+      StaffMembers,
+      JobPostings,
+      Faqs,
+      ContactSubmissions,
+      BookingRequests,
+      JobApplications,
+      ApplicantFiles,
+      Media,
+      Users,
+    ]),
+    AuditLog,
   ],
-  globals: [AboutPage, VisionPage, PatientsPage, CareersPage, SiteSettings, HomepageSettings, LegalPages],
+  globals: withAuditGlobals([AboutPage, VisionPage, PatientsPage, CareersPage, SiteSettings, HomepageSettings, LegalPages]),
   editor: bodyEditor,
   // SQLite: one file (data/dch.db by default), so the site runs on Namecheap
   // shared hosting without a database server. Schema changes always go
