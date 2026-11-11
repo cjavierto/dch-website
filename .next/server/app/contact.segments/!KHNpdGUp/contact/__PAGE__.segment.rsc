@@ -4,7 +4,7 @@
 6:I[837457,["$4"],"default"]
 b:"/_next/static/chunks/3bca0_wyukihf.js"
 c:"/_next/static/chunks/0x8b34faa_kj2.js"
-d:"/_next/static/chunks/0p72-_l8oxcey.js"
+d:"/_next/static/chunks/0rrb6t9d9f_12.js"
 e:I[522016,["$b","$c","$d"],""]
 f:"$Sreact.suspense"
 10:I[802111,["$b","$c","$d"],"ContactForm"]
@@ -30,12 +30,12 @@ a:[["children",{"s":"__PAGE__","h":49314,"d":{"r":["$","$3","c",{"children":[[["
 20:C
 23:X
 23:C
-0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L1b",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L1d",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$f",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Contact us · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Send Deiparine Community Hospital a message — appointment requests, billing and PhilHealth questions, medical records. We reply within one working day."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L1e","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1f","v":"$20","s":"$9"}},"a":"$@21","u":"$@22","b":"bq505gGkFHp1GOaU86Z2p","r":"$23"}
+0:{"t":{"t":{"s":"","h":49234,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L1b",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0e2559"}]]}],["$","$L1d",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$f",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Contact us · Deiparine Community Hospital"}],["$","meta","1",{"name":"description","content":"Send Deiparine Community Hospital a message — appointment requests, billing and PhilHealth questions, medical records. We reply within one working day."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.jpg?icon.1z746a3yetqs0.jpg","sizes":"447x447","type":"image/jpeg"}],["$","$L1e","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1f","v":"$20","s":"$9"}},"a":"$@21","u":"$@22","b":"JfBKOxIz9U3Wa06iwsuoj","r":"$23"}
 24:I[897367,["$4"],"OutletBoundary"]
 13:["$","h2",null,{"className":"mb-[5px] text-[17px] font-bold nav:mb-1.5 nav:text-[19px]","children":"Emergency hotline"}]
 14:["$","p",null,{"className":"mb-[7px] text-[14px] leading-[1.5] text-red-200 nav:mb-2 nav:text-[15px]","children":"Ambulance and ER are staffed 24 hours a day."}]
 15:["$","a",null,{"href":"tel:+63324841234","className":"font-display text-[19px] font-bold text-white hover:text-red-200 nav:text-[22px]","children":"(032) 484 1234"}]
-16:["$","script","script-0",{"src":"/_next/static/chunks/0p72-_l8oxcey.js","async":true}]
+16:["$","script","script-0",{"src":"/_next/static/chunks/0rrb6t9d9f_12.js","async":true}]
 17:["$","$L24",null,{"children":["$","$f",null,{"name":"Next.MetadataOutlet","children":"$@25"}]}]
 22:false
 25:null
