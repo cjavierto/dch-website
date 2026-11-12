@@ -1,0 +1,3 @@
+module.exports=[193695,(e,t,i)=>{t.exports=e.x("next/dist/shared/lib/no-fallback-error.external.js",()=>require("next/dist/shared/lib/no-fallback-error.external.js"))},912081,e=>{"use strict";let t="https://staging.deiparinecommunityhospital.ph".replace(/\/$/,""),i=["deiparinecommunityhospital.ph","www.deiparinecommunityhospital.ph"].includes(new URL(t).hostname);e.s(["U",0,i,"A",0,t])}];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__0a_ek2togqahj._.js.map

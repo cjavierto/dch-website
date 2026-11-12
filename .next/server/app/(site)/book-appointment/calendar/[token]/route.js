@@ -1,0 +1,13 @@
+var R=require("../../../../../chunks/[turbopack]_runtime.js")("server/app/(site)/book-appointment/calendar/[token]/route.js")
+R.c("server/chunks/[externals]_next_dist_shared_lib_no-fallback-error_external_0r3u29kz7xt8e.js")
+R.c("server/chunks/[root-of-the-server]__12uj0887q1ayr._.js")
+R.c("server/chunks/_0odcs63u1hmk-._.js")
+R.c("server/chunks/[externals]__0mvrq92yurzk_._.js")
+R.c("server/chunks/_0q9xweg9c8puq._.js")
+R.c("server/chunks/node_modules_date-fns_locale_0ooxnatkzpb34._.js")
+R.c("server/chunks/_1ido-arrv7fes._.js")
+R.c("server/chunks/_1e0aljt466f05._.js")
+R.c("server/chunks/node_modules_next_dist_1b7kgs4a4xh1w._.js")
+R.c("server/chunks/[root-of-the-server]__1nwxvtx1ig2pj._.js")
+R.m(953849)
+module.exports=R.m(953849).exports

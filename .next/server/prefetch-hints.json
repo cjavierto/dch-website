@@ -113,6 +113,54 @@
       }
     }
   },
+  "/book-appointment/manage/[token]": {
+    "hints": 16448,
+    "slots": {
+      "children": {
+        "hints": 16416,
+        "slots": {
+          "children": {
+            "hints": 16448,
+            "slots": {
+              "children": {
+                "hints": 16480,
+                "slots": {
+                  "children": {
+                    "hints": 16480,
+                    "slots": {
+                      "children": {
+                        "hints": 16544,
+                        "slots": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/book-appointment": {
+    "hints": 49216,
+    "slots": {
+      "children": {
+        "hints": 49184,
+        "slots": {
+          "children": {
+            "hints": 49216,
+            "slots": {
+              "children": {
+                "hints": 49312,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "/book": {
     "hints": 49216,
     "slots": {

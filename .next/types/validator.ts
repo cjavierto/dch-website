@@ -120,6 +120,40 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../src/app/(site)/book-appointment/manage/[token]/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/book-appointment/manage/[token]">> = Specific
+  const handler = {} as typeof import("../../src/app/(site)/book-appointment/manage/[token]/page.js")
+  type __Check = __IsExpected<typeof handler>
+  
+  type __ParamMatchingValue =
+    typeof handler extends { unstable_paramMatching: infer Matcher } ? Matcher :
+    typeof handler extends { unstable_generateParamMatching: (...args: any[]) => infer Matcher } ? Awaited<Matcher> : {}
+  type __InvalidParamMatchingKeys = Exclude<keyof __ParamMatchingValue, keyof ParamMap["/book-appointment/manage/[token]"]>
+  type __AssertNoInvalidParamMatchingKeys<Invalid extends never> = Invalid
+  const __paramMatchingKeyCheck: __AssertNoInvalidParamMatchingKeys<__InvalidParamMatchingKeys> | undefined = undefined
+  void __paramMatchingKeyCheck
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(site)/book-appointment/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/book-appointment">> = Specific
+  const handler = {} as typeof import("../../src/app/(site)/book-appointment/page.js")
+  type __Check = __IsExpected<typeof handler>
+  
+  type __ParamMatchingValue =
+    typeof handler extends { unstable_paramMatching: infer Matcher } ? Matcher :
+    typeof handler extends { unstable_generateParamMatching: (...args: any[]) => infer Matcher } ? Awaited<Matcher> : {}
+  type __InvalidParamMatchingKeys = Exclude<keyof __ParamMatchingValue, keyof ParamMap["/book-appointment"]>
+  type __AssertNoInvalidParamMatchingKeys<Invalid extends never> = Invalid
+  const __paramMatchingKeyCheck: __AssertNoInvalidParamMatchingKeys<__InvalidParamMatchingKeys> | undefined = undefined
+  void __paramMatchingKeyCheck
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/(site)/book/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/book">> = Specific
@@ -396,6 +430,16 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends RouteHandlerConfig<"/api/[...slug]">> = Specific
   const handler = {} as typeof import("../../src/app/(payload)/api/[...slug]/route.js")
+  type __Check = __IsExpected<typeof handler>
+  
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/(site)/book-appointment/calendar/[token]/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/book-appointment/calendar/[token]">> = Specific
+  const handler = {} as typeof import("../../src/app/(site)/book-appointment/calendar/[token]/route.js")
   type __Check = __IsExpected<typeof handler>
   
   // @ts-ignore

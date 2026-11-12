@@ -7,9 +7,9 @@
     "static/chunks/0cz1d0mv5g_q7.js"
   ],
   "lowPriorityFiles": [
-    "static/JfBKOxIz9U3Wa06iwsuoj/_buildManifest.js",
-    "static/JfBKOxIz9U3Wa06iwsuoj/_ssgManifest.js",
-    "static/JfBKOxIz9U3Wa06iwsuoj/_clientMiddlewareManifest.js"
+    "static/0ofasOdZo09eIx8Dnl4K6/_buildManifest.js",
+    "static/0ofasOdZo09eIx8Dnl4K6/_ssgManifest.js",
+    "static/0ofasOdZo09eIx8Dnl4K6/_clientMiddlewareManifest.js"
   ],
   "rootMainFiles": [
     "static/chunks/093w4w_19h9qh.js",
@@ -98,6 +98,28 @@
       ]
     },
     "/(site)/book/page": {
+      "otherChunks": [
+        "static/chunks/093w4w_19h9qh.js",
+        "static/chunks/3wjkd7x0y2arl.js",
+        "static/chunks/1_zw8ch5ym51z.js",
+        "static/chunks/1u4fxkbj-x676.js"
+      ],
+      "runtimeModuleIds": [
+        494553
+      ]
+    },
+    "/(site)/book-appointment/page": {
+      "otherChunks": [
+        "static/chunks/093w4w_19h9qh.js",
+        "static/chunks/3wjkd7x0y2arl.js",
+        "static/chunks/1_zw8ch5ym51z.js",
+        "static/chunks/1u4fxkbj-x676.js"
+      ],
+      "runtimeModuleIds": [
+        494553
+      ]
+    },
+    "/(site)/book-appointment/manage/[token]/page": {
       "otherChunks": [
         "static/chunks/093w4w_19h9qh.js",
         "static/chunks/3wjkd7x0y2arl.js",

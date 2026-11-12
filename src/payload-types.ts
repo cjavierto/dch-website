@@ -834,9 +834,23 @@ export interface Doctor {
    */
   scheduleNote?: string | null;
   /**
-   * Patients can request 20-minute slots in the timed clinic sessions above (12–1 PM is skipped for all-day clinics).
+   * Patients can book 20-minute slots in the timed clinic sessions above on the Book an appointment page (12–1 PM is skipped for all-day clinics).
    */
   bookable?: boolean | null;
+  /**
+   * Leave, conferences and other days this doctor has no clinic. Nobody can book these dates. Existing appointments are not cancelled automatically.
+   */
+  daysOff?:
+    | {
+        from: string;
+        /**
+         * Leave empty for one day.
+         */
+        to?: string | null;
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   /**
    * Untick to hide from the directory.
    */
@@ -1112,7 +1126,7 @@ export interface ContactSubmission {
   createdAt: string;
 }
 /**
- * Requests from the public booking page. Text the patient to confirm, then set the status.
+ * Booked online. Patients get an email with a link to reschedule or cancel. Setting the status to Cancelled emails the patient and frees the slot.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "booking-requests".
@@ -1131,14 +1145,20 @@ export interface BookingRequest {
   time: string;
   name: string;
   mobile: string;
-  philhealth?: string | null;
+  email?: string | null;
   firstVisit: 'yes' | 'no';
+  philhealth?: string | null;
   reason: string;
   /**
-   * Declined and cancelled requests free the slot again.
+   * Booked, rescheduled and cancelled by the patient.
    */
-  status: 'requested' | 'confirmed' | 'declined' | 'cancelled';
+  history?: string | null;
+  /**
+   * Cancelled and declined appointments free the slot again.
+   */
+  status: 'requested' | 'confirmed' | 'completed' | 'no-show' | 'cancelled' | 'declined';
   notes?: string | null;
+  manageToken?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1511,6 +1531,14 @@ export interface DoctorsSelect<T extends boolean = true> {
       };
   scheduleNote?: T;
   bookable?: T;
+  daysOff?:
+    | T
+    | {
+        from?: T;
+        to?: T;
+        note?: T;
+        id?: T;
+      };
   active?: T;
   slug?: T;
   sort?: T;
@@ -1611,11 +1639,14 @@ export interface BookingRequestsSelect<T extends boolean = true> {
   time?: T;
   name?: T;
   mobile?: T;
-  philhealth?: T;
+  email?: T;
   firstVisit?: T;
+  philhealth?: T;
   reason?: T;
+  history?: T;
   status?: T;
   notes?: T;
+  manageToken?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2160,8 +2191,28 @@ export interface SiteSetting {
           id?: string | null;
         }[]
       | null;
+    appointmentRecipients?:
+      | {
+          email: string;
+          id?: string | null;
+        }[]
+      | null;
   };
   outpatientHours: string;
+  /**
+   * Holidays and other days the outpatient clinics are closed. Nobody can book an appointment on these dates.
+   */
+  clinicClosures?:
+    | {
+        from: string;
+        /**
+         * Leave empty for one day.
+         */
+        to?: string | null;
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   visitingHours?:
     | {
         area: string;
@@ -2540,8 +2591,22 @@ export interface SiteSettingsSelect<T extends boolean = true> {
               email?: T;
               id?: T;
             };
+        appointmentRecipients?:
+          | T
+          | {
+              email?: T;
+              id?: T;
+            };
       };
   outpatientHours?: T;
+  clinicClosures?:
+    | T
+    | {
+        from?: T;
+        to?: T;
+        note?: T;
+        id?: T;
+      };
   visitingHours?:
     | T
     | {

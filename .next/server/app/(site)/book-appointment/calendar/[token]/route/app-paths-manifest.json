@@ -1,0 +1,3 @@
+{
+  "/(site)/book-appointment/calendar/[token]/route": "app/(site)/book-appointment/calendar/[token]/route.js"
+}

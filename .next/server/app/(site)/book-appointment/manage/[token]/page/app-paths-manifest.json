@@ -1,0 +1,3 @@
+{
+  "/(site)/book-appointment/manage/[token]/page": "app/(site)/book-appointment/manage/[token]/page.js"
+}

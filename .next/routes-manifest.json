@@ -71,6 +71,31 @@
       "namedRegex": "^/api/(?<nxtPslug>.+?)(?:/)?$"
     },
     {
+      "page": "/book-appointment/calendar/[token]",
+      "regex": "^/book\\-appointment/calendar/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPtoken": "nxtPtoken"
+      },
+      "namedRegex": "^/book\\-appointment/calendar/(?<nxtPtoken>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/book-appointment/manage/[token]",
+      "regex": "^/book\\-appointment/manage/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPtoken": "nxtPtoken"
+      },
+      "namedRegex": "^/book\\-appointment/manage/(?<nxtPtoken>[^/]+?)(?:/)?$",
+      "prefetchSegmentDataRoutes": [
+        {
+          "destination": "/book-appointment/manage/[token].segments/!KHNpdGUp/book-appointment/manage/$d$token$segment",
+          "source": "^/book\\-appointment/manage/(?<nxtPtoken>[^/]+?)\\.segments/!KHNpdGUp/book\\-appointment/manage/\\$d\\$token(?<segment>/__PAGE__\\.segment\\.rsc|\\.segment\\.rsc)(?:/)?$",
+          "routeKeys": {
+            "nxtPtoken": "nxtPtoken"
+          }
+        }
+      ]
+    },
+    {
       "page": "/careers/[slug]",
       "regex": "^/careers/([^/]+?)(?:/)?$",
       "routeKeys": {
@@ -181,6 +206,12 @@
       "regex": "^/book(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/book(?:/)?$"
+    },
+    {
+      "page": "/book-appointment",
+      "regex": "^/book\\-appointment(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/book\\-appointment(?:/)?$"
     },
     {
       "page": "/careers",

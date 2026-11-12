@@ -10,12 +10,12 @@ import type { Payload } from "payload";
 import { CONTACT_SUBJECTS, type ContactSubject } from "@/lib/contact";
 import { SITE_URL } from "@/lib/site";
 
-const escape = (s: string) =>
+export const escape = (s: string) =>
   s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 
 type Row = [label: string, value: string | null | undefined];
 
-function render(title: string, rows: Row[], adminPath: string, note?: string) {
+export function render(title: string, rows: Row[], adminPath: string, note?: string) {
   const link = `${SITE_URL}${adminPath}`;
   const shown = rows.filter((r): r is [string, string] => Boolean(r[1]));
   const text = [
@@ -46,7 +46,12 @@ export function recipients(main: string | null | undefined, extra: { email: stri
   return [...new Set(all)];
 }
 
-async function send(payload: Payload, message: { to: string[]; subject: string; replyTo?: string; text: string; html: string }) {
+export type Attachment = { filename: string; content: string; contentType: string };
+
+export async function send(
+  payload: Payload,
+  message: { to: string[]; subject: string; replyTo?: string; text: string; html: string; attachments?: Attachment[] },
+) {
   if (!message.to.length) return;
   try {
     await payload.sendEmail(message);
