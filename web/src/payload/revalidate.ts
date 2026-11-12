@@ -2,7 +2,7 @@
  * Payload hooks that expire the public site's "use cache" entries
  * (see cacheTag calls in src/lib/cms.ts) when content changes.
  */
-import { revalidateTag } from "next/cache";
+import { expireTags } from "@/lib/cacheTags";
 import type {
   CollectionAfterChangeHook,
   CollectionAfterDeleteHook,
@@ -16,14 +16,12 @@ export const ALL_TAGS = ["site-settings", "homepage", "faqs", "pages", "services
 export function expire(tags: string[], req: PayloadRequest) {
   // The seed script runs outside Next.js, where there is no cache to expire.
   if (req.context.skipRevalidate) return;
-  for (const tag of tags) {
-    try {
-      // expire: 0 → the next visit renders fresh content, so editors see
-      // their change straight away.
-      revalidateTag(tag, { expire: 0 });
-    } catch (err) {
-      req.payload.logger.warn(`revalidateTag("${tag}") skipped: ${(err as Error).message}`);
-    }
+  try {
+    // Expired now → the next visit renders fresh content, so editors see
+    // their change straight away (in every server process; see lib/cacheTags).
+    expireTags(tags);
+  } catch (err) {
+    req.payload.logger.warn(`Cache refresh for ${tags.join(", ")} skipped: ${(err as Error).message}`);
   }
 }
 
