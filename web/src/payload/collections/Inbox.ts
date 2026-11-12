@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { CONTACT_SUBJECTS } from "@/lib/contact";
-import { BOOKING_ENABLED } from "@/lib/features";
+import { APPOINTMENT_STATUSES } from "@/lib/appointments";
+import { emailPatientWhenHospitalCancels } from "@/lib/appointmentEmails";
 
 const signedIn = ({ req }: { req: { user?: unknown } }) => Boolean(req.user);
 
@@ -98,22 +99,24 @@ export const Users: CollectionConfig = {
   ],
 };
 
-/** Online appointment requests (/book). Staff confirm each one by SMS — a
-    request is not a confirmed booking. Hidden in the admin until booking
-    launches (NEXT_PUBLIC_BOOKING_ENABLED). */
+/** Appointments from the public booking pages. /book-appointment books a
+    slot straight away (status Confirmed) and emails the patient a link to
+    reschedule or cancel; the older /book page saves a Requested entry for
+    staff to confirm by SMS. */
 export const BookingRequests: CollectionConfig = {
   slug: "booking-requests",
-  labels: { singular: "Booking request", plural: "Booking entries" },
+  labels: { singular: "Appointment", plural: "Appointments" },
   admin: {
     group: "Inbox",
-    hidden: !BOOKING_ENABLED,
     useAsTitle: "name",
-    defaultColumns: ["name", "doctor", "date", "time", "status", "createdAt"],
-    listSearchableFields: ["name", "mobile", "reason"],
-    description: "Requests from the public booking page. Text the patient to confirm, then set the status.",
+    defaultColumns: ["date", "time", "name", "doctor", "status"],
+    listSearchableFields: ["name", "mobile", "email", "reason"],
+    description:
+      "Booked online. Patients get an email with a link to reschedule or cancel. Setting the status to Cancelled emails the patient and frees the slot.",
   },
-  defaultSort: "-createdAt",
+  defaultSort: "-date",
   access: { create: signedIn, read: signedIn, update: signedIn, delete: signedIn },
+  hooks: { afterChange: [emailPatientWhenHospitalCancels] },
   fields: [
     {
       type: "row",
@@ -134,34 +137,41 @@ export const BookingRequests: CollectionConfig = {
       fields: [
         { name: "name", type: "text", required: true, admin: { readOnly: true } },
         { name: "mobile", type: "text", required: true, admin: { readOnly: true } },
-        { name: "philhealth", label: "PhilHealth number", type: "text", admin: { readOnly: true } },
+        { name: "email", type: "email", admin: { readOnly: true } },
       ],
     },
     {
-      name: "firstVisit",
-      label: "First visit",
-      type: "select",
-      required: true,
-      options: [
-        { label: "Yes, first time at DCH", value: "yes" },
-        { label: "No, has a patient record", value: "no" },
+      type: "row",
+      fields: [
+        {
+          name: "firstVisit",
+          label: "First visit",
+          type: "select",
+          required: true,
+          options: [
+            { label: "Yes, first time at DCH", value: "yes" },
+            { label: "No, has a patient record", value: "no" },
+          ],
+          admin: { readOnly: true },
+        },
+        { name: "philhealth", label: "PhilHealth number", type: "text", admin: { readOnly: true } },
       ],
-      admin: { readOnly: true },
     },
     { name: "reason", label: "Reason for visit", type: "textarea", required: true, admin: { readOnly: true } },
+    {
+      name: "history",
+      type: "textarea",
+      admin: { readOnly: true, description: "Booked, rescheduled and cancelled by the patient." },
+    },
     {
       name: "status",
       type: "select",
       required: true,
       defaultValue: "requested",
-      options: [
-        { label: "Requested", value: "requested" },
-        { label: "Confirmed", value: "confirmed" },
-        { label: "Declined", value: "declined" },
-        { label: "Cancelled", value: "cancelled" },
-      ],
-      admin: { position: "sidebar", description: "Declined and cancelled requests free the slot again." },
+      options: [...APPOINTMENT_STATUSES],
+      admin: { position: "sidebar", description: "Cancelled and declined appointments free the slot again." },
     },
     { name: "notes", label: "Internal notes", type: "textarea", admin: { position: "sidebar" } },
+    { name: "manageToken", type: "text", index: true, admin: { hidden: true } },
   ],
 };

@@ -11,6 +11,7 @@
 import { cacheLife, cacheTag } from "next/cache";
 import config from "@payload-config";
 import { getPayload, type Where } from "payload";
+import { toClosedRanges } from "@/lib/appointments";
 import { formatBookingDate, formatTime } from "@/lib/booking";
 import { CV_TYPES } from "@/lib/careers";
 import type { ContactSubject } from "@/lib/contact";
@@ -113,6 +114,7 @@ function toSiteSettings(s: P.SiteSetting): SiteSettings {
     email: s.email,
     careersEmail: s.careersEmail,
     outpatientHours: s.outpatientHours,
+    clinicClosures: toClosedRanges(s.clinicClosures),
     mapUrl: s.mapUrl,
     mapEmbedUrl: mapEmbedUrl(s),
     visitingHours: (s.visitingHours ?? []).map(({ area, hours }) => ({ area, hours })),
@@ -192,6 +194,7 @@ function toDoctor(d: P.Doctor): Doctor {
     days: scheduleDays(schedule),
     scheduleNote: opt(d.scheduleNote),
     bookable: Boolean(d.bookable),
+    daysOff: toClosedRanges(d.daysOff),
   };
 }
 

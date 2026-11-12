@@ -8,6 +8,7 @@ import * as migration_20261110_120812_doctor_schedule from './20261110_120812_do
 import * as migration_20261110_124525_homepage_quick_links from './20261110_124525_homepage_quick_links';
 import * as migration_20261110_125720_map_embed from './20261110_125720_map_embed';
 import * as migration_20261110_215851_activity_log from './20261110_215851_activity_log';
+import * as migration_20261112_110026_appointments from './20261112_110026_appointments';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261110_215851_activity_log.up,
     down: migration_20261110_215851_activity_log.down,
-    name: '20261110_215851_activity_log'
+    name: '20261110_215851_activity_log',
+  },
+  {
+    up: migration_20261112_110026_appointments.up,
+    down: migration_20261112_110026_appointments.down,
+    name: '20261112_110026_appointments'
   },
 ];

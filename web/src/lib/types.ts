@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/Icon";
+import type { ClosedRange } from "@/lib/appointments";
 
 /** Singleton — everything staff edit under "Website settings". */
 export type SiteSettings = {
@@ -13,6 +14,8 @@ export type SiteSettings = {
   /** Where CVs go when no posting fits. */
   careersEmail: string;
   outpatientHours: string;
+  /** Days the outpatient clinics are closed (no online booking). */
+  clinicClosures: ClosedRange[];
   /** Link to the hospital on a map (directions). */
   mapUrl: string;
   /** Google Maps embed address for the contact page map. */
@@ -205,6 +208,8 @@ export type Doctor = {
   scheduleNote?: string;
   /** Can be booked online (in the timed sessions above). */
   bookable: boolean;
+  /** Leave and other days with no clinic. */
+  daysOff: ClosedRange[];
 };
 
 /** One clinic session. No times = in on that day, hours vary. */

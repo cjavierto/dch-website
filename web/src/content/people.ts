@@ -9,7 +9,7 @@ import type { ClinicSession, Doctor, StaffMember, TeamCount } from "@/lib/types"
 const week = (days: number[], from?: string, to?: string): ClinicSession[] => days.map((day) => ({ day, from, to }));
 
 /** Seed shape: clinic days are derived from the schedule. */
-export type DoctorSeed = Omit<Doctor, "days">;
+export type DoctorSeed = Omit<Doctor, "days" | "daysOff">;
 
 export const doctors: DoctorSeed[] = [
   { slug: "james-deiparine", initials: "JD", photo: "/images/dr-james-deiparine.png", name: "Dr. James Deiparine", specialty: "Internal Medicine · Medical Director", group: "Internal Medicine", service: "internal-medicine", schedule: [...week([0, 3], "09:00", "12:00"), { day: 3, from: "14:00", to: "16:00" }], bookable: true },

@@ -21,6 +21,9 @@ export const routes = {
       lib/features.ts) it lands on the contact form with the subject preset. */
   book: BOOKING_ENABLED ? "/book" : "/contact?subject=appointment",
   booking: "/book",
+  /** Self-service booking (Calendly-style), not linked from the site yet. */
+  bookAppointment: "/book-appointment",
+  manageAppointment: (token: string) => `/book-appointment/manage/${token}`,
   privacy: "/privacy",
   patientRights: "/patient-rights",
   sitemap: "/sitemap",

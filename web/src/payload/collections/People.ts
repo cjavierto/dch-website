@@ -1,8 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { doctorGroups } from "@/content/people";
-import { BOOKING_ENABLED } from "@/lib/features";
 import { formatTime, WEEKDAYS } from "@/lib/schedule";
-import { iconField, imageField, slugField, sortField } from "../fields";
+import { closedDaysField, iconField, imageField, slugField, sortField } from "../fields";
 import { revalidateCollection } from "../revalidate";
 
 /** Directory filter chips, in display order. */
@@ -99,14 +98,19 @@ export const Doctors: CollectionConfig = {
     },
     {
       name: "bookable",
-      label: "Accept online booking requests",
+      label: "Accept online appointments",
       type: "checkbox",
       defaultValue: false,
       admin: {
-        hidden: !BOOKING_ENABLED,
-        description: "Patients can request 20-minute slots in the timed clinic sessions above (12–1 PM is skipped for all-day clinics).",
+        description:
+          "Patients can book 20-minute slots in the timed clinic sessions above on the Book an appointment page (12–1 PM is skipped for all-day clinics).",
       },
     },
+    closedDaysField(
+      "daysOff",
+      "Days off",
+      "Leave, conferences and other days this doctor has no clinic. Nobody can book these dates. Existing appointments are not cancelled automatically.",
+    ),
     { name: "active", type: "checkbox", defaultValue: true, admin: { position: "sidebar", description: "Untick to hide from the directory." } },
     slugField("name"),
     sortField,

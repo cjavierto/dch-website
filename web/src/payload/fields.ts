@@ -120,3 +120,31 @@ export const bodyField: Field = {
       "Use {emergencyNumber} or {trunkline} to insert the numbers from Website settings. Leave empty to show the summary and a “being prepared” note.",
   },
 };
+
+/** Dates nobody can book: a list of single days or ranges (leave, holidays). */
+export const closedDaysField = (name: string, label: string, description: string): ArrayField => ({
+  name,
+  label,
+  type: "array",
+  labels: { singular: "Closed date", plural: "Closed dates" },
+  admin: { description, initCollapsed: false },
+  fields: [
+    {
+      type: "row",
+      fields: [
+        { name: "from", label: "From", type: "date", required: true, admin: { width: "30%", date: { pickerAppearance: "dayOnly", displayFormat: "MMM d, yyyy" } } },
+        {
+          name: "to",
+          label: "Until (optional)",
+          type: "date",
+          admin: { width: "30%", date: { pickerAppearance: "dayOnly", displayFormat: "MMM d, yyyy" }, description: "Leave empty for one day." },
+          validate: (value: unknown, { siblingData }: { siblingData?: { from?: string | null } }) => {
+            if (!value || !siblingData?.from) return true;
+            return new Date(String(value)) >= new Date(siblingData.from) || "Must be on or after the first day.";
+          },
+        },
+        { name: "note", label: "Reason (staff only)", type: "text", admin: { width: "40%", placeholder: "Leave, conference, holiday…" } },
+      ],
+    },
+  ],
+});

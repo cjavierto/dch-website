@@ -30,6 +30,18 @@ function format(a: Address | Address[] | undefined): string | undefined {
     .join(", ");
 }
 
+/** Nodemailer-style attachments → Postmark's base64 form. */
+type AttachmentIn = { filename?: string | false; content?: unknown; contentType?: string };
+
+function attachments(list: SendEmailOptions["attachments"]) {
+  if (!list?.length) return undefined;
+  return (list as AttachmentIn[]).map((a) => {
+    const content = a.content;
+    const base64 = Buffer.isBuffer(content) ? content.toString("base64") : Buffer.from(String(content ?? ""), "utf8").toString("base64");
+    return { Name: a.filename || "attachment", Content: base64, ContentType: a.contentType || "application/octet-stream" };
+  });
+}
+
 export function postmarkAdapter(token: string): EmailAdapter {
   const from = parseFrom(process.env.EMAIL_FROM);
   return ({ payload }) => ({
@@ -49,6 +61,7 @@ export function postmarkAdapter(token: string): EmailAdapter {
           Subject: message.subject,
           HtmlBody: typeof message.html === "string" ? message.html : undefined,
           TextBody: typeof message.text === "string" ? message.text : undefined,
+          Attachments: attachments(message.attachments),
           MessageStream: "outbound",
         }),
       });

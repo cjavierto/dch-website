@@ -1,6 +1,6 @@
 import { QUICK_LINK_TARGETS } from "@/lib/types";
 import type { ArrayField, GlobalConfig } from "payload";
-import { iconField, imageField, textList } from "../fields";
+import { closedDaysField, iconField, imageField, textList } from "../fields";
 import { revalidateGlobal } from "../revalidate";
 
 const iconCards = (name: string, label: string): ArrayField => ({
@@ -107,6 +107,7 @@ export const SiteSettings: GlobalConfig = {
               fields: [
                 recipientList("contactRecipients", "Also send contact messages to"),
                 recipientList("applicationRecipients", "Also send job applications to"),
+                recipientList("appointmentRecipients", "Also send appointment bookings to"),
               ],
             },
           ],
@@ -115,6 +116,11 @@ export const SiteSettings: GlobalConfig = {
           label: "Hours & visiting",
           fields: [
             { name: "outpatientHours", type: "text", required: true },
+            closedDaysField(
+              "clinicClosures",
+              "Clinic closures",
+              "Holidays and other days the outpatient clinics are closed. Nobody can book an appointment on these dates.",
+            ),
             {
               name: "visitingHours",
               type: "array",
