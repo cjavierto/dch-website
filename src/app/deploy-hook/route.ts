@@ -11,7 +11,7 @@ import { timingSafeEqual } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import path from "node:path";
-import { revalidateTag } from "next/cache";
+import { expireTags } from "@/lib/cacheTags";
 import { ALL_TAGS } from "@/payload/revalidate";
 
 const notFound = () => new Response("Not found", { status: 404 });
@@ -31,6 +31,6 @@ export async function POST(request: Request) {
   const b = Buffer.from(secret);
   if (a.length !== b.length || !timingSafeEqual(a, b)) return notFound();
 
-  for (const tag of ALL_TAGS) revalidateTag(tag, { expire: 0 });
+  expireTags(ALL_TAGS);
   return Response.json({ expired: ALL_TAGS });
 }
