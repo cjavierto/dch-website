@@ -36,8 +36,8 @@ export default async function VisionPage() {
       </section>
 
       <section className="page-container pt-8 pb-8 nav:pt-12 nav:pb-[72px]">
-        <SectionHeading eyebrow="Our values" size={32}>
-          Six things we will not compromise
+        <SectionHeading eyebrow={page.valuesEyebrow} size={32}>
+          {page.valuesHeading}
         </SectionHeading>
         <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3 nav:mt-6 nav:gap-[18px]">
           {page.values.map((v) => (

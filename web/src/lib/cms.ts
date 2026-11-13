@@ -33,6 +33,7 @@ import { notifyBooking, notifyContact, notifyJobApplication, recipients } from "
 import type * as P from "@/payload-types";
 import { scheduleDays } from "@/lib/schedule";
 import { DOCTOR_GROUPS } from "@/payload/collections/People";
+import { VALUES_EYEBROW, VALUES_HEADING } from "@/payload/globals";
 import { lexicalToBlocks } from "@/payload/richText";
 
 const payload = () => getPayload({ config });
@@ -351,6 +352,8 @@ export async function getVisionPage() {
     lead: v.lead,
     vision: v.vision,
     mission: v.mission,
+    valuesEyebrow: v.valuesEyebrow?.trim() || VALUES_EYEBROW,
+    valuesHeading: v.valuesHeading?.trim() || VALUES_HEADING,
     values: (v.values ?? []).map(({ icon, title, text }) => ({ icon, title, text })),
     rightsNote: v.rightsNote,
   };
