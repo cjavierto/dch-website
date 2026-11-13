@@ -4,6 +4,7 @@ import config from "@payload-config";
 import "@payloadcms/next/css";
 import type { ServerFunctionClient } from "payload";
 import { handleServerFunctions, RootLayout } from "@payloadcms/next/layouts";
+import { connection } from "next/server";
 import type React from "react";
 import { importMap } from "./admin/importMap.js";
 import "./custom.scss";
@@ -20,7 +21,9 @@ const serverFunction: ServerFunctionClient = async function (args) {
   return handleServerFunctions({ ...args, config, importMap });
 };
 
-export default function Layout({ children }: Args) {
+export default async function Layout({ children }: Args) {
+  // Per request: the admin checks the signed-in user (see admin page.tsx).
+  await connection();
   return (
     <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
       {children}
