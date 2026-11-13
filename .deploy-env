@@ -1,3 +1,3 @@
 SITE_URL=https://staging.deiparinecommunityhospital.ph
 APP_DIR=/home/deipmali/dch-web
-SOURCE_COMMIT=0dd3af3013b7c8c382cf937f8c7e8a1870e46273
+SOURCE_COMMIT=b6f223a2e4741db82152d9d9cb01c31ca5cc14cf

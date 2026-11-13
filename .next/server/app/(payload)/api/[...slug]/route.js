@@ -1,6 +1,6 @@
 var R=require("../../../../chunks/[turbopack]_runtime.js")("server/app/(payload)/api/[...slug]/route.js")
 R.c("server/chunks/[root-of-the-server]__0a_ek2togqahj._.js")
-R.c("server/chunks/[root-of-the-server]__0jzu2gsznddff._.js")
+R.c("server/chunks/[root-of-the-server]__1njrofcy6ozgr._.js")
 R.c("server/chunks/node_modules_date-fns_locale_en-US_2026_yrikp4qd.js")
 R.c("server/chunks/[externals]__1jb9uazytu918._.js")
 R.c("server/chunks/node_modules_date-fns_0rgimjq5nh0s-._.js")

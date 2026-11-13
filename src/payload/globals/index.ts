@@ -14,6 +14,10 @@ const iconCards = (name: string, label: string): ArrayField => ({
   ],
 });
 
+/** Shown on the Vision & values page when the fields are left empty. */
+export const VALUES_EYEBROW = "Our values";
+export const VALUES_HEADING = "Six things we will not compromise";
+
 const numbersNote = "Use {emergencyNumber} or {trunkline} to insert the numbers from Website settings.";
 
 /** Extra people who receive a notice email, one address per row. */
@@ -373,6 +377,23 @@ export const VisionPage: GlobalConfig = {
     { name: "lead", type: "textarea", required: true },
     { name: "vision", type: "textarea", required: true },
     { name: "mission", type: "textarea", required: true },
+    {
+      type: "row",
+      fields: [
+        {
+          name: "valuesEyebrow",
+          label: "Values label",
+          type: "text",
+          admin: { width: "35%", placeholder: VALUES_EYEBROW, description: "Small green text above the heading." },
+        },
+        {
+          name: "valuesHeading",
+          label: "Values heading",
+          type: "text",
+          admin: { width: "65%", placeholder: VALUES_HEADING, description: "Leave empty to use the text shown in grey." },
+        },
+      ],
+    },
     iconCards("values", "Values"),
     { name: "rightsNote", label: "Patient rights note", type: "textarea", required: true },
   ],

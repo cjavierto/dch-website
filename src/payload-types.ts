@@ -1930,6 +1930,14 @@ export interface VisionPage {
   lead: string;
   vision: string;
   mission: string;
+  /**
+   * Small green text above the heading.
+   */
+  valuesEyebrow?: string | null;
+  /**
+   * Leave empty to use the text shown in grey.
+   */
+  valuesHeading?: string | null;
   values?:
     | {
         /**
@@ -2479,6 +2487,8 @@ export interface VisionPageSelect<T extends boolean = true> {
   lead?: T;
   vision?: T;
   mission?: T;
+  valuesEyebrow?: T;
+  valuesHeading?: T;
   values?:
     | T
     | {
