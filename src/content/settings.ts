@@ -44,6 +44,8 @@ export const siteSettings: Omit<SiteSettings, "accreditationBadges" | "mapEmbedU
 };
 
 export const homepageSettings: HomepageSettings = {
+  // Empty: the banner uses its built-in photo and wording (HERO_* in payload/globals).
+  hero: { imagePosition: "center", heading: "", text: "" },
   showStats: true,
   stats: [
     { value: "50 yrs", label: "Serving southern Cebu", labelShort: "Serving southern Cebu" },

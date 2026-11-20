@@ -1,5 +1,40 @@
 module.exports = [
-(()=>{"use strict";return[
+"[externals]/fs [external] (fs, cjs)", ((__turbopack_context__, module, exports) => {
+
+var mod = __turbopack_context__.x("fs", () => require("fs"));
+
+module.exports = mod;
+}),
+"[externals]/module [external] (module, cjs)", ((__turbopack_context__, module, exports) => {
+
+var mod = __turbopack_context__.x("module", () => require("module"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/compiled/loader-runner [external] (next/dist/compiled/loader-runner, cjs)", ((__turbopack_context__, module, exports) => {
+
+var mod = __turbopack_context__.x("next/dist/compiled/loader-runner", () => require("next/dist/compiled/loader-runner"));
+
+module.exports = mod;
+}),
+"[externals]/path [external] (path, cjs)", ((__turbopack_context__, module, exports) => {
+
+var mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}),
+"[externals]/stream [external] (stream, cjs)", ((__turbopack_context__, module, exports) => {
+
+var mod = __turbopack_context__.x("stream", () => require("stream"));
+
+module.exports = mod;
+}),
+"[externals]/vm [external] (vm, cjs)", ((__turbopack_context__, module, exports) => {
+
+var mod = __turbopack_context__.x("vm", () => require("vm"));
+
+module.exports = mod;
+}),
 "[turbopack-node]/transforms/transforms.ts [webpack_loaders] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
@@ -598,43 +633,6 @@ function makeErrorEmitter(severity, ipc) {
         });
     };
 }
-}),
-]})(),
-"[externals]/fs [external] (fs, cjs)", ((__turbopack_context__, module, exports) => {
-
-var mod = __turbopack_context__.x("fs", () => require("fs"));
-
-module.exports = mod;
-}),
-"[externals]/module [external] (module, cjs)", ((__turbopack_context__, module, exports) => {
-
-var mod = __turbopack_context__.x("module", () => require("module"));
-
-module.exports = mod;
-}),
-"[externals]/next/dist/compiled/loader-runner [external] (next/dist/compiled/loader-runner, cjs)", ((__turbopack_context__, module, exports) => {
-
-var mod = __turbopack_context__.x("next/dist/compiled/loader-runner", () => require("next/dist/compiled/loader-runner"));
-
-module.exports = mod;
-}),
-"[externals]/path [external] (path, cjs)", ((__turbopack_context__, module, exports) => {
-
-var mod = __turbopack_context__.x("path", () => require("path"));
-
-module.exports = mod;
-}),
-"[externals]/stream [external] (stream, cjs)", ((__turbopack_context__, module, exports) => {
-
-var mod = __turbopack_context__.x("stream", () => require("stream"));
-
-module.exports = mod;
-}),
-"[externals]/vm [external] (vm, cjs)", ((__turbopack_context__, module, exports) => {
-
-var mod = __turbopack_context__.x("vm", () => require("vm"));
-
-module.exports = mod;
 }),
 ];
 

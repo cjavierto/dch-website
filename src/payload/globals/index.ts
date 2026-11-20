@@ -14,6 +14,11 @@ const iconCards = (name: string, label: string): ArrayField => ({
   ],
 });
 
+/** Homepage banner wording when the fields are left empty. */
+export const HERO_HEADING = "Compassionate care, close to home.";
+export const HERO_TEXT =
+  "Fifty years of serving Sibonga and southern Cebu — emergency, maternity, surgery, and diagnostics under one roof.";
+
 /** Shown on the Vision & values page when the fields are left empty. */
 export const VALUES_EYEBROW = "Our values";
 export const VALUES_HEADING = "Six things we will not compromise";
@@ -191,6 +196,38 @@ export const HomepageSettings: GlobalConfig = {
   admin: { group: "Settings" },
   hooks: { afterChange: revalidateGlobal("homepage") },
   fields: [
+    {
+      name: "hero",
+      label: "Banner",
+      type: "group",
+      admin: {
+        description: "The large banner at the top of the homepage. Leave a field empty to keep the current photo or wording (shown in grey).",
+      },
+      fields: [
+        imageField("image", {
+          label: "Background photo",
+          admin: {
+            description:
+              "A wide landscape photo, at least 1920 px wide. It is darkened and sits behind the text on the left, so a photo with the subject on the right works best. Phones crop the sides.",
+          },
+        }),
+        {
+          name: "imagePosition",
+          label: "Keep in view when cropped",
+          type: "select",
+          defaultValue: "center",
+          options: [
+            { label: "Middle of the photo", value: "center" },
+            { label: "Top of the photo", value: "top" },
+            { label: "Bottom of the photo", value: "bottom" },
+            { label: "Left side", value: "left" },
+            { label: "Right side", value: "right" },
+          ],
+        },
+        { name: "heading", type: "text", maxLength: 70, admin: { placeholder: HERO_HEADING, description: "Short and big: aim for under 40 characters." } },
+        { name: "text", label: "Text under the heading", type: "textarea", maxLength: 220, admin: { placeholder: HERO_TEXT, rows: 2 } },
+      ],
+    },
     {
       name: "quickLinks",
       label: "Shortcut cards",

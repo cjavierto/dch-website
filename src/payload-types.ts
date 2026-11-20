@@ -2262,6 +2262,21 @@ export interface SiteSetting {
 export interface HomepageSetting {
   id: number;
   /**
+   * The large banner at the top of the homepage. Leave a field empty to keep the current photo or wording (shown in grey).
+   */
+  hero?: {
+    /**
+     * A wide landscape photo, at least 1920 px wide. It is darkened and sits behind the text on the left, so a photo with the subject on the right works best. Phones crop the sides.
+     */
+    image?: (number | null) | Media;
+    imagePosition?: ('center' | 'top' | 'bottom' | 'left' | 'right') | null;
+    /**
+     * Short and big: aim for under 40 characters.
+     */
+    heading?: string | null;
+    text?: string | null;
+  };
+  /**
    * The cards under the hero, in order. The red emergency card always comes last (below). Phones show two cards per row, so 3 or 5 here gives even rows.
    */
   quickLinks?:
@@ -2650,6 +2665,14 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  * via the `definition` "homepage-settings_select".
  */
 export interface HomepageSettingsSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        image?: T;
+        imagePosition?: T;
+        heading?: T;
+        text?: T;
+      };
   quickLinks?:
     | T
     | {
