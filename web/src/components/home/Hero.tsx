@@ -2,17 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { routes } from "@/lib/routes";
+import type { HomepageSettings } from "@/lib/types";
 
-export function Hero({ licence }: { licence: string }) {
+const POSITION = { center: "object-center", top: "object-top", bottom: "object-bottom", left: "object-left", right: "object-right" };
+
+/** Built-in banner photo, used until one is chosen in Settings → Homepage. */
+const DEFAULT_IMAGE = "/images/staff-hallway.png";
+
+export function Hero({ licence, image, imagePosition, heading, text }: { licence: string } & HomepageSettings["hero"]) {
   return (
     <section className="on-navy relative overflow-hidden bg-navy-900">
+      {/* Decorative: darkened behind the text, so no alt text. */}
       <Image
-        src="/images/staff-hallway.png"
+        src={image?.src ?? DEFAULT_IMAGE}
         alt=""
         fill
         loading="eager"
         sizes="100vw"
-        className="object-cover opacity-40 nav:opacity-42"
+        className={`object-cover opacity-40 nav:opacity-42 ${POSITION[imagePosition]}`}
       />
       <div
         aria-hidden="true"
@@ -24,11 +31,10 @@ export function Hero({ licence }: { licence: string }) {
           {licence} · DOH Licensed
         </span>
         <h1 className="mt-4 max-w-[16em] font-display text-[31px] leading-[1.12] font-bold tracking-[-0.6px] text-pretty text-white nav:mt-[22px] nav:text-[56px] nav:leading-[1.06] nav:tracking-[-1px]">
-          Compassionate care, close to home.
+          {heading}
         </h1>
         <p className="mt-3 max-w-[34em] text-[15.5px] leading-[1.55] text-on-navy-body nav:mt-[18px] nav:text-[19px]">
-          Fifty years of serving Sibonga and southern Cebu — emergency, maternity, surgery, and
-          diagnostics under one roof.
+          {text}
         </p>
         <div className="mt-5 flex flex-wrap gap-3 nav:mt-8">
           <Link

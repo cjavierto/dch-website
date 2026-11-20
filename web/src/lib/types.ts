@@ -32,6 +32,8 @@ export type SiteSettings = {
 export type AccreditationBadge = { name: string; subtitle?: string; logo?: Image; link?: string };
 
 export type HomepageSettings = {
+  /** Top banner; an empty photo falls back to the built-in one. */
+  hero: { image?: Image; imagePosition: HeroImagePosition; heading: string; text: string };
   showStats: boolean;
   stats: { value: string; label: string; labelShort: string }[];
   /** "Our facility" photos; an empty slot falls back to the built-in photo. */
@@ -41,6 +43,8 @@ export type HomepageSettings = {
   /** The red card at the end; always calls the emergency number. */
   emergencyCard: { title: string; detail: string };
 };
+
+export type HeroImagePosition = "center" | "top" | "bottom" | "left" | "right";
 
 /** Pages a quick-link card can open. "book" follows the booking switch. */
 export const QUICK_LINK_TARGETS = [

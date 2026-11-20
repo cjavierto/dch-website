@@ -33,7 +33,7 @@ import { notifyBooking, notifyContact, notifyJobApplication, recipients } from "
 import type * as P from "@/payload-types";
 import { scheduleDays } from "@/lib/schedule";
 import { DOCTOR_GROUPS } from "@/payload/collections/People";
-import { VALUES_EYEBROW, VALUES_HEADING } from "@/payload/globals";
+import { HERO_HEADING, HERO_TEXT, VALUES_EYEBROW, VALUES_HEADING } from "@/payload/globals";
 import { lexicalToBlocks } from "@/payload/richText";
 
 const payload = () => getPayload({ config });
@@ -293,6 +293,12 @@ export async function getHomepageSettings() {
   const h = await (await payload()).findGlobal({ slug: "homepage-settings", depth: 1 });
   const settings = await numbers();
   return withSettings({
+    hero: {
+      image: image(h.hero?.image),
+      imagePosition: h.hero?.imagePosition ?? "center",
+      heading: h.hero?.heading?.trim() || HERO_HEADING,
+      text: h.hero?.text?.trim() || HERO_TEXT,
+    },
     showStats: Boolean(h.showStats),
     stats: (h.stats ?? []).map(({ value, label, labelShort }) => ({ value, label, labelShort })),
     facilityPhotos: {
