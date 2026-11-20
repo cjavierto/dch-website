@@ -47,9 +47,11 @@ if [ -n "$kept_cache" ]; then
 fi
 mirror public
 mirror src
-for f in server.js server.cjs next.config.ts package.json package-lock.json tsconfig.json; do
+for f in server.js server.cjs next.config.mjs package.json package-lock.json tsconfig.json; do
   cp "$REPO_DIR/$f" "$APP_DIR/$f"
 done
+# The config used to be next.config.ts; remove it so only the .mjs is left.
+rm -f "$APP_DIR/next.config.ts"
 echo "Files copied."
 
 # Install dependencies when they changed, inside the app's Node.js environment
