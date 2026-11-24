@@ -10,6 +10,7 @@ import { ClinicSessionLabel as ClinicSessionLabel_750b24f8be2a5642a9beb7fdc69ed1
 import { QuickLinkLabel as QuickLinkLabel_0e9547d2a6ca0804155cac145b4ee50d } from '@/payload/admin/QuickLinkLabel'
 import { Icon as Icon_b9e9b447baa5fc5b01f1bf12b506faed } from '@/payload/admin/Brand'
 import { Logo as Logo_b9e9b447baa5fc5b01f1bf12b506faed } from '@/payload/admin/Brand'
+import { Dashboard as Dashboard_84a41906d066def45718a662e1d5f79a } from '@/payload/admin/Dashboard'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -26,5 +27,6 @@ export const importMap = {
   "@/payload/admin/QuickLinkLabel#QuickLinkLabel": QuickLinkLabel_0e9547d2a6ca0804155cac145b4ee50d,
   "@/payload/admin/Brand#Icon": Icon_b9e9b447baa5fc5b01f1bf12b506faed,
   "@/payload/admin/Brand#Logo": Logo_b9e9b447baa5fc5b01f1bf12b506faed,
+  "@/payload/admin/Dashboard#Dashboard": Dashboard_84a41906d066def45718a662e1d5f79a,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

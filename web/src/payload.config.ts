@@ -32,11 +32,13 @@ export default buildConfig({
         Logo: "@/payload/admin/Brand#Logo",
         Icon: "@/payload/admin/Brand#Icon",
       },
+      views: {
+        dashboard: { Component: "@/payload/admin/Dashboard#Dashboard" },
+      },
     },
     importMap: { baseDir: dirname },
   },
   // Order sets the sidebar: Content, Inbox, Library, Settings.
-  // Booking requests stay hidden in the admin until booking launches.
   collections: [
     ...withAudit([
       Services,
