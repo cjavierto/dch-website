@@ -1,6 +1,6 @@
 {
   "node": {
-    "407bad9d28fb6efb0ec093582fc7d7946814c2ff4b": {
+    "4032ab82b8291792b88b70841c7ae311b71816727e": {
       "workers": {
         "app/(payload)/admin/[[...segments]]/page": {
           "moduleId": 273652,
@@ -10,7 +10,7 @@
       "exportedName": "$$RSC_SERVER_ACTION_0",
       "filename": "src/app/(payload)/layout.tsx"
     },
-    "60b66a2a4523131de73c762071a94b9368453d1b5e": {
+    "60decd978cde5adc511ebc1bbb7df5e7da2050b255": {
       "workers": {
         "app/(payload)/admin/[[...segments]]/page": {
           "moduleId": 273652,
